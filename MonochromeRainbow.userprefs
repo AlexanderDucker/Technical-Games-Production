@@ -1,0 +1,14 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="MonochromeRainbow\Classes\Player.cs">
+    <Files>
+      <File FileName="MonochromeRainbow\Classes\AppMain.cs" Line="52" Column="35" />
+      <File FileName="MonochromeRainbow\Classes\Enemy.cs" Line="72" Column="14" />
+      <File FileName="MonochromeRainbow\Classes\Player.cs" Line="80" Column="29" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
