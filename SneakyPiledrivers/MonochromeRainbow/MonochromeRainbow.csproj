@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{900BF26C-CEFD-43F0-AB56-9B428F5CDC1C}</ProjectGuid>
+    <ProjectTypeGuids>{69878862-DA7D-4DC6-B0A1-50D8FAB4242F};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>MonochromeRainbow</RootNamespace>
+    <AssemblyName>MonochromeRainbow</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="Sce.PlayStation.Core" />
+    <Reference Include="Sce.PlayStation.HighLevel.GameEngine2D" />
+    <Reference Include="Sce.PlayStation.HighLevel.UI" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Classes\AppMain.cs" />
+    <Compile Include="Classes\Bullet.cs" />
+    <Compile Include="Classes\Enemy.cs" />
+    <Compile Include="Classes\Player.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PsmMetadata Include="app.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Sce\Sce.Psm.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="shaders\" />
+    <Folder Include="fonts\" />
+    <Folder Include="sounds\" />
+    <Folder Include="Classes\" />
+    <Folder Include="textures\" />
+    <Folder Include="textures\player\sprites\" />
+    <Folder Include="sounds\sfx\" />
+    <Folder Include="textures\enemy\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ShaderProgram Include="shaders\Texture.fcg" />
+    <ShaderProgram Include="shaders\Texture.vcg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="sounds\bgm\Local Forecast - Elevator.mp3" />
+    <Content Include="sounds\bgm\Pamgaea.mp3" />
+    <Content Include="sounds\bgm\Rollin at 5 - electronic.mp3" />
+    <Content Include="sounds\bgm\Rollin at 5.mp3" />
+    <Content Include="sounds\bgm\Son Of A Rocket.mp3" />
+    <Content Include="sounds\bgm\Doh De Oh.mp3" />
+    <Content Include="sounds\bgm\Hackbeat.mp3" />
+    <Content Include="textures\background\levelBackground%28-10%25%29.png" />
+    <Content Include="textures\background\levelBackground%28-100%25%29.png" />
+    <Content Include="textures\background\levelBackground%28-20%25%29.png" />
+    <Content Include="textures\background\levelBackground%28-30%25%29.png" />
+    <Content Include="textures\background\levelBackground%28-40%25%29.png" />
+    <Content Include="textures\background\levelBackground%28-50%25%29.png" />
+    <Content Include="textures\background\levelBackground%28-60%25%29.png" />
+    <Content Include="textures\background\levelBackground%28-70%25%29.png" />
+    <Content Include="textures\background\levelBackground%28-80%25%29.png" />
+    <Content Include="textures\background\levelBackground%28-90%25%29.png" />
+    <Content Include="textures\background\levelBackground%280%25%29.png" />
+    <Content Include="textures\background\menuBackground.png" />
+    <Content Include="textures\background\pauseBackground.png" />
+    <Content Include="textures\collectibles\ammo.png" />
+    <Content Include="textures\collectibles\health.png" />
+    <Content Include="textures\collectibles\multiplier.png" />
+    <Content Include="textures\collectibles\rainbow\1-R.png" />
+    <Content Include="textures\collectibles\rainbow\2-A.png" />
+    <Content Include="textures\collectibles\rainbow\3-I.png" />
+    <Content Include="textures\collectibles\rainbow\4-N.png" />
+    <Content Include="textures\collectibles\rainbow\5-B.png" />
+    <Content Include="textures\collectibles\rainbow\6-O.png" />
+    <Content Include="textures\collectibles\rainbow\7-W.png" />
+    <Content Include="textures\other\bullet.png" />
+    <Content Include="textures\player\playerSheet.png" />
+    <Content Include="textures\player\sprites\coffeeLeft.png" />
+    <Content Include="textures\player\sprites\coffeeRight.png" />
+    <Content Include="textures\player\sprites\jumpingLeft.png" />
+    <Content Include="textures\player\sprites\jumpingRight.png" />
+    <Content Include="textures\player\sprites\standingLeft.png" />
+    <Content Include="textures\player\sprites\standingRight.png" />
+    <Content Include="sounds\sfx\grunt.wav" />
+    <Content Include="sounds\sfx\impact.wav" />
+    <Content Include="sounds\sfx\shoot.wav" />
+    <Content Include="sounds\sfx\damn.wav" />
+    <Content Include="sounds\sfx\fail.wav" />
+    <Content Include="sounds\bgm\Laconic Granny.mp3" />
+    <Content Include="textures\other\platform.png" />
+    <Content Include="textures\other\youSuck.png" />
+    <Content Include="textures\enemy\flyingEnemy.png" />
+    <Content Include="textures\enemy\heavyEnemy.png" />
+    <Content Include="textures\enemy\regularEnemy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="textures\Thumbs.db" />
+  </ItemGroup>
+</Project>
