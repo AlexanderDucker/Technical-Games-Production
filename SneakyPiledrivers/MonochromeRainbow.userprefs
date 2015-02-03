@@ -1,10 +1,10 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="MonochromeRainbow\Classes\Player.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="E:\University\Year 2 -- Level 5\Technical Games Production\TGP Group Assignment 2\TGP With Movement\Player.cs">
     <Files>
       <File FileName="MonochromeRainbow\Classes\AppMain.cs" Line="52" Column="35" />
       <File FileName="MonochromeRainbow\Classes\Enemy.cs" Line="72" Column="14" />
-      <File FileName="MonochromeRainbow\Classes\Player.cs" Line="80" Column="29" />
+      <File FileName="E:\University\Year 2 -- Level 5\Technical Games Production\TGP Group Assignment 2\TGP With Movement\Player.cs" Line="313" Column="26" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

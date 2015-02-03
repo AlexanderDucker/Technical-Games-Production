@@ -4,7 +4,7 @@
     <Files>
       <File FileName="MonochromeRainbow\Classes\AppMain.cs" Line="52" Column="35" />
       <File FileName="MonochromeRainbow\Classes\Enemy.cs" Line="72" Column="14" />
-      <File FileName="MonochromeRainbow\Classes\Player.cs" Line="80" Column="29" />
+      <File FileName="MonochromeRainbow\Classes\Player.cs" Line="264" Column="6" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
