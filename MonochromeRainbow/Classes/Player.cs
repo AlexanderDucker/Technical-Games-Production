@@ -15,6 +15,8 @@ namespace MonochromeRainbow
 		private TextureInfo[]	textures;
 		private GamePadData		gamePadData;
 		
+		public float			characterXVelocity;
+		public float 			characterYVelocity;
 		public bool 			canBeHit;
 		public int				health;
 		public Timer			timer;
@@ -222,6 +224,7 @@ namespace MonochromeRainbow
         		if ((gamePadData.Buttons & GamePadButtons.Left) != 0)
         		{
 					xVelocity = -4.0f;
+					//xVelocity = -characterXVelocity;
 					//Aim Left
 					facingDirection = 0;
         		}
@@ -230,9 +233,23 @@ namespace MonochromeRainbow
         		if ((gamePadData.Buttons & GamePadButtons.Right) != 0)
         		{
 					xVelocity = 4.0f;
+					//xVelocity = characterXVelocity;
 					//Aim Right
 					facingDirection = 4;
         		}
+				//Up Vertical movement.
+        		if ((gamePadData.Buttons & GamePadButtons.Up) != 0)
+        		{
+					yVelocity = 4.0f;
+					//yVelocity = characterYvelocity;
+        		}
+				//Down Vertical movement.
+        		if ((gamePadData.Buttons & GamePadButtons.Down) != 0)
+        		{
+					yVelocity = -4.0f;
+					//yVelocity = -characterYvelocity;
+        		}
+				
 			}
 			if ((gamePadData.Buttons & GamePadButtons.R) != 0)
 			{
@@ -274,17 +291,11 @@ namespace MonochromeRainbow
         		}
 			}
 					
-			//Slow down player if button is held.
-			if ((gamePadData.Buttons & GamePadButtons.Cross) != 0 & !onGround && yVelocity > 0)
-			{
-        		yVelocity += 0.1f;
-			}
+			
 			
 			//Check if player is off the ground.
 			if (!onGround)
 			{
-				//Player loses vertical speed tue to gravity.
-				yVelocity -= 0.5f;
 				
 				if ((gamePadData.Buttons & GamePadButtons.Left) == 0 && (gamePadData.Buttons & GamePadButtons.Right) == 0)
 				{
@@ -303,25 +314,28 @@ namespace MonochromeRainbow
 				}
 			}
 
-			//Player shouldn't fall too fast. [Terminal Velocity]
-			if (yVelocity < -5.0f)
-			{
-        		yVelocity = -5.0f;
-			}
+			////Player shouldn't fall too fast. [Terminal Velocity]
+			//if (yVelocity < -5.0f)
+			//{
+        	//	yVelocity = -5.0f;
+			//}
 			
 			//Check if player is on the ground.
-            if (yVelocity != 0.0f)
-			{
-				onGround = false;
-    		}
+            //if (yVelocity != 0.0f)
+			//{
+			//	onGround = false;
+    		//}
 			
 			//Check if player has hit the ground.
-			if (playerPos.Y < 0.0f)
-			{
-				playerPos.Y = 0.0f;
-				onGround = true;
-			}
-						
+			//if (playerPos.Y < 0.0f)
+			//{
+			//	playerPos.Y = 0.0f;
+			//	onGround = true;
+			//}
+			
+			//Characterx and y sets
+			
+			
 			//Update player position.
     		playerPos.Y += yVelocity;
 			playerPos.X += xVelocity;
