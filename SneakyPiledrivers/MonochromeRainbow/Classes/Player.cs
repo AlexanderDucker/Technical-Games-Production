@@ -40,7 +40,8 @@ namespace MonochromeRainbow
 		public Vector2i[]		tileIndex;
 		public bool 			aiming;
 		public bool				canShoot;
-		public bool isAlive;
+		public bool 			isAlive;
+		public float 			speed;
 		
 		/*
 		DIRECTIONS:
@@ -65,7 +66,7 @@ namespace MonochromeRainbow
 			playerRec = new Vector2(32,64);
 			player.Quad.S = playerRec;
 			playerPos = playerPosition;
-			
+			speed = 1.0f;
 			isAlive = true;
 			bounds = new Bounds2();
 			health = 10;
@@ -329,8 +330,8 @@ namespace MonochromeRainbow
 			//}
 						
 			//Update player position.
-    		playerPos.Y += yVelocity;
-			playerPos.X += xVelocity;
+    		playerPos.Y += yVelocity * speed;
+			playerPos.X += xVelocity * speed;
 			
 			//Check if player has hit the wall.
 			if (playerPos.X > Director.Instance.GL.Context.GetViewport().Width - player.Quad.S.X)
