@@ -24,34 +24,18 @@ namespace MonochromeRainbow
 		public float			coolTime;
 		public float			shootCoolTime;
 		public int 				ammo;
-		public int 				facingDirection;
-		public float			xVelocity;
-		public float			yVelocity;
-		public bool				mayJumpAgain;
-		public bool				onGround;
+		public Vector2			facingDirection;
 		public bool				startOn;
 		public Bounds2 			bounds;
 		public Vector2			playerPos; 
 		public SpriteTile		player;
-		public Bullet[]			bullet;
-		public bool[] 			bulletActive;
 		public Vector2 			playerRec;
 		public bool 			isPressed;
 		public Vector2i[]		tileIndex;
-		public bool 			aiming;
 		public bool				canShoot;
 		public bool 			isAlive;
 		public float 			speed;
 		
-		/*
-		DIRECTIONS:
-		LEFT			= 0
-		DIAGONAL-LEFT	= 1
-		UP				= 2
-		DIAGONAL-RIGHT	= 3
-		RIGHT			= 4
-		*/
-			
 		public Player (Scene scene, Vector2 playerPosition)
 		{
 			SetSpriteArray();
@@ -66,24 +50,11 @@ namespace MonochromeRainbow
 			playerRec = new Vector2(32,64);
 			player.Quad.S = playerRec;
 			playerPos = playerPosition;
-			speed = 1.0f;
+			speed = 2.0f;
 			isAlive = true;
 			bounds = new Bounds2();
 			health = 10;
 			ammo = 50;
-			mayJumpAgain = true;
-			onGround = true;
-			bulletActive = new bool[20];
-			bullet = new Bullet[20];
-			
-			for (int i = 0; i < 20; i++)
-			{
-				bulletActive[i] = false;
-				bullet[i] = new Bullet(scene, new Vector2(-100.0f,-100.0f),0); 
-			}
-
-			facingDirection = 4;
-			aiming = false;
 			canShoot = true;
 			
 			scene.AddChild(player);
@@ -109,7 +80,6 @@ namespace MonochromeRainbow
 			previousTime = currentTime;
 			coolTime+= elapsedTime;
 			shootCoolTime += elapsedTime;
-			
 			if (!canBeHit)
 				{
 					if (coolTime >= 2000)
@@ -132,207 +102,40 @@ namespace MonochromeRainbow
 				health = 0;	
 			}
 			
-			for (int i = 0; i < 20; i++)
-			{
-				if (bulletActive[i] == true)
-				{
-					bullet[i].Update();
-					if(bullet[i].bulletPosition.X < -10 || bullet[i].bulletPosition.X > 970 || bullet[i].bulletPosition.Y < -10 || bullet[i].bulletPosition.Y > 554)
-					{
-						bullet[i].bulletPosition = new Vector2(-100.0f, -100.0f);
-						bulletActive[i] = false;
-					}
-				}
-			}			
-			
-			//Shooting.
-        	if ((gamePadData.Buttons & GamePadButtons.Square) != 0)
+			//Left movement
+        	if ((gamePadData.Buttons & GamePadButtons.Left) != 0)
         	{
-        		//shoot;
-				if (canShoot)
-				{
-					if (ammo > 0)
-					{
-						ammo --;
-						bool bulletNotActive = false;
-						int checkCount = 0;
-						do
-						{
-							if (bulletActive[checkCount] == false)
-							{
-								
-								bullet[checkCount].bulletDirection = facingDirection;
-								bullet[checkCount].bulletPosition = new Vector2(playerPos.X + 28,playerPos.Y + 32);
-								bulletActive[checkCount] = true;
-								bulletNotActive = true;
-								canShoot = false;
-							}
-							checkCount++;
-						} 
-						
-						while(bulletNotActive == false);
-					}
-
-				}
+				facingDirection.X = -1.0f;
         	}
-			
-			//Check if player is on ground.
-        	if (onGround)
+			//Right movement
+        	else if ((gamePadData.Buttons & GamePadButtons.Right) != 0)
+        	{
+				facingDirection.X = 1.0f;
+        	}
+			else
 			{
-				if (facingDirection < 2)
-				{
-					textureInfo	= textures[0];
-					player.TextureInfo = textureInfo;
-				}
-				if (facingDirection > 2)
-				{
-					textureInfo	= textures[1];
-					player.TextureInfo = textureInfo;
-				}
-				
-				yVelocity = 0;
-				
-				xVelocity *= 0.9f;
-				
-				//Apply friction.
-        		if ((gamePadData.Buttons & GamePadButtons.Left) == 0)
-				{
-					xVelocity *= 0.65f;
-        		}
-				
-				//Check if cross is pressed.
-				if ((gamePadData.Buttons & GamePadButtons.Cross) != 0)
-				{
-            		//Check if player is able to jump.
-					if (mayJumpAgain)
-					{
-                		yVelocity = 11.0f;
-                		mayJumpAgain = false;
-					}
-        		}
-        		else
-				{
-					mayJumpAgain = true;
-        		}
-        	}	
-			
-			
-			//Left movement.
-			if (!aiming)
-			{
-        		if ((gamePadData.Buttons & GamePadButtons.Left) != 0)
-        		{
-					xVelocity = -4.0f;
-					//Aim Left
-					facingDirection = 0;
-        		}
-			
-				//Right movement.
-        		if ((gamePadData.Buttons & GamePadButtons.Right) != 0)
-        		{
-					xVelocity = 4.0f;
-					//Aim Right
-					facingDirection = 4;
-        		}
-				//Up Vertical movement.
-        		if ((gamePadData.Buttons & GamePadButtons.Up) != 0)
-        		{
-					yVelocity = 4.0f;
-					
-        		}
-				//Down Vertical movement.
-        		if ((gamePadData.Buttons & GamePadButtons.Down) != 0)
-        		{
-					yVelocity = -4.0f;
-        		}
-				
+				facingDirection.X = 0.0f;	
 			}
-			if ((gamePadData.Buttons & GamePadButtons.R) != 0)
+			//Up movement
+        	if ((gamePadData.Buttons & GamePadButtons.Up) != 0)
+        	{
+				facingDirection.Y = 1.0f;
+        	}
+			//Down movement
+        	else if ((gamePadData.Buttons & GamePadButtons.Down) != 0)
+        	{
+				facingDirection.Y = -1.0f;
+        	}
+			else
 			{
-				//Stop moving to aim
-				aiming = true;
+				facingDirection.Y = 0.0f;	
 			}
-			
-			if (aiming)
+			if (!facingDirection.IsZero())
 			{
-				if ((gamePadData.Buttons & GamePadButtons.R) == 0)
-				{
-					//Stop aiming
-					aiming = false;
-				}
-				if ((gamePadData.Buttons & GamePadButtons.Up) != 0)
-				{
-					//Aim up
-					facingDirection = 2;
-				}
-				if (((gamePadData.Buttons & GamePadButtons.Up) != 0) & ((gamePadData.Buttons & GamePadButtons.Right) != 0))
-				{
-					//Aim up-right
-					facingDirection = 3;
-				}
-				if (((gamePadData.Buttons & GamePadButtons.Up) != 0) & ((gamePadData.Buttons & GamePadButtons.Left) != 0))
-				{
-					//Aim up-left
-					facingDirection = 1;
-				}
-				if ((gamePadData.Buttons & GamePadButtons.Left) != 0 & !((gamePadData.Buttons & GamePadButtons.Up) != 0))
-        		{
-					//Aim Left
-					facingDirection = 0;
-        		}
-        		if ((gamePadData.Buttons & GamePadButtons.Right) != 0 & !((gamePadData.Buttons & GamePadButtons.Up) != 0))
-        		{
-					//Aim Right
-					facingDirection = 4;
-        		}
+				Vector2 newDir = facingDirection.Normalize();
+				playerPos += newDir * speed;
 			}
-					
-			
-			
-			//Check if player is off the ground.
-			if (!onGround)
-			{
-				
-				if ((gamePadData.Buttons & GamePadButtons.Left) == 0 && (gamePadData.Buttons & GamePadButtons.Right) == 0)
-				{
-					xVelocity *= 0.975f;
-				}
-				
-				if (facingDirection < 2)
-				{
-					textureInfo	= textures[4];
-					player.TextureInfo = textureInfo;
-				}
-				if (facingDirection > 2)
-				{
-					textureInfo	= textures[5];
-					player.TextureInfo = textureInfo;
-				}
-			}
-
-			////Player shouldn't fall too fast. [Terminal Velocity]
-			//if (yVelocity < -5.0f)
-			//{
-        	//	yVelocity = -5.0f;
-			//}
-			
-			//Check if player is on the ground.
-            //if (yVelocity != 0.0f)
-			//{
-			//	onGround = false;
-    		//}
-			
-			//Check if player has hit the ground.
-			//if (playerPos.Y < 0.0f)
-			//{
-			//	playerPos.Y = 0.0f;
-			//	onGround = true;
-			//}
 						
-			//Update player position.
-    		playerPos.Y += yVelocity * speed;
-			playerPos.X += xVelocity * speed;
-			
 			//Check if player has hit the wall.
 			if (playerPos.X > Director.Instance.GL.Context.GetViewport().Width - player.Quad.S.X)
 			{
