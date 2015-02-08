@@ -11,338 +11,74 @@ namespace MonochromeRainbow
 {
 	public class Player
 	{
-		private TextureInfo		textureInfo;
-		private TextureInfo[]	textures;
+		private SpriteUV		player;
+		private TextureInfo		playerTextureInfo;
 		private GamePadData		gamePadData;
 		
-		public bool 			canBeHit;
-		public int				health;
-		public Timer			timer;
-		public float			previousTime; 
-		public float			currentTime;
-		public float			elapsedTime;
-		public float			coolTime;
-		public float			shootCoolTime;
-		public int 				ammo;
-		public int 				facingDirection;
-		public float			xVelocity;
-		public float			yVelocity;
-		public bool				mayJumpAgain;
-		public bool				onGround;
-		public bool				startOn;
-		public Bounds2 			bounds;
-		public Vector2			playerPos; 
-		public SpriteTile		player;
-		public Bullet[]			bullet;
-		public bool[] 			bulletActive;
-		public Vector2 			playerRec;
-		public bool 			isPressed;
-		public Vector2i[]		tileIndex;
-		public bool 			aiming;
-		public bool				canShoot;
-		public bool isAlive;
+		private Vector2			centerPosition;
+		private float			health;
+		private bool 			isAlive;
+		private float			radius;
 		
-		/*
-		DIRECTIONS:
-		LEFT			= 0
-		DIAGONAL-LEFT	= 1
-		UP				= 2
-		DIAGONAL-RIGHT	= 3
-		RIGHT			= 4
-		*/
-			
-		public Player (Scene scene, Vector2 playerPosition)
+		public Vector2 CenterPosition{ get{return centerPosition;} }
+		public bool IsAlive{ get{return isAlive;} set{isAlive = value;} }
+		public float Health{ get{return health;} set{health = value;} }
+		public float Radius { get{return radius;} }
+		public SpriteUV PlayerSprite{get {return player;} }
+		
+		
+		public Player (Scene scene, Vector2 playerPos)
 		{
-			SetSpriteArray();
-			
-			textureInfo = new TextureInfo();
-			textureInfo = textures[3];
-			
-			timer = new Timer();
-			previousTime = (float)timer.Milliseconds();
-			
-			player = new SpriteTile(textureInfo);
-			playerRec = new Vector2(32,64);
-			player.Quad.S = playerRec;
-			playerPos = playerPosition;
-			
+			playerTextureInfo = new TextureInfo("/Application/textures/player/blue.png");
+			player = new SpriteUV(playerTextureInfo);	
+			player.Quad.S = playerTextureInfo.TextureSizef;
+			player.Position = playerPos;
+			centerPosition = player.Position + player.Quad.Center;
+			radius = player.Quad.Point10.X / 2;
+			health = 1.0f;
 			isAlive = true;
-			bounds = new Bounds2();
-			health = 10;
-			ammo = 50;
-			mayJumpAgain = true;
-			onGround = true;
-			bulletActive = new bool[20];
-			bullet = new Bullet[20];
-			
-			for (int i = 0; i < 20; i++)
-			{
-				bulletActive[i] = false;
-				bullet[i] = new Bullet(scene, new Vector2(-100.0f,-100.0f),0); 
-			}
-
-			facingDirection = 4;
-			aiming = false;
-			canShoot = true;
-			
 			scene.AddChild(player);
+			
 		}
 		
-		public void SetSpriteArray()
+		public void Dispose()
 		{
-			textures = new TextureInfo[6];
-			textures[0]		= new TextureInfo("/Application/textures/player/sprites/standingLeft.png");
-			textures[1]		= new TextureInfo("/Application/textures/player/sprites/standingRight.png");
-			textures[2]		= new TextureInfo("/Application/textures/player/sprites/coffeeLeft.png");
-			textures[3]		= new TextureInfo("/Application/textures/player/sprites/coffeeRight.png");	
-			textures[4]		= new TextureInfo("/Application/textures/player/sprites/jumpingLeft.png");
-			textures[5]		= new TextureInfo("/Application/textures/player/sprites/jumpingRight.png");
+			playerTextureInfo.Dispose();
 		}
 		
-		public void Update(Scene gameScene)
+		public void Update()
 		{
         	//Get gamepad input.
 			gamePadData = GamePad.GetData(0);
-			currentTime = (float)timer.Milliseconds();
-			elapsedTime = currentTime - previousTime;
-			previousTime = currentTime;
-			coolTime+= elapsedTime;
-			shootCoolTime += elapsedTime;
 			
-			if (!canBeHit)
-				{
-					if (coolTime >= 2000)
-					{
-						coolTime = 0.0f;
-						canBeHit= true;
-					}
-				}
-			if (!canShoot)
+			centerPosition = player.Position + player.Quad.Center;
+			
+			if(isAlive)
 			{
-				if (shootCoolTime >= 300)
-				{
-					shootCoolTime = 0.0f;
-					canShoot = true;
-				}
-			}
-				
-			if(health < 0)
-			{
-				health = 0;	
-			}
-			
-			for (int i = 0; i < 20; i++)
-			{
-				if (bulletActive[i] == true)
-				{
-					bullet[i].Update();
-					if(bullet[i].bulletPosition.X < -10 || bullet[i].bulletPosition.X > 970 || bullet[i].bulletPosition.Y < -10 || bullet[i].bulletPosition.Y > 554)
-					{
-						bullet[i].bulletPosition = new Vector2(-100.0f, -100.0f);
-						bulletActive[i] = false;
-					}
-				}
-			}			
-			
-			//Shooting.
-        	if ((gamePadData.Buttons & GamePadButtons.Square) != 0)
-        	{
-        		//shoot;
-				if (canShoot)
-				{
-					if (ammo > 0)
-					{
-						ammo --;
-						bool bulletNotActive = false;
-						int checkCount = 0;
-						do
-						{
-							if (bulletActive[checkCount] == false)
-							{
-								
-								bullet[checkCount].bulletDirection = facingDirection;
-								bullet[checkCount].bulletPosition = new Vector2(playerPos.X + 28,playerPos.Y + 32);
-								bulletActive[checkCount] = true;
-								bulletNotActive = true;
-								canShoot = false;
-							}
-							checkCount++;
-						} 
-						
-						while(bulletNotActive == false);
-					}
-
-				}
-        	}
-			
-			//Check if player is on ground.
-        	if (onGround)
-			{
-				if (facingDirection < 2)
-				{
-					textureInfo	= textures[0];
-					player.TextureInfo = textureInfo;
-				}
-				if (facingDirection > 2)
-				{
-					textureInfo	= textures[1];
-					player.TextureInfo = textureInfo;
-				}
-				
-				yVelocity = 0;
-				
-				xVelocity *= 0.9f;
-				
-				//Apply friction.
-        		if ((gamePadData.Buttons & GamePadButtons.Left) == 0)
-				{
-					xVelocity *= 0.65f;
-        		}
-				
-				//Check if cross is pressed.
-				if ((gamePadData.Buttons & GamePadButtons.Cross) != 0)
-				{
-            		//Check if player is able to jump.
-					if (mayJumpAgain)
-					{
-                		yVelocity = 11.0f;
-                		mayJumpAgain = false;
-					}
-        		}
-        		else
-				{
-					mayJumpAgain = true;
-        		}
-        	}	
-			
-			
-			//Left movement.
-			if (!aiming)
-			{
-        		if ((gamePadData.Buttons & GamePadButtons.Left) != 0)
-        		{
-					xVelocity = -4.0f;
-					//Aim Left
-					facingDirection = 0;
-        		}
+				//Left movement.
+	    		if ((gamePadData.Buttons & GamePadButtons.Left) != 0)
+	    		{
+					player.Position = new Vector2(player.Position.X - 4.0f, player.Position.Y);
+	    		}
 			
 				//Right movement.
-        		if ((gamePadData.Buttons & GamePadButtons.Right) != 0)
-        		{
-					xVelocity = 4.0f;
-					//Aim Right
-					facingDirection = 4;
-        		}
-			}
-			if ((gamePadData.Buttons & GamePadButtons.R) != 0)
-			{
-				//Stop moving to aim
-				aiming = true;
-			}
-			
-			if (aiming)
-			{
-				if ((gamePadData.Buttons & GamePadButtons.R) == 0)
-				{
-					//Stop aiming
-					aiming = false;
-				}
-				if ((gamePadData.Buttons & GamePadButtons.Up) != 0)
-				{
-					//Aim up
-					facingDirection = 2;
-				}
-				if (((gamePadData.Buttons & GamePadButtons.Up) != 0) & ((gamePadData.Buttons & GamePadButtons.Right) != 0))
-				{
-					//Aim up-right
-					facingDirection = 3;
-				}
-				if (((gamePadData.Buttons & GamePadButtons.Up) != 0) & ((gamePadData.Buttons & GamePadButtons.Left) != 0))
-				{
-					//Aim up-left
-					facingDirection = 1;
-				}
-				if ((gamePadData.Buttons & GamePadButtons.Left) != 0 & !((gamePadData.Buttons & GamePadButtons.Up) != 0))
-        		{
-					//Aim Left
-					facingDirection = 0;
-        		}
-        		if ((gamePadData.Buttons & GamePadButtons.Right) != 0 & !((gamePadData.Buttons & GamePadButtons.Up) != 0))
-        		{
-					//Aim Right
-					facingDirection = 4;
-        		}
-			}
-					
-			//Slow down player if button is held.
-			if ((gamePadData.Buttons & GamePadButtons.Cross) != 0 & !onGround && yVelocity > 0)
-			{
-        		yVelocity += 0.1f;
-			}
-			
-			//Check if player is off the ground.
-			if (!onGround)
-			{
-				//Player loses vertical speed tue to gravity.
-				yVelocity -= 0.5f;
+	    		if ((gamePadData.Buttons & GamePadButtons.Right) != 0)
+	    		{
+					player.Position = new Vector2(player.Position.X + 4.0f, player.Position.Y);
+	    		}
 				
-				if ((gamePadData.Buttons & GamePadButtons.Left) == 0 && (gamePadData.Buttons & GamePadButtons.Right) == 0)
-				{
-					xVelocity *= 0.975f;
-				}
+				//Up movement.
+	    		if ((gamePadData.Buttons & GamePadButtons.Up) != 0)
+	    		{
+					player.Position = new Vector2(player.Position.X, player.Position.Y + 4.0f);
+	    		}
 				
-				if (facingDirection < 2)
-				{
-					textureInfo	= textures[4];
-					player.TextureInfo = textureInfo;
-				}
-				if (facingDirection > 2)
-				{
-					textureInfo	= textures[5];
-					player.TextureInfo = textureInfo;
-				}
+				//Down movement.
+	    		if ((gamePadData.Buttons & GamePadButtons.Down) != 0)
+	    		{
+					player.Position = new Vector2(player.Position.X, player.Position.Y - 4.0f);
+	    		}
 			}
-
-			//Player shouldn't fall too fast. [Terminal Velocity]
-			if (yVelocity < -5.0f)
-			{
-        		yVelocity = -5.0f;
-			}
-			
-			//Check if player is on the ground.
-            if (yVelocity != 0.0f)
-			{
-				onGround = false;
-    		}
-			
-			//Check if player has hit the ground.
-			if (playerPos.Y < 0.0f)
-			{
-				playerPos.Y = 0.0f;
-				onGround = true;
-			}
-						
-			//Update player position.
-    		playerPos.Y += yVelocity;
-			playerPos.X += xVelocity;
-			
-			//Check if player has hit the wall.
-			if (playerPos.X > Director.Instance.GL.Context.GetViewport().Width - player.Quad.S.X)
-			{
-				playerPos.X = Director.Instance.GL.Context.GetViewport().Width - player.Quad.S.X;
-			}
-			else if (playerPos.X < 0.0f)
-			{
-				playerPos.X = 0.0f;
-			}
-			
-			if(health == 0)	
-			{
-				isAlive = false;
-			}
-			
-			player.Position = playerPos;
-			player.Draw();
 		}
 	}
 }

@@ -1,10 +1,11 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="MonochromeRainbow\Classes\Player.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="MonochromeRainbow\TheGame.cs">
     <Files>
-      <File FileName="MonochromeRainbow\Classes\AppMain.cs" Line="52" Column="35" />
-      <File FileName="MonochromeRainbow\Classes\Enemy.cs" Line="72" Column="14" />
-      <File FileName="MonochromeRainbow\Classes\Player.cs" Line="80" Column="29" />
+      <File FileName="MonochromeRainbow\Classes\AppMain.cs" Line="27" Column="31" />
+      <File FileName="MonochromeRainbow\Classes\Player.cs" Line="45" Column="4" />
+      <File FileName="MonochromeRainbow\TheGame.cs" Line="83" Column="40" />
+      <File FileName="MonochromeRainbow\Classes\Monster.cs" Line="21" Column="15" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
