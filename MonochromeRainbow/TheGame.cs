@@ -21,8 +21,9 @@ namespace MonochromeRainbow
 		private static GamePadData		gamePadData;
 		private Player				player;
 		private Monster[] 			enemies;
+		private bool 				hasSwapped;
 		
-		public TheGame(){}
+		public TheGame(){ hasSwapped = false; }
 		
 		public void LoadLevel()
 		{
@@ -68,7 +69,7 @@ namespace MonochromeRainbow
 				
 		public void CheckDistance(Monster m)
 		{
-			Vector2 dir = (m.CenterPosition) - (player.CenterPosition);
+			Vector2 dir = (player.CenterPosition) - (m.CenterPosition);
 			float distanceSqrd = Square(dir.X) + Square(dir.Y);
 			
 			Console.WriteLine(distanceSqrd);
@@ -76,15 +77,28 @@ namespace MonochromeRainbow
 			if(distanceSqrd <= Square(m.Radius) + Square(player.Radius))
 			{
 				Console.WriteLine("collision");
-				//swap sprites. press s.
+				//Swap sprites & positions. press a.
 				if (((gamePadData.Buttons & GamePadButtons.Square) != 0))
 				{
-					TextureInfo temp = player.PlayerSprite.TextureInfo;
-					player.PlayerSprite.TextureInfo = m.MonsterSprite.TextureInfo;
-					player.PlayerSprite.Quad.S = player.PlayerSprite.TextureInfo.TextureSizef;
-					m.MonsterSprite.TextureInfo = temp;
-					m.MonsterSprite.Quad.S = m.MonsterSprite.TextureInfo.TextureSizef;
-		    	}	
+					hasSwapped = true;
+				}
+				if (((gamePadData.Buttons & GamePadButtons.Square) == 0))
+				{
+					hasSwapped = false;
+				}
+			}
+			
+			if(hasSwapped)
+			{
+				TextureInfo temp = player.PlayerSprite.TextureInfo;
+				player.PlayerSprite.TextureInfo = m.MonsterSprite.TextureInfo;
+				player.PlayerSprite.Quad.S = player.PlayerSprite.TextureInfo.TextureSizef;
+				m.MonsterSprite.TextureInfo = temp;
+				m.MonsterSprite.Quad.S = m.MonsterSprite.TextureInfo.TextureSizef;
+				Vector2 tempPos = m.MonsterSprite.Position;
+				m.MonsterSprite.Position = player.PlayerSprite.Position;
+				player.PlayerSprite.Position = tempPos;
+				hasSwapped = false;
 			}
 		}
 		

@@ -34,7 +34,7 @@ namespace MonochromeRainbow
 			player.Quad.S = playerTextureInfo.TextureSizef;
 			player.Position = playerPos;
 			centerPosition = player.Position + player.Quad.Center;
-			radius = player.Quad.Point10.X / 2;
+			radius = player.Quad.Point10.X;
 			health = 1.0f;
 			isAlive = true;
 			scene.AddChild(player);
