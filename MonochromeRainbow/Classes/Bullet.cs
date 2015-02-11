@@ -12,10 +12,10 @@ namespace MonochromeRainbow
 	public class Bullet
 	{
 		public 	SpriteUV 	sprite;
-		private	 	TextureInfo	textureInfo;
-		public 		int 		bulletDirection;
-		public 		Vector2		bulletPosition;
-				public Bounds2		bounds;
+		private	TextureInfo	textureInfo;
+		public 	int 		bulletDirection;
+		public 	Vector2		bulletPosition;
+		public 	Bounds2		bounds;
 		
 		public Bullet (Scene scene, Vector2 position, int direction)
 		{
@@ -23,7 +23,7 @@ namespace MonochromeRainbow
 			bulletDirection = direction;
 			sprite	= new SpriteUV();
 			
-			textureInfo	= new TextureInfo("/Application/textures/other/bullet.png");
+			textureInfo	= new TextureInfo("/Application/Textures/bullet.png");
 			
 			sprite			= new SpriteUV(textureInfo);
 			sprite.Quad.S	= textureInfo.TextureSizef;
