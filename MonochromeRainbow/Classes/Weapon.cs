@@ -19,38 +19,56 @@ namespace MonochromeRainbow
 		public float shotSpeed;
 		public Vector2 bulletPosition;
 		public Bounds2		bounds;
-		private bool north, south, east, west;
 		private int damage;
-		public Vector2 weaponRec;
+		public Vector2 weaponRec, facingDirection;
+		public bool hasCollided;
+		Scene scene = Director.Instance.CurrentScene; 
 		 
 		
-		public Weapon (Scene scene, int damages, float shotSpeeds, int texture)
+		public Weapon (Scene scene, int damages, float shotSpeeds, int texture, Vector2 position, Vector2 facingDirection)
 		{
 			this.damage = damages;
 			this.shotSpeed = shotSpeeds;
 
+				hasCollided = false;
 				weaponOne = new TextureInfo("/Application/textures/bullet.png");
 				weapon = new SpriteUV(weaponOne);
 				weaponRec = new Vector2(32, 16);
 				weapon.Quad.S = weaponRec;
-				weapon.Position = new Vector2(0,0);
-			scene.AddChild (weapon);
+				weapon.Position = position;
+				this.facingDirection = facingDirection;
+				scene.AddChild (weapon);
 			
 		}
 		
 		public void Update()
 		{
-			if(north)
-				bulletPosition.Y += shotSpeed;	
-			if(south)
-				bulletPosition.Y -= shotSpeed;
-			if(east)
-				bulletPosition.X += shotSpeed;
-			if(west)
-				bulletPosition.X -= shotSpeed;
+			weapon.Position += facingDirection * shotSpeed;
+			CheckCollision();
 		}
 		
-		
+		public void CheckCollision()
+		{	
+			if(weapon.Position.X > Director.Instance.GL.Context.GetViewport().Width - weapon.Quad.S.X)
+			{
+				scene.RemoveChild(weapon, true);
+			}
+			
+			if(weapon.Position.X < 0.0f)
+			{
+				scene.RemoveChild(weapon, true);
+			}
+			
+			if(weapon.Position.Y < 0.0f)
+			{
+				scene.RemoveChild(weapon, true);
+			}
+			
+			if(weapon.Position.Y > Director.Instance.GL.Context.GetViewport().Height + weapon.Quad.S.X)
+			{
+				scene.RemoveChild(weapon, true);
+			}
+		}	
 	}
 }
 

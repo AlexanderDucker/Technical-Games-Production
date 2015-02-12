@@ -16,12 +16,13 @@ namespace MonochromeRainbow
 		private Vector2			centerPosition;
 		private float			radius;
 		private float			health;
-		private bool			isSomething;
+		private bool			hasSwapped, isAlive;
 		
 		//Accessors.
 		public Vector2 CenterPosition{ get{return centerPosition;}}
 		public float Radius { get{return radius;} }
 		public float Health { get{return health;} set{health = value;} }
+		public bool IsAlive{ get{return isAlive;} set{isAlive = value;} }
 		public SpriteUV EnemySprite{get {return enemy;} }
 		
 		public Enemy (Scene gameScene, Vector2 enemyPos)
@@ -38,7 +39,8 @@ namespace MonochromeRainbow
 			enemy.Position = enemyPos;
 			
 			health = 1.0f;
-			isSomething = false;
+			hasSwapped = false;
+			isAlive = true;
 			
 			radius = enemy.Quad.Point10.X/2;
 			centerPosition = enemy.Position + enemy.Quad.Center;
@@ -57,15 +59,17 @@ namespace MonochromeRainbow
 		public void Update()
 		{
 			centerPosition = enemy.Position + enemy.Quad.Center;
+			radius = enemy.Quad.Point10.X/2;
 			
-			if(health <= 0.0f && !isSomething)
+			if(health <= 0.0f && !hasSwapped)
 			{
 				enemy.Position = enemy.Position - enemy.Quad.Center;
 				enemyTextureInfo = textures[1];
 				enemy.TextureInfo = enemyTextureInfo;
 				enemy.Quad.S = enemyTextureInfo.TextureSizef;
 				radius = enemy.Quad.Point10.X / 2;
-				isSomething = true;
+				hasSwapped = true;
+				isAlive = false;
 			}
 		}
 	}

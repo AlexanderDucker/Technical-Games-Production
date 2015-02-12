@@ -21,9 +21,10 @@ namespace MonochromeRainbow
 		private static GamePadData		gamePadData;
 		private Player				player;
 		private Enemy[] 			enemies;
-		private bool 				hasSwapped;
+		private bool 				hasSwapped, canSwap, firstSwap;
+		private TextureLoading		tl;
 		
-		public TheGame(){ hasSwapped = false; }
+		public TheGame(){ hasSwapped = false; canSwap = true; firstSwap = true;}
 		
 		public void LoadLevel()
 		{
@@ -32,6 +33,8 @@ namespace MonochromeRainbow
 			//Set game scene
 			gameScene = new Sce.PlayStation.HighLevel.GameEngine2D.Scene();
 			gameScene.Camera.SetViewFromViewport();
+			
+			tl = new TextureLoading();
 			
 			player = new Player(gameScene, new Vector2(100,100));
 			
@@ -49,7 +52,7 @@ namespace MonochromeRainbow
 			//Get gamepad input.
 			gamePadData = GamePad.GetData(0);
 			
-			player.Update();
+			player.Update(gameScene);
 			
 			foreach(Enemy e in enemies)
 			{
@@ -59,6 +62,7 @@ namespace MonochromeRainbow
 					CheckDistance(e);
 				}
 			}
+			
 			//Suicide. Key press d.
 		    if (((gamePadData.Buttons & GamePadButtons.Circle) != 0))
 			{
@@ -80,32 +84,50 @@ namespace MonochromeRainbow
 				//Swap sprites & positions. press a.
 				if (((gamePadData.Buttons & GamePadButtons.Square) != 0))
 				{
-					hasSwapped = true;
+					if(canSwap)
+					{
+						hasSwapped = true;
+						canSwap = false;
+					}
 				}
 				if (((gamePadData.Buttons & GamePadButtons.Square) == 0))
 				{
 					hasSwapped = false;
+					canSwap = true;
 				}
 			}
 			
 			if(hasSwapped)
 			{
-				TextureInfo temp = player.PlayerSprite.TextureInfo;
-				player.PlayerSprite.TextureInfo = e.EnemySprite.TextureInfo;
-				player.PlayerSprite.Quad.S = player.PlayerSprite.TextureInfo.TextureSizef;
-				e.EnemySprite.TextureInfo = temp;
-				e.EnemySprite.Quad.S = e.EnemySprite.TextureInfo.TextureSizef;
-				Vector2 tempPos = e.EnemySprite.Position;
-				e.EnemySprite.Position = player.PlayerSprite.Position;
-				player.PlayerSprite.Position = tempPos;
-				hasSwapped = false;
+				if(firstSwap)
+				{
+					player.PlayerSprite.TextureInfo = tl.EnemyTex;
+					player.PlayerSprite.Quad.S = player.PlayerSprite.TextureInfo.TextureSizef;
+					e.EnemySprite.TextureInfo = tl.DeadPlayerTex;
+					e.EnemySprite.Quad.S = e.EnemySprite.TextureInfo.TextureSizef;
+					Vector2 tempPos = e.EnemySprite.Position;
+					e.EnemySprite.Position = player.PlayerSprite.Position;
+					player.PlayerSprite.Position = tempPos;
+					hasSwapped = false;
+					firstSwap = false;
+				}
+				else
+				{
+					player.PlayerSprite.TextureInfo = tl.PlayerTex;
+					player.PlayerSprite.Quad.S = player.PlayerSprite.TextureInfo.TextureSizef;
+					e.EnemySprite.TextureInfo = tl.DeadEnemyTex;
+					e.EnemySprite.Quad.S = e.EnemySprite.TextureInfo.TextureSizef;
+					Vector2 tempPos = e.EnemySprite.Position;
+					e.EnemySprite.Position = player.PlayerSprite.Position;
+					player.PlayerSprite.Position = tempPos;
+					hasSwapped = false;
+					firstSwap = true;
+				}
+				
 			}
 		}
 		
-		private float Square(float a)
-		{
-			return a*a;
-		}
+		private float Square(float a){return a*a;}
 	}
 }
 

@@ -1,4 +1,7 @@
 using System;
+using System.Diagnostics;
+using System.Collections.Generic;
+
 
 using Sce.PlayStation.Core;
 using Sce.PlayStation.Core.Graphics;
@@ -13,6 +16,7 @@ namespace MonochromeRainbow
 	{
 		private SpriteUV		player;
 		private TextureInfo		playerTextureInfo;
+		private TextureInfo[]	textures;
 		private GamePadData		gamePadData;
 		public Vector2			movingDirection;
 		public Vector2			facingDirection;
@@ -21,17 +25,25 @@ namespace MonochromeRainbow
 		private float			health;
 		private bool 			isAlive;
 		private float			radius;
+
 		
 		public Vector2 CenterPosition{ get{return centerPosition;} }
 		public bool IsAlive{ get{return isAlive;} set{isAlive = value;} }
 		public float Health{ get{return health;} set{health = value;} }
 		public float Radius { get{return radius;} }
 		public SpriteUV PlayerSprite{get {return player;} }
-		
+		List<Weapon> weaponList = new List<Weapon>();
+		Stopwatch s = new Stopwatch();
+
+
 		
 		public Player (Scene scene, Vector2 playerPos)
 		{
-			playerTextureInfo = new TextureInfo("/Application/Textures/Character_one.png");
+			playerTextureInfo = new TextureInfo();
+			textures = new TextureInfo[2];
+			textures[0] = new TextureInfo("/Application/Textures/Character_one.png");
+			textures[1] = new TextureInfo("/Application/Textures/Character_one_dead.png");
+			playerTextureInfo = textures[0];
 			player = new SpriteUV(playerTextureInfo);	
 			player.Quad.S = playerTextureInfo.TextureSizef;
 			player.Position = playerPos;
@@ -40,6 +52,7 @@ namespace MonochromeRainbow
 			speed = 2.0f;
 			health = 1.0f;
 			isAlive = true;
+			s.Start();
 			scene.AddChild(player);
 			
 		}
@@ -49,7 +62,7 @@ namespace MonochromeRainbow
 			playerTextureInfo.Dispose();
 		}
 		
-		public void Update()
+		public void Update(Scene scene)
 		{
         	//Get gamepad input.
 			gamePadData = GamePad.GetData(0);
@@ -156,6 +169,24 @@ namespace MonochromeRainbow
 				{					
 					player.Position = new Vector2(player.Position.X, 0.0f);
 				}
+				if((gamePadData.Buttons & GamePadButtons.Triangle) != 0)
+				{
+					if(s.ElapsedMilliseconds > 500)
+					{
+						Weapon weaponOne = new Weapon(scene, 10, 10.0f, 1, centerPosition, facingDirection);
+						weaponList.Add(weaponOne);
+						Console.WriteLine(weaponList.Count);
+						s.Reset();
+						s.Start();
+					}
+				}
+				
+				if(weaponList.Count > 0)
+					foreach(Weapon w in weaponList)
+					{
+						w.Update();
+					}
+				
 			}
 		}
 	}
