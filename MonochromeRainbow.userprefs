@@ -1,15 +1,28 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="MonochromeRainbow\Classes\Weapon.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="MonochromeRainbow\TheGame.cs">
     <Files>
-      <File FileName="MonochromeRainbow\Classes\AppMain.cs" Line="21" Column="9" />
-      <File FileName="MonochromeRainbow\Classes\Player.cs" Line="31" Column="29" />
-      <File FileName="MonochromeRainbow\Resurrection.cs" Line="24" Column="4" />
-      <File FileName="MonochromeRainbow\TheGame.cs" Line="33" Column="14" />
-      <File FileName="MonochromeRainbow\Classes\Enemy.cs" Line="31" Column="29" />
-      <File FileName="MonochromeRainbow\TextureLoading.cs" Line="50" Column="4" />
-      <File FileName="MonochromeRainbow\Classes\Weapon.cs" Line="11" Column="1" />
+      <File FileName="MonochromeRainbow\Classes\Enemy.cs" Line="20" Column="30" />
+      <File FileName="MonochromeRainbow\TheGame.cs" Line="59" Column="6" />
+      <File FileName="MonochromeRainbow\Classes\AppMain.cs" Line="16" Column="3" />
+      <File FileName="MonochromeRainbow\Classes\Player.cs" Line="68" Column="22" />
+      <File FileName="MonochromeRainbow\TextureLoading.cs" Line="18" Column="34" />
+      <File FileName="MonochromeRainbow\Classes\Weapon.cs" Line="34" Column="5" />
     </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State expanded="True">
+          <Node name="MonochromeRainbow" expanded="True">
+            <Node name="Classes" expanded="True" />
+            <Node name="Textures" expanded="True" />
+            <Node name="TheGame.cs" selected="True" />
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="ClassPad">
+        <State expanded="True" selected="True" />
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />

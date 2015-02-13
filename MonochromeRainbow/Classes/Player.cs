@@ -1,4 +1,7 @@
 using System;
+using System.Diagnostics;
+using System.Collections.Generic;
+
 
 using Sce.PlayStation.Core;
 using Sce.PlayStation.Core.Graphics;
@@ -9,90 +12,213 @@ using Sce.PlayStation.HighLevel.GameEngine2D.Base;
 
 namespace MonochromeRainbow
 {
-	public class Character
+	public class Player
 	{
-		private SpriteUV		character;
-		private TextureInfo		characterTextureInfo;
-		private Resurrection	ring;
+		private SpriteUV		player;
+		private TextureInfo		playerTextureInfo;
+		private TextureInfo[]	textures;
 		private GamePadData		gamePadData;
-		
+		public Vector2			movingDirection;
+		public Vector2			facingDirection;
+		public float			speed;
+		private Vector2			centerPosition;
 		private float			health;
-		private bool 			isPlayer;
 		private bool 			isAlive;
-		private bool			isActivated;
+		private float			radius;
+		public int				fireRate;
+		public float			shootSpeed;
+		public int				bulletTex;
+		private TextureInfo 	BGTex;
+		private SpriteUV 		BG;
+
 		
+		public Vector2 CenterPosition{ get{return centerPosition;} }
 		public bool IsAlive{ get{return isAlive;} set{isAlive = value;} }
 		public float Health{ get{return health;} set{health = value;} }
+		public float Radius { get{return radius;} }
+		public SpriteUV PlayerSprite{get {return player;} }
+		List<Weapon> weaponList = new List<Weapon>();
+		Stopwatch s = new Stopwatch();
+
+
 		
-		public Character (Scene scene, Vector2 characterPos, bool isPlayer, TextureInfo texture)
+		public Player (Scene scene, Vector2 playerPos)
 		{
-			characterTextureInfo = texture;
-			character = new SpriteUV(texture);
-			character.Scale = texture.TextureSizef;
-			character.Position = characterPos;
-			
+			BGTex = new TextureInfo("Application/Textures/Laboratory_Background.png");
+			BG = new SpriteUV(BGTex);
+			BG.Quad.S = BGTex.TextureSizef;
+			playerTextureInfo = new TextureInfo();
+			textures = new TextureInfo[2];
+			textures[0] = new TextureInfo("/Application/Textures/Character_one.png");
+			textures[1] = new TextureInfo("/Application/Textures/Character_one_dead.png");
+			playerTextureInfo = textures[0];
+			player = new SpriteUV(playerTextureInfo);	
+			player.Quad.S = playerTextureInfo.TextureSizef;
+			player.Position = playerPos;
+			centerPosition = player.Position + player.Quad.Center;
+			radius = player.Quad.Point10.X/2;
+			speed = 2.0f;
 			health = 1.0f;
 			isAlive = true;
-			isActivated = false;
-			this.isPlayer = isPlayer;
-			scene.AddChild(character);
+			fireRate = 200;
+			shootSpeed = 10.0f;
+			bulletTex = 1;
+			facingDirection = new Vector2(1.0f,0.0f);
+			s.Start();
+			scene.AddChild (BG);
+			scene.AddChild(player);
+			
 		}
 		
 		public void Dispose()
 		{
-			characterTextureInfo.Dispose();
+			playerTextureInfo.Dispose();
 		}
 		
-		public void Update()
+		
+		public Vector2 getPlayerPos()
+		{
+			return player.Position;
+		}
+		
+		public void Update(Scene scene)
 		{
         	//Get gamepad input.
 			gamePadData = GamePad.GetData(0);
 			
-			if(isPlayer && isAlive)
-			{
-				//Left movement.
-	    		if ((gamePadData.Buttons & GamePadButtons.Left) != 0)
-	    		{
-					character.Position = new Vector2(character.Position.X - 4.0f, character.Position.Y);
-	    		}
+			centerPosition = player.Position + player.Quad.Center;
 			
-				//Right movement.
-	    		if ((gamePadData.Buttons & GamePadButtons.Right) != 0)
-	    		{
-					character.Position = new Vector2(character.Position.X + 4.0f, character.Position.Y);
-	    		}
+			if(isAlive)
+			{
+				//Left movement
+		    	if ((gamePadData.Buttons & GamePadButtons.Left) != 0)
+		    	{
+					movingDirection.X = -1.0f;
+					facingDirection.X = -1.0f;
+					if ((gamePadData.Buttons & GamePadButtons.Up) != 0)
+		    		{
+						facingDirection.Y = 1.0f;
+					}
+					else if ((gamePadData.Buttons & GamePadButtons.Down) != 0)
+		    		{
+						facingDirection.Y = -1.0f;
+					}
+		    		else
+					{
+						facingDirection.Y = 0.0f;
+					}					
+		    	}
+				//Right movement
+		    	else if ((gamePadData.Buttons & GamePadButtons.Right) != 0)
+		    	{
+					movingDirection.X = 1.0f;
+					facingDirection.X = 1.0f;
+					if ((gamePadData.Buttons & GamePadButtons.Up) != 0)
+		    		{
+						facingDirection.Y = 1.0f;
+					}
+					else if ((gamePadData.Buttons & GamePadButtons.Down) != 0)
+		    		{
+						facingDirection.Y = -1.0f;
+					}
+		    		else
+					{
+						facingDirection.Y = 0.0f;
+					}
+		    	}
+				else
+				{
+					movingDirection.X = 0.0f;
+				}
+				//Up movement
+		    	if ((gamePadData.Buttons & GamePadButtons.Up) != 0)
+		    	{
+					movingDirection.Y = 1.0f;
+					facingDirection.Y = 1.0f;
+					if ((gamePadData.Buttons & GamePadButtons.Left) != 0)
+		    		{
+						facingDirection.X = -1.0f;
+					}
+					else if ((gamePadData.Buttons & GamePadButtons.Right) != 0)
+		    		{
+						facingDirection.X = 1.0f;
+					}
+		    		else
+					{
+						facingDirection.X = 0.0f;
+					}
+		    	}
+				//Down movement
+		    	else if ((gamePadData.Buttons & GamePadButtons.Down) != 0)
+		    	{
+					movingDirection.Y = -1.0f;
+					facingDirection.Y = -1.0f;
+					if ((gamePadData.Buttons & GamePadButtons.Left) != 0)
+		    		{
+						facingDirection.X = -1.0f;
+					}
+					else if ((gamePadData.Buttons & GamePadButtons.Right) != 0)
+		    		{
+						facingDirection.X = 1.0f;
+					}
+		    		else
+					{
+						facingDirection.X = 0.0f;
+					}
+		    	}
+				else
+				{
+					movingDirection.Y = 0.0f;
+				}
+				if (!(movingDirection.IsZero()))
+				{
+					Vector2 newDir = movingDirection.Normalize();
+					player.Position = new Vector2(player.Position.X + (newDir.X * speed),player.Position.Y + (newDir.Y * speed));
+				}
+				wallCollision();
+				if((gamePadData.Buttons & GamePadButtons.Triangle) != 0)
+				{
+					if(s.ElapsedMilliseconds > fireRate)
+					{
+						Weapon weaponOne = new Weapon(scene, 10, shootSpeed, bulletTex, centerPosition, facingDirection);
+						weaponList.Add(weaponOne);
+						Console.WriteLine(weaponList.Count);
+						s.Reset();
+						s.Start();
+					}
+				}
 				
-				//Up movement.
-	    		if ((gamePadData.Buttons & GamePadButtons.Up) != 0)
-	    		{
-					character.Position = new Vector2(character.Position.X, character.Position.Y + 4.0f);
-	    		}
+				if(weaponList.Count > 0)
+					foreach(Weapon w in weaponList)
+					{
+						w.Update();
+					}
 				
-				//Down movement.
-	    		if ((gamePadData.Buttons & GamePadButtons.Down) != 0)
-	    		{
-					character.Position = new Vector2(character.Position.X, character.Position.Y - 4.0f);
-	    		}
-			}
-			
-			if(health <= 0.0f && !isPlayer && !isActivated)
-			{
-				isAlive = false;		
-				Death();
-				isActivated = true;
-			}
-			
-			else if(health <= 0.0f && isPlayer)
-			{
-				isAlive = false;
 			}
 		}
-		
-		public void Death()
+		void wallCollision()
 		{
-			Scene scene = Director.Instance.CurrentScene;
-			ring = new Resurrection(scene, character.Position);
+			//Check if player has hit the wall.
+			if (player.Position.X > Director.Instance.GL.Context.GetViewport().Width - player.Quad.S.X)
+			{
+				player.Position = new Vector2(Director.Instance.GL.Context.GetViewport().Width - player.Quad.S.X,player.Position.Y);
+			}
+			if (player.Position.Y > Director.Instance.GL.Context.GetViewport().Height - player.Quad.S.Y)
+			{
+				player.Position = new Vector2(player.Position.X,Director.Instance.GL.Context.GetViewport().Height - (player.Quad.S.X/2));
+			}
+			if (player.Position.X < 0.0f)
+			{					
+				player.Position = new Vector2(0.0f, player.Position.Y);
+			}
+			if (player.Position.Y < 0.0f)
+			{					
+				player.Position = new Vector2(player.Position.X, 0.0f);
+			}
 		}
 	}
 }
-
+//do while until for if (x = cabbage)
+//{
+//	cabbage++;
+//}
