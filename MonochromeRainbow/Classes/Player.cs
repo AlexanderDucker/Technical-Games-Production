@@ -62,6 +62,12 @@ namespace MonochromeRainbow
 			playerTextureInfo.Dispose();
 		}
 		
+		
+		public Vector2 getPlayerPos()
+		{
+			return player.Position;
+		}
+		
 		public void Update(Scene scene)
 		{
         	//Get gamepad input.

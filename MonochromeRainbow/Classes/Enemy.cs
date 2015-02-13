@@ -17,7 +17,7 @@ namespace MonochromeRainbow
 		private float			radius;
 		private float			health;
 		private bool			hasSwapped, isAlive;
-		
+		private Vector2 		position;
 		//Accessors.
 		public Vector2 CenterPosition{ get{return centerPosition;}}
 		public float Radius { get{return radius;} }
@@ -37,7 +37,7 @@ namespace MonochromeRainbow
 			enemy = new SpriteUV(enemyTextureInfo);
 			enemy.Quad.S = enemyTextureInfo.TextureSizef;
 			enemy.Position = enemyPos;
-			
+			position = enemyPos;
 			health = 1.0f;
 			hasSwapped = false;
 			isAlive = true;
@@ -71,6 +71,19 @@ namespace MonochromeRainbow
 				hasSwapped = true;
 				isAlive = false;
 			}
+			enemy.Position = position;
+		}
+		
+		public void RunAI(Vector2 playerPos)
+		{
+			if(playerPos.X > enemy.Position.X)
+				position.X += 1.0f;
+			if(playerPos.Y > enemy.Position.Y)
+				position.Y += 1.0f;
+			if(playerPos.X < enemy.Position.X)
+				position -= 1.0f;
+			if(playerPos.Y < enemy.Position.Y)
+				position.Y -= 1.0f;
 		}
 	}
 }

@@ -60,6 +60,11 @@ namespace MonochromeRainbow
 				if(e.Health <= 0.0f)
 				{
 					CheckDistance(e);
+					
+				}
+				else
+				{
+					e.RunAI(player.getPlayerPos());
 				}
 			}
 			
