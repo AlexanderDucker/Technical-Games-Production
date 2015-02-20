@@ -41,10 +41,16 @@
     <Compile Include="Classes\AppMain.cs" />
     <Compile Include="Classes\Bullet.cs" />
     <Compile Include="Classes\Enemy.cs" />
-    <Compile Include="TextureLoading.cs" />
     <Compile Include="Classes\Weapon.cs" />
     <Compile Include="Classes\Player.cs" />
     <Compile Include="TheGame.cs" />
+    <Compile Include="Managers\EnemyManager.cs" />
+    <Compile Include="Managers\ObjectManager.cs" />
+    <Compile Include="Managers\TextureLoading.cs" />
+    <Compile Include="Managers\CollisionManager.cs" />
+    <Compile Include="Managers\InputManager.cs" />
+    <Compile Include="Managers\MechanicManager.cs" />
+    <Compile Include="Classes\TextureSwitching.cs" />
   </ItemGroup>
   <ItemGroup>
     <PsmMetadata Include="app.xml" />
@@ -54,6 +60,7 @@
     <Folder Include="fonts\" />
     <Folder Include="Classes\" />
     <Folder Include="Textures\" />
+    <Folder Include="Managers\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Textures\bullet.png" />

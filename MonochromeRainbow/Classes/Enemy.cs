@@ -26,18 +26,25 @@ namespace MonochromeRainbow
 		
 		public Enemy ()
 		{
+			
+		}
+		
+		public void InitData()
+		{
 			health = 1.0f;
 			hasSwapped = false;
 			isAlive = true;
 			radius = enemy.Quad.Point10.X/2;
 			centerPosition = enemy.Position + enemy.Quad.Center;
+			position = enemy.Position;
 		}
 		
-		public void SetTexture(TextureInfo texture)
+		public void SetTexture(TextureInfo texture, Vector2 pos)
 		{
 			eTexture = texture;
-			enemy = new SpriteUV(texture);
+			enemy = new SpriteUV(eTexture);
 			enemy.Quad.S = texture.TextureSizef;
+			enemy.Position = pos;
 		}
 		
 		public void Dispose()
@@ -45,11 +52,11 @@ namespace MonochromeRainbow
 			eTexture.Dispose ();
 		}
 		
-		public void Update()
+		public void Update(Vector2 playerpos)
 		{
 			centerPosition = enemy.Position + enemy.Quad.Center;
 			radius = enemy.Quad.Point10.X/2;
-			
+				
 			if(health <= 0.0f && !hasSwapped)
 			{
 				enemy.Position = enemy.Position - enemy.Quad.Center;
@@ -57,6 +64,7 @@ namespace MonochromeRainbow
 				hasSwapped = true;
 				isAlive = false;
 			}
+		
 			enemy.Position = position;
 		}
 		

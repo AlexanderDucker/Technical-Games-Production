@@ -1,0 +1,15 @@
+Just a quick document to explain the new refactoring.
+//sorry about the whole notepad thing - haven't gotten around to installing MSWord yet.
+
+Right so, AppMain starts the loop, starts TheGame.
+TheGame initialises the window and all that, then starts the ObjectManager and the MechanicManager and updates them.
+The ObjectManager starts the EnemyManager, Player and everything else in there and updates them.
+EnemyManager handles the spawning of the enemies and runs the Enemy class which has all of the AI in it.  
+Player class handles the Weapons, which handles the bullets, and the InputManager, which should eventually handle all input and give instructions to the player.
+The MechanicManager handles the game mechanics like TextureSwitching and stuff like that.
+The CollisionManager is run by the ObjectManager and takes player and enemy locations as parameters, then tells them what to do.
+
+Please keep it tidy and try to follow this stuff.  If you have any problems using it or want me to get rid of or add a few things then please do tell.
+
+Love ya'<3
+~Nathan
