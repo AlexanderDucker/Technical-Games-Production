@@ -15,14 +15,14 @@ namespace MonochromeRainbow
 		private TextureInfo[] 	walkPlayerTex;
 		private TextureInfo 	enemyTex;
 		private TextureInfo 	deadEnemyTex;
-		private TextureInfo 	weaponTex;
+		//private TextureInfo 	weaponTex;
 		
 		public TextureInfo   PlayerTex{ get{return playerTex;} }
 		public TextureInfo   DeadPlayerTex{ get{return deadPlayerTex;} }
 		public TextureInfo[] WalkPlayerTex{ get{return walkPlayerTex;} }
 		public TextureInfo   EnemyTex{ get{return enemyTex;} }
 		public TextureInfo   DeadEnemyTex{ get{return deadEnemyTex;} }
-		public TextureInfo   WeaponTex{ get{return weaponTex;} }
+		//public TextureInfo   WeaponTex{ get{return weaponTex;} }
 		
 		public TextureLoading ()
 		{
@@ -33,7 +33,7 @@ namespace MonochromeRainbow
 			walkPlayerTex[1] = new TextureInfo("Application/textures/Character_one_walk_two.png");
 			enemyTex = new TextureInfo("Application/Textures/Character_three.png");
 			deadEnemyTex = new TextureInfo("Application/Textures/Character_three_dead.png");
-			weaponTex = new TextureInfo("Application/textures/player/blue.png");
+			//weaponTex = new TextureInfo("Application/textures/player/blue.png");
 		}
 		
 	}
