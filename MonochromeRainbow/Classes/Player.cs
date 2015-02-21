@@ -21,7 +21,7 @@ namespace MonochromeRainbow
 		public Vector2			movingDirection;
 		public Vector2			facingDirection;
 		public float			speed;
-		private Vector2			centerPosition;
+		public Vector2			centerPosition;
 		private float			health;
 		private bool 			isAlive;
 		private float			radius;

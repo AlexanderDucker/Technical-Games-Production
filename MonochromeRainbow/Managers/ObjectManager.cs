@@ -37,7 +37,7 @@ namespace MonochromeRainbow
 		
 		public void UpdateObjects()
 		{
-			enemyManager.Update(player.getPlayerPos());	
+			enemyManager.Update(player.centerPosition, !player.movingDirection.IsZero());	
 			player.Update (scene);
 			collisions.CheckCollisions(player.getPlayerPos(), enemyManager.enemies);
 			Console.WriteLine("Objects Updating");

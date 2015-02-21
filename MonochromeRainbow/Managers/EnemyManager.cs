@@ -21,23 +21,24 @@ namespace MonochromeRainbow
 		public Scene scene;
 		int spawnpnt = 0;
 		private static GamePadData		gamePadData;
+		Stopwatch s = new Stopwatch();
 		public EnemyManager (Scene gameScene, TextureLoading textureManager)
 		{
 			SetSpawnPoints ();
 			scene = gameScene;
 			textures = textureManager;
 			enemyCount = 20;
-			
+			s.Start();
 		}
 		
 		
-		public void Update(Vector2 playerPos)
+		public void Update(Vector2 playerPos, bool playerMoving)
 		{
 			if(enemies.Count < enemyCount)
 			{	
 				//if there are not 20 enemies in the list - works for respawning.
 				//loops through four spawnpoints and creates an enemy at each one
-				CreateNewEnemy (spawnpnt);
+				CreateNewEnemy (spawnpnt, playerPos);
 				spawnpnt++;
 			}
 			
@@ -49,7 +50,7 @@ namespace MonochromeRainbow
 			{
 				enemies[i].Update(playerPos);	
 				enemies[i].RunAI (playerPos);
-				
+				enemies[i].Shoot (playerPos, scene, s, playerMoving);
 			}
 			Console.WriteLine("enemies updating");
 			//TEMPORARY STUFF
@@ -63,11 +64,11 @@ namespace MonochromeRainbow
 			
 		}
 		
-		public void CreateNewEnemy(int spawnpt)
+		public void CreateNewEnemy(int spawnpt, Vector2 playerPos)
 		{
 			Enemy enemy = new Enemy();
 			enemy.SetTexture (textures.EnemyTex, spawnpoints[spawnpt]);
-			enemy.InitData ();
+			enemy.InitData (playerPos);
 			scene.AddChild (enemy.enemy);	
 			enemies.Add (enemy);
 			
