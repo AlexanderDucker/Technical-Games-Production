@@ -2,7 +2,6 @@ using System;
 using System.Diagnostics;
 using System.Collections.Generic;
 
-
 using Sce.PlayStation.Core;
 using Sce.PlayStation.Core.Graphics;
 using Sce.PlayStation.Core.Input;
@@ -21,16 +20,15 @@ namespace MonochromeRainbow
 		public Scene scene;
 		int spawnpnt = 0;
 		private static GamePadData		gamePadData;
-		Stopwatch s = new Stopwatch();
+
+		List<Weapon> weaponList = new List<Weapon>();
 		public EnemyManager (Scene gameScene, TextureLoading textureManager)
 		{
 			SetSpawnPoints ();
 			scene = gameScene;
 			textures = textureManager;
 			enemyCount = 20;
-			s.Start();
 		}
-		
 		
 		public void Update(Vector2 playerPos, bool playerMoving)
 		{
@@ -50,31 +48,37 @@ namespace MonochromeRainbow
 			{
 				enemies[i].Update(playerPos);	
 				enemies[i].RunAI (playerPos);
-				enemies[i].Shoot (playerPos, scene, s, playerMoving);
+				enemies[i].Shoot (playerPos, scene, playerMoving, weaponList);
 			}
-			Console.WriteLine("enemies updating");
 			//TEMPORARY STUFF
 			gamePadData = GamePad.GetData(0);
 			 if (((gamePadData.Buttons & GamePadButtons.Circle) != 0))
 			{
 				enemies[0].Health = 0.0f;
-				Console.WriteLine("button clicked");
 		    }	
 			//TEMPORARY STUFF
 			
+			if(weaponList.Count > 0)
+			{
+				foreach(Weapon w in weaponList)
+				{
+					w.Update();
+				}
+			}
 		}
 		
 		public void CreateNewEnemy(int spawnpt, Vector2 playerPos)
 		{
+			Random rand = new Random(Guid.NewGuid().GetHashCode());
+			float speed = (float)rand.Next(10, 20);
+			speed /= 10;
+			int fireRate = rand.Next(300, 500);
 			Enemy enemy = new Enemy();
 			enemy.SetTexture (textures.EnemyTex, spawnpoints[spawnpt]);
-			enemy.InitData (playerPos);
+			enemy.InitData (playerPos, speed, fireRate);
 			scene.AddChild (enemy.enemy);	
 			enemies.Add (enemy);
-			
 		}
-		
-		
 		
 		public void SetSpawnPoints()
 		{

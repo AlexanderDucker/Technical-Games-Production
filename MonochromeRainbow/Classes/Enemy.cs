@@ -27,14 +27,14 @@ namespace MonochromeRainbow
 		public float Health { get{return health;} set{health = value;} }
 		public bool IsAlive{ get{return isAlive;} set{isAlive = value;} }
 		public SpriteUV EnemySprite{get {return enemy;} }
-		List<Weapon> weaponList = new List<Weapon>();
+		Stopwatch s = new Stopwatch();
 		
 		public Enemy ()
 		{
 			
 		}
 		
-		public void InitData(Vector2 playerPos)
+		public void InitData(Vector2 playerPos, float speed, int fireRate)
 		{
 			health = 1.0f;
 			hasSwapped = false;
@@ -44,13 +44,14 @@ namespace MonochromeRainbow
 			position = enemy.Position;
 			facingDirection = playerPos - enemy.Position;
 			facingDirection = facingDirection.Normalize();		
-			speed = 4.0f;
+			this.speed = speed;
 			health = 2.0f;
 			isAlive = true;
-			fireRate =400;
+			this.fireRate = fireRate;
 			shootSpeed = 20.0f;
 			bulletTex = 0;
 			runAway = false;
+			s.Start();
 		}
 		
 		public void SetTexture(TextureInfo texture, Vector2 pos)
@@ -80,14 +81,6 @@ namespace MonochromeRainbow
 			}
 		
 			enemy.Position = position;
-			
-			if(weaponList.Count > 0)
-			{
-				foreach(Weapon w in weaponList)
-				{
-					w.Update();
-				}
-			}
 		}
 		
 		public void RunAI(Vector2 playerPos)
@@ -101,11 +94,11 @@ namespace MonochromeRainbow
 			
 			if (distance > 150.0f)
 			{
-				position += facingDirection;
+				position += facingDirection * speed;
 			}
 			else if (distance < 100.0f)
 			{
-				position -= facingDirection;
+				position -= facingDirection * speed;
 				runAway = true;
 			}
 			if (runAway)
@@ -116,7 +109,7 @@ namespace MonochromeRainbow
 				}
 			}
 		}
-		public void Shoot(Vector2 playerPos, Scene scene, Stopwatch s, bool playerMoving)
+		public void Shoot(Vector2 playerPos, Scene scene, bool playerMoving, List<Weapon> weaponList)
 		{
 			if (!runAway)
 			{
@@ -150,7 +143,6 @@ namespace MonochromeRainbow
 							missFactor = rand.Next(-100,100);
 						}
 					}
-					Console.WriteLine(missFactor);
 					Vector2 newVec;
 					newVec.X = -facingDirection.Y;
 					newVec.Y = facingDirection.X;
