@@ -30,15 +30,14 @@ namespace MonochromeRainbow
 			this.damage = damages;
 			this.shotSpeed = shotSpeeds;
 
-				hasCollided = false;
-				weaponOne = new TextureInfo("/Application/textures/bullet.png");
-				weapon = new SpriteUV(weaponOne);
-				weaponRec = new Vector2(32, 16);
-				weapon.Quad.S = weaponRec;
-				weapon.Position = position;
-				this.facingDirection = facingDirection;
-				scene.AddChild (weapon);
-			
+			hasCollided = false;
+			weaponOne = new TextureInfo("/Application/textures/bullet.png");
+			weapon = new SpriteUV(weaponOne);
+			weaponRec = new Vector2(32, 16);
+			weapon.Quad.S = weaponRec;
+			weapon.Position = position;
+			this.facingDirection = facingDirection;
+			scene.AddChild (weapon);
 		}
 		
 		public void Update()
@@ -49,17 +48,17 @@ namespace MonochromeRainbow
 		
 		public void CheckCollision()
 		{	
-			if(weapon.Position.X > Director.Instance.GL.Context.GetViewport().Width - weapon.Quad.S.X)
+			if(weapon.Position.X > Director.Instance.GL.Context.GetViewport().Width + weapon.Quad.S.X)
 			{
 				scene.RemoveChild(weapon, true);
 			}
 			
-			if(weapon.Position.X < 0.0f)
+			if(weapon.Position.X < -10.0f)
 			{
 				scene.RemoveChild(weapon, true);
 			}
 			
-			if(weapon.Position.Y < 0.0f)
+			if(weapon.Position.Y < -10.0f)
 			{
 				scene.RemoveChild(weapon, true);
 			}
@@ -68,7 +67,7 @@ namespace MonochromeRainbow
 			{
 				scene.RemoveChild(weapon, true);
 			}
-		}	
+		}		
 	}
 }
 

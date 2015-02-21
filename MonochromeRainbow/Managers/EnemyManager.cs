@@ -72,10 +72,12 @@ namespace MonochromeRainbow
 			Random rand = new Random(Guid.NewGuid().GetHashCode());
 			float speed = (float)rand.Next(10, 20);
 			speed /= 10;
+			float bulletSpeed = (float)rand.Next(100, 200);
+			bulletSpeed /= 10;
 			int fireRate = rand.Next(300, 500);
 			Enemy enemy = new Enemy();
 			enemy.SetTexture (textures.EnemyTex, spawnpoints[spawnpt]);
-			enemy.InitData (playerPos, speed, fireRate);
+			enemy.InitData (playerPos, speed, fireRate, bulletSpeed);
 			scene.AddChild (enemy.enemy);	
 			enemies.Add (enemy);
 		}

@@ -34,7 +34,7 @@ namespace MonochromeRainbow
 			
 		}
 		
-		public void InitData(Vector2 playerPos, float speed, int fireRate)
+		public void InitData(Vector2 playerPos, float speed, int fireRate, float bulletSpeed)
 		{
 			health = 1.0f;
 			hasSwapped = false;
@@ -48,7 +48,7 @@ namespace MonochromeRainbow
 			health = 2.0f;
 			isAlive = true;
 			this.fireRate = fireRate;
-			shootSpeed = 20.0f;
+			shootSpeed = bulletSpeed;
 			bulletTex = 0;
 			runAway = false;
 			s.Start();
@@ -92,7 +92,7 @@ namespace MonochromeRainbow
 			float distanceSqrd = Square(dir.X) + Square(dir.Y);
 			double distance = System.Math.Sqrt(distanceSqrd);
 			
-			if (distance > 150.0f)
+			if (distance >= 150.0f)
 			{
 				position += facingDirection * speed;
 			}
@@ -103,7 +103,7 @@ namespace MonochromeRainbow
 			}
 			if (runAway)
 			{
-				if(distance > 150.0f)
+				if(distance >= 150.0f)
 				{
 					runAway = false;	
 				}

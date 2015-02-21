@@ -18,14 +18,10 @@ namespace MonochromeRainbow
 		private TextureInfo		playerTextureInfo;
 		private TextureInfo[]	textures;
 		private GamePadData		gamePadData;
-		public Vector2			movingDirection;
-		public Vector2			facingDirection;
-		public float			speed;
-		public Vector2			centerPosition;
-		private float			health;
+		public Vector2			movingDirection, facingDirection, centerPosition;
 		private bool 			isAlive;
-		private float			radius;
-
+		public float			speed, health, radius, shootSpeed, fireRate;
+		public int				bulletTex;
 		
 		public Vector2 CenterPosition{ get{return centerPosition;} }
 		public bool IsAlive{ get{return isAlive;} set{isAlive = value;} }
@@ -35,33 +31,40 @@ namespace MonochromeRainbow
 		List<Weapon> weaponList = new List<Weapon>();
 		Stopwatch s = new Stopwatch();
 
-
-		
 		public Player (Scene scene, Vector2 playerPos)
 		{
-			playerTextureInfo = new TextureInfo();
 			textures = new TextureInfo[2];
 			textures[0] = new TextureInfo("/Application/Textures/Character_one.png");
 			textures[1] = new TextureInfo("/Application/Textures/Character_one_dead.png");
+			
+			playerTextureInfo = new TextureInfo();
 			playerTextureInfo = textures[0];
+			
 			player = new SpriteUV(playerTextureInfo);	
 			player.Quad.S = playerTextureInfo.TextureSizef;
+			
 			player.Position = playerPos;
 			centerPosition = player.Position + player.Quad.Center;
 			radius = player.Quad.Point10.X/2;
+			
 			speed = 2.0f;
 			health = 1.0f;
 			isAlive = true;
-			s.Start();
-			scene.AddChild(player);
+			fireRate = 200;
+			shootSpeed = 10.0f;
+			bulletTex = 1;
 			
+			facingDirection = new Vector2(1.0f,0.0f);
+			
+			s.Start();
+			
+			scene.AddChild(player);
 		}
 		
 		public void Dispose()
 		{
 			playerTextureInfo.Dispose();
 		}
-		
 		
 		public Vector2 getPlayerPos()
 		{
@@ -162,19 +165,9 @@ namespace MonochromeRainbow
 					Vector2 newDir = movingDirection.Normalize();
 					player.Position = new Vector2(player.Position.X + (newDir.X * speed),player.Position.Y + (newDir.Y * speed));
 				}
-								//Check if player has hit the wall.
-				if (player.Position.X > Director.Instance.GL.Context.GetViewport().Width - player.Quad.S.X)
-				{
-					player.Position = new Vector2(Director.Instance.GL.Context.GetViewport().Width - player.Quad.S.X,player.Position.Y);
-				}
-				else if (player.Position.X < 0.0f)
-				{					
-					player.Position = new Vector2(0.0f, player.Position.Y);
-				}
-				else if (player.Position.Y < 0.0f)
-				{					
-					player.Position = new Vector2(player.Position.X, 0.0f);
-				}
+				
+				wallCollision();
+				
 				if((gamePadData.Buttons & GamePadButtons.Triangle) != 0)
 				{
 					if(s.ElapsedMilliseconds > 500)
@@ -188,11 +181,33 @@ namespace MonochromeRainbow
 				}
 				
 				if(weaponList.Count > 0)
+				{
 					foreach(Weapon w in weaponList)
 					{
 						w.Update();
 					}
-				
+				}
+			}
+		}
+		
+		void wallCollision()
+		{
+			//Check if player has hit the wall.
+			if (player.Position.X > Director.Instance.GL.Context.GetViewport().Width - player.Quad.S.X)
+			{
+				player.Position = new Vector2(Director.Instance.GL.Context.GetViewport().Width - player.Quad.S.X,player.Position.Y);
+			}
+			if (player.Position.Y > Director.Instance.GL.Context.GetViewport().Height - player.Quad.S.Y)
+			{
+				player.Position = new Vector2(player.Position.X,Director.Instance.GL.Context.GetViewport().Height - (player.Quad.S.X/2));
+			}
+			if (player.Position.X < 0.0f)
+			{					
+				player.Position = new Vector2(0.0f, player.Position.Y);
+			}
+			if (player.Position.Y < 0.0f)
+			{					
+				player.Position = new Vector2(player.Position.X, 0.0f);
 			}
 		}
 	}
