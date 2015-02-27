@@ -17,12 +17,11 @@ namespace MonochromeRainbow
 		private SpriteUV		player;
 		private TextureInfo		playerTextureInfo;
 		private TextureInfo[]	textures;
-		private GamePadData		gamePadData;
 		public Vector2			movingDirection, facingDirection, centerPosition;
 		private bool 			isAlive;
 		public float			speed, health, radius, shootSpeed, fireRate;
 		public int				bulletTex;
-		
+		public InputManager 	inputManager;
 		public Vector2 CenterPosition{ get{return centerPosition;} }
 		public bool IsAlive{ get{return isAlive;} set{isAlive = value;} }
 		public float Health{ get{return health;} set{health = value;} }
@@ -33,6 +32,7 @@ namespace MonochromeRainbow
 
 		public Player (Scene scene, Vector2 playerPos)
 		{
+			inputManager = new InputManager();
 			textures = new TextureInfo[2];
 			textures[0] = new TextureInfo("/Application/Textures/Character_one.png");
 			textures[1] = new TextureInfo("/Application/Textures/Character_one_dead.png");
@@ -73,102 +73,27 @@ namespace MonochromeRainbow
 		
 		public void Update(Scene scene)
 		{
-        	//Get gamepad input.
-			gamePadData = GamePad.GetData(0);
-			
+        	inputManager.CheckInput ();
 			centerPosition = player.Position + player.Quad.Center;
 			
 			if(isAlive)
 			{
-				//Left movement
-		    	if ((gamePadData.Buttons & GamePadButtons.Left) != 0)
-		    	{
-					movingDirection.X = -1.0f;
-					facingDirection.X = -1.0f;
-					if ((gamePadData.Buttons & GamePadButtons.Up) != 0)
-		    		{
-						facingDirection.Y = 1.0f;
-					}
-					else if ((gamePadData.Buttons & GamePadButtons.Down) != 0)
-		    		{
-						facingDirection.Y = -1.0f;
-					}
-		    		else
-					{
-						facingDirection.Y = 0.0f;
-					}					
-		    	}
-				//Right movement
-		    	else if ((gamePadData.Buttons & GamePadButtons.Right) != 0)
-		    	{
-					movingDirection.X = 1.0f;
-					facingDirection.X = 1.0f;
-					if ((gamePadData.Buttons & GamePadButtons.Up) != 0)
-		    		{
-						facingDirection.Y = 1.0f;
-					}
-					else if ((gamePadData.Buttons & GamePadButtons.Down) != 0)
-		    		{
-						facingDirection.Y = -1.0f;
-					}
-		    		else
-					{
-						facingDirection.Y = 0.0f;
-					}
-		    	}
-				else
-				{
-					movingDirection.X = 0.0f;
-				}
-				//Up movement
-		    	if ((gamePadData.Buttons & GamePadButtons.Up) != 0)
-		    	{
-					movingDirection.Y = 1.0f;
-					facingDirection.Y = 1.0f;
-					if ((gamePadData.Buttons & GamePadButtons.Left) != 0)
-		    		{
-						facingDirection.X = -1.0f;
-					}
-					else if ((gamePadData.Buttons & GamePadButtons.Right) != 0)
-		    		{
-						facingDirection.X = 1.0f;
-					}
-		    		else
-					{
-						facingDirection.X = 0.0f;
-					}
-		    	}
-				//Down movement
-		    	else if ((gamePadData.Buttons & GamePadButtons.Down) != 0)
-		    	{
-					movingDirection.Y = -1.0f;
-					facingDirection.Y = -1.0f;
-					if ((gamePadData.Buttons & GamePadButtons.Left) != 0)
-		    		{
-						facingDirection.X = -1.0f;
-					}
-					else if ((gamePadData.Buttons & GamePadButtons.Right) != 0)
-		    		{
-						facingDirection.X = 1.0f;
-					}
-		    		else
-					{
-						facingDirection.X = 0.0f;
-					}
-		    	}
-				else
-				{
-					movingDirection.Y = 0.0f;
-				}
+				//Movement
+				movingDirection = inputManager.GetTransform ();
+				facingDirection = inputManager.GetFacingDirection();
 				if (!(movingDirection.IsZero()))
 				{
 					Vector2 newDir = movingDirection.Normalize();
 					player.Position = new Vector2(player.Position.X + (newDir.X * speed),player.Position.Y + (newDir.Y * speed));
 				}
+				//Movement^
+				
 				
 				wallCollision();
 				
-				if((gamePadData.Buttons & GamePadButtons.Triangle) != 0)
+				
+				
+				if(inputManager.GetCanFire())
 				{
 					if(s.ElapsedMilliseconds > 500)
 					{
