@@ -51,6 +51,7 @@
     <Compile Include="Managers\InputManager.cs" />
     <Compile Include="Managers\MechanicManager.cs" />
     <Compile Include="Classes\TextureSwitching.cs" />
+    <Compile Include="Classes\Tile.cs" />
   </ItemGroup>
   <ItemGroup>
     <PsmMetadata Include="app.xml" />
@@ -73,5 +74,7 @@
     <Content Include="Textures\Character_three_dead.png" />
     <Content Include="Textures\Character_two.png" />
     <Content Include="Textures\Character_two_dead.png" />
+    <Content Include="Sprite_Index.txt" />
+    <Content Include="Textures\spritesheet.png" />
   </ItemGroup>
 </Project>

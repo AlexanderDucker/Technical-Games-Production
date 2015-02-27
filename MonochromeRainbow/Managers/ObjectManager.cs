@@ -23,6 +23,7 @@ namespace MonochromeRainbow
 		Player player;
 		CollisionManager collisions;
 		MechanicManager mechanics;
+		Tile level;
 		Scene scene;
 		
 		public ObjectManager (Scene gameScene)
@@ -32,6 +33,7 @@ namespace MonochromeRainbow
 			player = new Player(gameScene, new Vector2(100,100));
 			collisions = new CollisionManager();
 			mechanics = new MechanicManager(gameScene);
+			level = new Tile (gameScene);
 			scene = gameScene;
 		}
 		
