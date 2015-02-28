@@ -16,7 +16,6 @@ namespace MonochromeRainbow
 	{
 		public CollisionManager ()
 		{
-			
 		}
 		
 		public void CheckCollisions(Vector2 playerPos, List<Enemy> enemies)

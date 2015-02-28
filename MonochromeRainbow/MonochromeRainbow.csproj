@@ -76,5 +76,6 @@
     <Content Include="Textures\Character_two_dead.png" />
     <Content Include="Sprite_Index.txt" />
     <Content Include="Textures\spritesheet.png" />
+    <Content Include="Textures\Spritesheet_Minecraft.PNG" />
   </ItemGroup>
 </Project>

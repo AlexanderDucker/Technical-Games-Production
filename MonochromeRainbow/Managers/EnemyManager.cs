@@ -13,6 +13,7 @@ namespace MonochromeRainbow
 {
 	public class EnemyManager
 	{
+		public List<Weapon> weaponList = new List<Weapon>();
 		public List<Enemy> enemies = new List<Enemy>();
 		public Vector2[] spawnpoints;
 		public int enemyCount;
@@ -21,7 +22,7 @@ namespace MonochromeRainbow
 		int spawnpnt = 0;
 		private static GamePadData		gamePadData;
 
-		List<Weapon> weaponList = new List<Weapon>();
+		
 		public EnemyManager (Scene gameScene, TextureLoading textureManager)
 		{
 			SetSpawnPoints ();
