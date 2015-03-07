@@ -13,7 +13,7 @@ namespace MonochromeRainbow
 {
 	public class EnemyManager
 	{
-		public List<Weapon> weaponList = new List<Weapon>();
+		//public List<Weapon> weaponList = new List<Weapon>();
 		public List<Enemy> enemies = new List<Enemy>();
 		public Vector2[] spawnpoints;
 		public int enemyCount;
@@ -49,7 +49,7 @@ namespace MonochromeRainbow
 			{
 				enemies[i].Update(playerPos);	
 				enemies[i].RunAI (playerPos);
-				enemies[i].Shoot (playerPos, scene, playerMoving, weaponList);
+				enemies[i].Shoot (playerPos, scene, playerMoving);
 			}
 			//TEMPORARY STUFF
 			gamePadData = GamePad.GetData(0);
@@ -59,13 +59,14 @@ namespace MonochromeRainbow
 		    }	
 			//TEMPORARY STUFF
 			
-			if(weaponList.Count > 0)
-			{
-				foreach(Weapon w in weaponList)
+			for(int i = 0; i < enemies.Count; i++)
+				if(enemies[i].weaponList.Count > 0)
 				{
-					w.Update();
+					foreach(Weapon w in enemies[i].weaponList)
+					{
+						w.Update();
+					}
 				}
-			}
 		}
 		
 		public void CreateNewEnemy(int spawnpt, Vector2 playerPos)
@@ -81,6 +82,7 @@ namespace MonochromeRainbow
 			enemy.InitData (playerPos, speed, fireRate, bulletSpeed);
 			scene.AddChild (enemy.enemy);	
 			enemies.Add (enemy);
+
 		}
 		
 		public void SetSpawnPoints()

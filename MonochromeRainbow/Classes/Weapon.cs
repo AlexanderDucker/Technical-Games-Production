@@ -43,31 +43,8 @@ namespace MonochromeRainbow
 		public void Update()
 		{
 			weapon.Position += facingDirection * shotSpeed;
-			CheckCollision();
 		}
-		
-		public void CheckCollision()
-		{	
-			if(weapon.Position.X > Director.Instance.GL.Context.GetViewport().Width + weapon.Quad.S.X)
-			{
-				scene.RemoveChild(weapon, true);
-			}
-			
-			if(weapon.Position.X < -10.0f)
-			{
-				scene.RemoveChild(weapon, true);
-			}
-			
-			if(weapon.Position.Y < -10.0f)
-			{
-				scene.RemoveChild(weapon, true);
-			}
-			
-			if(weapon.Position.Y > Director.Instance.GL.Context.GetViewport().Height + weapon.Quad.S.X)
-			{
-				scene.RemoveChild(weapon, true);
-			}
-		}		
+				
 	}
 }
 

@@ -19,12 +19,13 @@ namespace MonochromeRainbow
 		private TextureInfo[]	textures;
 		public Vector2			movingDirection, facingDirection, centerPosition;
 		private bool 			isAlive;
-		public float			speed, health, radius, shootSpeed, fireRate;
-		public int				bulletTex;
+		public float			speed, radius, shootSpeed, fireRate;
+		public int				bulletTex, health;
+		public Bounds2			bounds;
 		public InputManager 	inputManager;
 		public Vector2 CenterPosition{ get{return centerPosition;} }
 		public bool IsAlive{ get{return isAlive;} set{isAlive = value;} }
-		public float Health{ get{return health;} set{health = value;} }
+		public int Health{ get{return health;} set{health = value;} }
 		public float Radius { get{return radius;} }
 		public SpriteUV PlayerSprite{get {return player;} }
 		List<Weapon> weaponList = new List<Weapon>();
@@ -48,7 +49,7 @@ namespace MonochromeRainbow
 			radius = player.Quad.Point10.X/2;
 			
 			speed = 2.0f;
-			health = 1.0f;
+			health = 100;
 			isAlive = true;
 			fireRate = 200;
 			shootSpeed = 10.0f;
