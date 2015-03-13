@@ -1,18 +1,28 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="MonochromeRainbow\Classes\Tile.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="MonochromeRainbow\Managers\EnemyManager.cs">
     <Files>
-      <File FileName="MonochromeRainbow\Classes\Tile.cs" Line="26" Column="15" />
-      <File FileName="c:\Users\Alex\Documents\GitHub\Technical-Games-Production\MonochromeRainbow\Classes\AppMain.cs" Line="28" Column="1" />
+      <File FileName="MonochromeRainbow\Managers\EnemyManager.cs" Line="67" Column="17" />
+      <File FileName="MonochromeRainbow\Classes\Enemies\EnemyEvasive.cs" Line="39" Column="4" />
+      <File FileName="MonochromeRainbow\Classes\Enemies\EnemyChaser.cs" Line="104" Column="32" />
+      <File FileName="MonochromeRainbow\Classes\Enemies\EnemyTank.cs" Line="39" Column="4" />
+      <File FileName="MonochromeRainbow\Classes\Enemies\EnemyBase.cs" Line="43" Column="17" />
+      <File FileName="MonochromeRainbow\Managers\CollisionManager.cs" Line="34" Column="55" />
+      <File FileName="MonochromeRainbow\Managers\InputManager.cs" Line="29" Column="36" />
+      <File FileName="MonochromeRainbow\Managers\ObjectManager.cs" Line="45" Column="80" />
+      <File FileName="MonochromeRainbow\Classes\Player.cs" Line="18" Column="20" />
+      <File FileName="MonochromeRainbow\Classes\Weapon.cs" Line="40" Column="28" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="MonochromeRainbow" expanded="True">
             <Node name="Classes" expanded="True">
-              <Node name="Tile.cs" selected="True" />
+              <Node name="Enemies" expanded="True" />
             </Node>
-            <Node name="Managers" expanded="True" />
+            <Node name="Managers" expanded="True">
+              <Node name="EnemyManager.cs" selected="True" />
+            </Node>
             <Node name="Textures" expanded="True" />
           </Node>
         </State>

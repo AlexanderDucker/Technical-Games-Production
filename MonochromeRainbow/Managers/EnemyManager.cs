@@ -14,7 +14,7 @@ namespace MonochromeRainbow
 	public class EnemyManager
 	{
 		public List<Weapon> weaponList = new List<Weapon>();
-		public List<Enemy> enemies = new List<Enemy>();
+		public List<EnemyBase> enemies = new List<EnemyBase>();
 		public Vector2[] spawnpoints;
 		public int enemyCount;
 		public TextureLoading textures;
@@ -50,6 +50,7 @@ namespace MonochromeRainbow
 				enemies[i].Update(playerPos);	
 				enemies[i].RunAI (playerPos);
 				enemies[i].Shoot (playerPos, scene, playerMoving, weaponList);
+				Console.WriteLine (weaponList.Count + "lol");
 			}
 			//TEMPORARY STUFF
 			gamePadData = GamePad.GetData(0);
@@ -76,11 +77,17 @@ namespace MonochromeRainbow
 			float bulletSpeed = (float)rand.Next(100, 200);
 			bulletSpeed /= 10;
 			int fireRate = rand.Next(300, 500);
-			Enemy enemy = new Enemy();
+			
+			EnemyChaser enemy = new EnemyChaser();
 			enemy.SetTexture (textures.EnemyTex, spawnpoints[spawnpt]);
-			enemy.InitData (playerPos, speed, fireRate, bulletSpeed);
 			scene.AddChild (enemy.enemy);	
+		
 			enemies.Add (enemy);
+		}
+		
+		public void DecideEnemyType()
+		{
+				
 		}
 		
 		public void SetSpawnPoints()

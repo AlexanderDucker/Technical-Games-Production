@@ -15,6 +15,7 @@ namespace MonochromeRainbow
 	public class Player
 	{
 		private SpriteUV		player;
+		public Bounds2			bounds;
 		private TextureInfo		playerTextureInfo;
 		private TextureInfo[]	textures;
 		public Vector2			movingDirection, facingDirection, centerPosition;
