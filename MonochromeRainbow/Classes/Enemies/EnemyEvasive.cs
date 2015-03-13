@@ -20,6 +20,7 @@ namespace MonochromeRainbow
 		private Vector2 		position;
 		public int				bulletTex;
 		private bool			runAway;
+		public 	List<Weapon>    weaponList = new List<Weapon>();
 
 		//Accessors.
 		public Vector2 CenterPosition{ get{return centerPosition;}}
@@ -109,7 +110,7 @@ namespace MonochromeRainbow
 				}
 			}
 		}
-		public void Shoot(Vector2 playerPos, Scene scene, bool playerMoving, List<Weapon> weaponList)
+		public void Shoot(Vector2 playerPos, Scene scene, bool playerMoving)
 		{
 			if (!runAway)
 			{
