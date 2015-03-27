@@ -50,7 +50,7 @@ namespace MonochromeRainbow
 				enemies[i].Update(playerPos);	
 				enemies[i].RunAI (playerPos);
 				enemies[i].Shoot (playerPos, scene, playerMoving, weaponList);
-				Console.WriteLine (weaponList.Count + "lol");
+				Console.WriteLine (weaponList.Count);
 			}
 			//TEMPORARY STUFF
 			gamePadData = GamePad.GetData(0);
@@ -78,10 +78,8 @@ namespace MonochromeRainbow
 			bulletSpeed /= 10;
 			int fireRate = rand.Next(300, 500);
 			
-			EnemyChaser enemy = new EnemyChaser();
-			enemy.SetTexture (textures.EnemyTex, spawnpoints[spawnpt]);
-			scene.AddChild (enemy.enemy);	
-		
+			EnemyBase enemy = new EnemyChaser();
+			enemy.SetTexture (textures.EnemyTex, spawnpoints[spawnpt], scene);
 			enemies.Add (enemy);
 		}
 		

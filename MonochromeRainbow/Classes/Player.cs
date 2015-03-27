@@ -22,7 +22,7 @@ namespace MonochromeRainbow
 		private bool 			isAlive;
 		public float			speed, radius, shootSpeed, fireRate;
 		public int				bulletTex, health;
-		public Bounds2			bounds;
+		
 		public InputManager 	inputManager;
 		public Vector2 CenterPosition{ get{return centerPosition;} }
 		public bool IsAlive{ get{return isAlive;} set{isAlive = value;} }
