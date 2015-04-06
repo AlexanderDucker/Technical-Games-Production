@@ -81,10 +81,16 @@ namespace MonochromeRainbow
 			{
 				player.weaponList[i].weapon.GetContentWorldBounds(ref player.weaponList[i].bounds);
 				playerTempList = player.weaponList;
-				foreach(EnemyBase enemy in enemies)
+				/*foreach(EnemyBase enemy in enemies)
 				{
-					
-				}
+					enemy.enemySprite.GetContentWorldBounds(ref enemy.bounds);
+					if(player.weaponList[i].bounds.Overlaps(enemy.bounds))
+					{
+						enemy.Health -= 1;
+						scene.RemoveChild(player.weaponList[i].weapon);
+						playerTempList.Remove(player.weaponList[i]);
+					}
+				}*/
 				
 				//Checks for projectile collisions with side of screen	
 				if(player.weaponList[i].weapon.Position.X > Director.Instance.GL.Context.GetViewport().Width + player.weaponList[i].weapon.Quad.S.X)
