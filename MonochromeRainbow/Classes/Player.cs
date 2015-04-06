@@ -29,7 +29,7 @@ namespace MonochromeRainbow
 		public int Health{ get{return health;} set{health = value;} }
 		public float Radius { get{return radius;} }
 		public SpriteUV PlayerSprite{get {return player;} }
-		List<Weapon> weaponList = new List<Weapon>();
+		public List<Weapon> weaponList = new List<Weapon>();
 		Stopwatch s = new Stopwatch();
 
 		public Player (Scene scene, Vector2 playerPos)
