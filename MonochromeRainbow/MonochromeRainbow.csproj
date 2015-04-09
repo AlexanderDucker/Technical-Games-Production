@@ -81,5 +81,9 @@
     <Content Include="Sprite_Index.txt" />
     <Content Include="Textures\spritesheet.png" />
     <Content Include="Textures\Spritesheet_Minecraft.PNG" />
+    <Content Include="Textures\jugger.png" />
+    <Content Include="Textures\EnemyChaserWalking.png" />
+    <Content Include="Textures\enemyEvasiveWalking.png" />
+    <Content Include="Textures\EnemyTankWalking.png" />
   </ItemGroup>
 </Project>

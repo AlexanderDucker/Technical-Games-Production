@@ -76,9 +76,13 @@ namespace MonochromeRainbow
 		
 		public virtual void SetTexture(TextureInfo texture, Vector2 pos, Scene scene)
 		{
+			
 			eTexture = texture;
 			enemy = new SpriteUV(eTexture);
-			enemy.Quad.S = texture.TextureSizef;
+			enemy.Quad.S = new Vector2(48,48);
+			//enemy.CenterSprite();
+		
+			enemy.Scale = new Vector2(2,2);
 			enemy.Position = pos;
 			scene.AddChild(enemy);
 		}

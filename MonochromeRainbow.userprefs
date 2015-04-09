@@ -1,25 +1,26 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="MonochromeRainbow\Managers\EnemyManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="MonochromeRainbow\Classes\Enemies\EnemyChaser.cs">
     <Files>
-      <File FileName="MonochromeRainbow\Managers\EnemyManager.cs" Line="81" Column="37" />
-      <File FileName="MonochromeRainbow\Classes\Enemies\EnemyEvasive.cs" Line="14" Column="3" />
-      <File FileName="MonochromeRainbow\Classes\Enemies\EnemyChaser.cs" Line="28" Column="26" />
-      <File FileName="MonochromeRainbow\Classes\Enemies\EnemyTank.cs" Line="14" Column="3" />
-      <File FileName="MonochromeRainbow\Classes\Enemies\EnemyBase.cs" Line="83" Column="26" />
+      <File FileName="MonochromeRainbow\Managers\EnemyManager.cs" Line="86" Column="32" />
+      <File FileName="MonochromeRainbow\Classes\Enemies\EnemyEvasive.cs" Line="53" Column="6" />
+      <File FileName="MonochromeRainbow\Classes\Enemies\EnemyChaser.cs" Line="24" Column="38" />
+      <File FileName="MonochromeRainbow\Classes\Enemies\EnemyTank.cs" Line="37" Column="5" />
+      <File FileName="MonochromeRainbow\Classes\Enemies\EnemyBase.cs" Line="79" Column="4" />
       <File FileName="MonochromeRainbow\Managers\CollisionManager.cs" Line="34" Column="55" />
       <File FileName="MonochromeRainbow\Classes\Player.cs" Line="57" Column="18" />
+      <File FileName="MonochromeRainbow\Managers\TextureLoading.cs" Line="19" Column="34" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="MonochromeRainbow" expanded="True">
             <Node name="Classes" expanded="True">
-              <Node name="Enemies" expanded="True" />
+              <Node name="Enemies" expanded="True">
+                <Node name="EnemyChaser.cs" selected="True" />
+              </Node>
             </Node>
-            <Node name="Managers" expanded="True">
-              <Node name="EnemyManager.cs" selected="True" />
-            </Node>
+            <Node name="Managers" expanded="True" />
             <Node name="Textures" expanded="True" />
           </Node>
         </State>

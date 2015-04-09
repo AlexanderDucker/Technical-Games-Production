@@ -21,7 +21,7 @@ namespace MonochromeRainbow
 		{
 			eTexture = texture;
 			enemy = new SpriteUV(eTexture);
-			enemy.Quad.S = texture.TextureSizef;
+			enemy.Quad.S = new Vector2(48,48);
 			position = pos;
 			bulletTex = 1;
 			enemy.Position = pos;

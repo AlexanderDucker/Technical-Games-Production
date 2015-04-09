@@ -19,7 +19,7 @@ namespace MonochromeRainbow
 		private bool			hasSwapped, isAlive;
 		private Vector2 		position;
 		public int				bulletTex;
-		private bool			runAway;
+		//private bool			runAway;
 
 		//Accessors.
 		public Vector2 CenterPosition{ get{return centerPosition;}}
@@ -50,7 +50,7 @@ namespace MonochromeRainbow
 			this.fireRate = fireRate;
 			shootSpeed = bulletSpeed;
 			bulletTex = 0;
-			runAway = false;
+			//runAway = false;
 			s.Start();
 		}
 		
@@ -83,80 +83,7 @@ namespace MonochromeRainbow
 			enemy.Position = position;
 		}
 		
-		public void RunAI(Vector2 playerPos)
-		{
-			facingDirection = playerPos - enemy.Position;
-			facingDirection = facingDirection.Normalize();
-			
-			Vector2 dir = playerPos - centerPosition;
-			float distanceSqrd = Square(dir.X) + Square(dir.Y);
-			double distance = System.Math.Sqrt(distanceSqrd);
-			
-			if (distance >= 150.0f)
-			{
-				position += facingDirection * speed;
-			}
-			else if (distance < 100.0f)
-			{
-				position -= facingDirection * speed;
-				runAway = true;
-			}
-			if (runAway)
-			{
-				if(distance >= 150.0f)
-				{
-					runAway = false;	
-				}
-			}
-		}
-		public void Shoot(Vector2 playerPos, Scene scene, bool playerMoving, List<Weapon> weaponList)
-		{
-			if (!runAway)
-			{
-				Vector2 dir = playerPos - centerPosition;
-				float distanceSqrd = Square(dir.X) + Square(dir.Y);
-				double distance = System.Math.Sqrt(distanceSqrd);
-				
-				if(s.ElapsedMilliseconds > fireRate)
-				{
-					int missFactor;
-					Random rand = new Random(Guid.NewGuid().GetHashCode());
-					if (playerMoving)
-					{
-						if (distance < 50.0f)
-						{
-							missFactor = rand.Next(-20,20);
-						}
-						else
-						{
-							missFactor = rand.Next(-50,50);
-						}
-					}
-					else
-					{
-						if (distance < 50.0f)
-						{
-							missFactor = rand.Next(-50,50);
-						}
-						else
-						{
-							missFactor = rand.Next(-100,100);
-						}
-					}
-					Vector2 newVec;
-					newVec.X = -facingDirection.Y;
-					newVec.Y = facingDirection.X;
-					newVec *= missFactor;
-					newVec = playerPos + (newVec - centerPosition);
-					newVec = newVec.Normalize();
-					Weapon weaponOne = new Weapon(scene, 10, shootSpeed, bulletTex, centerPosition, newVec);
-					weaponList.Add(weaponOne);
-					s.Reset();
-					s.Start();
-				}
-			}
-		}
-		private float Square(float a){return a*a;}
+	
 	}
 }
 
