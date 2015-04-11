@@ -12,7 +12,8 @@ namespace MonochromeRainbow
 {
 	public class EnemyBase
 	{
-		protected SpriteUV		enemy;
+		public SpriteUV		enemy;
+		public Bounds2      bounds;
 		protected TextureInfo	eTexture; 
 		protected Vector2		facingDirection, centerPosition, playerPosition;
 		protected float			speed, health, radius, shootSpeed, fireRate;

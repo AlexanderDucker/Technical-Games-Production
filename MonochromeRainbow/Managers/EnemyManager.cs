@@ -84,12 +84,14 @@ namespace MonochromeRainbow
 			{
 				EnemyBase enemy = new EnemyChaser();
 				enemy.SetTexture (textures.EnemyChaserTex, spawnpoints[spawnpt], scene);
+				enemy.InitData(new Vector2(0,0), speed, fireRate, bulletSpeed);
 				enemies.Add (enemy);
 			}
 			else if( enemytype ==1)
 			{
 				EnemyBase enemy = new EnemyTank();
 				enemy.SetTexture (textures.EnemyTankTex, spawnpoints[spawnpt], scene);
+				enemy.InitData(new Vector2(0,0), speed, fireRate, bulletSpeed);
 				enemies.Add (enemy);
 			}
 			

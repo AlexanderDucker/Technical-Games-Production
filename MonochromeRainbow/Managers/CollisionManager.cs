@@ -77,20 +77,20 @@ namespace MonochromeRainbow
 				manager.weaponList = tempWeaponList;
 			}
 			
-			for(int i = 0; i < player.weaponList.Count - 1; i++)
-			{
-				player.weaponList[i].weapon.GetContentWorldBounds(ref player.weaponList[i].bounds);
-				playerTempList = player.weaponList;
-				/*foreach(EnemyBase enemy in enemies)
-				{
-					enemy.enemySprite.GetContentWorldBounds(ref enemy.bounds);
-					if(player.weaponList[i].bounds.Overlaps(enemy.bounds))
+					for(int i = 0; i < player.weaponList.Count - 1; i++)
 					{
-						enemy.Health -= 1;
-						scene.RemoveChild(player.weaponList[i].weapon);
-						playerTempList.Remove(player.weaponList[i]);
-					}
-				}*/
+						player.weaponList[i].weapon.GetContentWorldBounds(ref player.weaponList[i].bounds);
+						playerTempList = player.weaponList;
+						for(int y = 0; y < manager.enemies.Count - 1; y++)
+						{
+							manager.enemies[i].enemy.GetContentWorldBounds(ref manager.enemies[i].bounds);
+							if(player.weaponList[i].bounds.Overlaps(manager.enemies[i].bounds))
+							{
+								manager.enemies[i].Health -= 1;
+								scene.RemoveChild(player.weaponList[i].weapon, true);
+								playerTempList.Remove(player.weaponList[i]);
+							}
+						}
 				
 				//Checks for projectile collisions with side of screen	
 				if(player.weaponList[i].weapon.Position.X > Director.Instance.GL.Context.GetViewport().Width + player.weaponList[i].weapon.Quad.S.X)
