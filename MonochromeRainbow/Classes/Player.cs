@@ -14,6 +14,7 @@ namespace MonochromeRainbow
 {
 	public class Player
 	{
+		private GamePadData		gamePadData;
 		private SpriteUV		player;
 		public Bounds2			bounds;
 		private TextureInfo		playerTextureInfo;
@@ -77,10 +78,12 @@ namespace MonochromeRainbow
 		{
         	inputManager.CheckInput ();
 			centerPosition = player.Position + player.Quad.Center;
+			Console.WriteLine(player.Position);
 			
 			if(isAlive)
 			{
 				//Movement
+				gamePadData = GamePad.GetData(0);
 				movingDirection = inputManager.GetTransform ();
 				facingDirection = inputManager.GetFacingDirection();
 				if (!(movingDirection.IsZero()))
@@ -89,6 +92,17 @@ namespace MonochromeRainbow
 					player.Position = new Vector2(player.Position.X + (newDir.X * speed),player.Position.Y + (newDir.Y * speed));
 				}
 				//Movement^
+				if((gamePadData.Buttons & GamePadButtons.Select) != 0)
+				{
+					if(facingDirection.Y == 1.0f)
+						player.Position = new Vector2(player.Position.X,player.Position.Y + 30.0f);
+					else if(facingDirection.Y == -1.0f)
+						player.Position = new Vector2(player.Position.X,player.Position.Y - 30.0f);
+					else if(facingDirection.X == 1.0f)
+						player.Position = new Vector2(player.Position.X + 30.0f,player.Position.Y);
+					else if(facingDirection.X == -1.0f)
+						player.Position = new Vector2(player.Position.X + -30.0f,player.Position.Y);
+				}
 				
 				
 				wallCollision();

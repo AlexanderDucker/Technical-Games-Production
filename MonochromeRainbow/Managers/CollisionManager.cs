@@ -43,6 +43,8 @@ namespace MonochromeRainbow
 						    p1.health -= 1;
 							Console.WriteLine(p1.health);
 						}
+					else if(p1.health <=0)
+						p1.IsAlive = true;
 						
 						scene.RemoveChild(manager.weaponList[i].weapon, true);
 						tempWeaponList.Remove(manager.weaponList[i]);

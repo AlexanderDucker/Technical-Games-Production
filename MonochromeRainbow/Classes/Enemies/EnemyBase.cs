@@ -32,7 +32,7 @@ namespace MonochromeRainbow
 		
 		public  EnemyBase ()
 		{
-			health = 1.0f;
+			health = 100.0f;
 			hasSwapped = false;
 			isAlive = true;
 			
