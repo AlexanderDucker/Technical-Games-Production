@@ -23,10 +23,10 @@ namespace MonochromeRainbow
 		public float			speed, radius, shootSpeed, fireRate;
 		public int				bulletTex, health;
 		
-		public TextureLoading spriteTextures;
+		
 		
 		//enemy.SetTexture (textures.EnemyTex, spawnpoints[spawnpt], scene);
-		
+		public TextureLoading spriteTextures;
 		public InputManager 	inputManager;
 		public Vector2 CenterPosition{ get{return centerPosition;} }
 		public bool IsAlive{ get{return isAlive;} set{isAlive = value;} }
@@ -40,14 +40,14 @@ namespace MonochromeRainbow
 		{
 			inputManager = new InputManager();
 			spriteTextures = textureManager;
-			textures = new TextureInfo[2];
-			
-			textures[0] = spriteTextures.PlayerTex;
+			textures = new TextureInfo[4];
+				
+		
+			textures[0] = inputManager.textures;
 			textures[1] = new TextureInfo("/Application/Textures/Character_one_dead.png");
 			
 			playerTextureInfo = new TextureInfo();
 			playerTextureInfo = textures[0];
-			
 			player = new SpriteUV(playerTextureInfo);	
 			player.Quad.S = playerTextureInfo.TextureSizef;
 			
@@ -81,7 +81,7 @@ namespace MonochromeRainbow
 		
 		public void Update(Scene scene)
 		{
-        	inputManager.CheckInput ();
+        	inputManager.CheckInput (spriteTextures);
 			centerPosition = player.Position + player.Quad.Center;
 			
 			if(isAlive)
@@ -94,6 +94,7 @@ namespace MonochromeRainbow
 					Vector2 newDir = movingDirection.Normalize();
 					player.Position = new Vector2(player.Position.X + (newDir.X * speed),player.Position.Y + (newDir.Y * speed));
 				}
+		
 				//Movement^
 				
 				

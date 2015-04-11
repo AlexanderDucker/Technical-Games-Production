@@ -85,5 +85,8 @@
     <Content Include="Textures\Graveyard_spritetile.png" />
     <Content Include="Textures\Necromancer.png" />
     <Content Include="Textures\Necromancer_one.png" />
+    <Content Include="Textures\Necromancer_Four.png" />
+    <Content Include="Textures\Necromancer_Three.png" />
+    <Content Include="Textures\Necromancer_Two.png" />
   </ItemGroup>
 </Project>

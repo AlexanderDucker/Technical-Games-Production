@@ -212,3 +212,9 @@ E:\University\Year 2 -- Level 5\Technical Games Production\TGP Group Assignment 
 E:\University\Year 2 -- Level 5\Technical Games Production\TGP Group Assignment 2\Technical-Games-Production-master\MonochromeRainbow\bin\Debug\MonochromeRainbow-signed\Application\Textures\Necromancer_one.png
 E:\University\Year 2 -- Level 5\Technical Games Production\TGP Group Assignment 2\Technical-Games-Production-master\MonochromeRainbow\bin\Debug\MonochromeRainbow.psdp
 E:\University\Year 2 -- Level 5\Technical Games Production\TGP Group Assignment 2\Technical-Games-Production-master\MonochromeRainbow\obj\Debug\convertedpdb\app.exe.mdb
+E:\University\Year 2 -- Level 5\Technical Games Production\TGP Group Assignment 2\Technical-Games-Production-master\MonochromeRainbow\bin\Debug\MonochromeRainbow-unsigned\Application\Textures\Necromancer_Four.png
+E:\University\Year 2 -- Level 5\Technical Games Production\TGP Group Assignment 2\Technical-Games-Production-master\MonochromeRainbow\bin\Debug\MonochromeRainbow-unsigned\Application\Textures\Necromancer_Three.png
+E:\University\Year 2 -- Level 5\Technical Games Production\TGP Group Assignment 2\Technical-Games-Production-master\MonochromeRainbow\bin\Debug\MonochromeRainbow-unsigned\Application\Textures\Necromancer_Two.png
+E:\University\Year 2 -- Level 5\Technical Games Production\TGP Group Assignment 2\Technical-Games-Production-master\MonochromeRainbow\bin\Debug\MonochromeRainbow-signed\Application\Textures\Necromancer_Four.png
+E:\University\Year 2 -- Level 5\Technical Games Production\TGP Group Assignment 2\Technical-Games-Production-master\MonochromeRainbow\bin\Debug\MonochromeRainbow-signed\Application\Textures\Necromancer_Three.png
+E:\University\Year 2 -- Level 5\Technical Games Production\TGP Group Assignment 2\Technical-Games-Production-master\MonochromeRainbow\bin\Debug\MonochromeRainbow-signed\Application\Textures\Necromancer_Two.png
