@@ -1,4 +1,7 @@
 using System;
+using System.Diagnostics;
+using System.Collections.Generic;
+
 
 using Sce.PlayStation.Core;
 using Sce.PlayStation.Core.Graphics;
@@ -9,89 +12,136 @@ using Sce.PlayStation.HighLevel.GameEngine2D.Base;
 
 namespace MonochromeRainbow
 {
-	public class Character
+	public class Player
 	{
-		private SpriteUV		character;
-		private TextureInfo		characterTextureInfo;
-		private Resurrection	ring;
-		private GamePadData		gamePadData;
-		
-		private float			health;
-		private bool 			isPlayer;
+		private SpriteUV		player;
+		public Bounds2			bounds;
+		private TextureInfo		playerTextureInfo;
+		private TextureInfo[]	textures;
+		public Vector2			movingDirection, facingDirection, centerPosition;
 		private bool 			isAlive;
-		private bool			isActivated;
+		public float			speed, radius, shootSpeed, fireRate;
+		public int				bulletTex, health;
 		
+		public TextureLoading spriteTextures;
+		
+		//enemy.SetTexture (textures.EnemyTex, spawnpoints[spawnpt], scene);
+		
+		public InputManager 	inputManager;
+		public Vector2 CenterPosition{ get{return centerPosition;} }
 		public bool IsAlive{ get{return isAlive;} set{isAlive = value;} }
-		public float Health{ get{return health;} set{health = value;} }
-		
-		public Character (Scene scene, Vector2 characterPos, bool isPlayer, TextureInfo texture)
+		public int Health{ get{return health;} set{health = value;} }
+		public float Radius { get{return radius;} }
+		public SpriteUV PlayerSprite{get {return player;} }
+		public List<Weapon> weaponList = new List<Weapon>();
+		Stopwatch s = new Stopwatch();
+
+		public Player (Scene scene, Vector2 playerPos, TextureLoading textureManager)
 		{
-			characterTextureInfo = texture;
-			character = new SpriteUV(texture);
-			character.Scale = texture.TextureSizef;
-			character.Position = characterPos;
+			inputManager = new InputManager();
+			spriteTextures = textureManager;
+			textures = new TextureInfo[2];
 			
-			health = 1.0f;
+			textures[0] = spriteTextures.PlayerTex;
+			textures[1] = new TextureInfo("/Application/Textures/Character_one_dead.png");
+			
+			playerTextureInfo = new TextureInfo();
+			playerTextureInfo = textures[0];
+			
+			player = new SpriteUV(playerTextureInfo);	
+			player.Quad.S = playerTextureInfo.TextureSizef;
+			
+			player.Position = playerPos;
+			centerPosition = player.Position + player.Quad.Center;
+			radius = player.Quad.Point10.X/2;
+			
+			speed = 2.0f;
+			health = 100;
 			isAlive = true;
-			isActivated = false;
-			this.isPlayer = isPlayer;
-			scene.AddChild(character);
+			fireRate = 200;
+			shootSpeed = 10.0f;
+			bulletTex = 1;
+			
+			facingDirection = new Vector2(1.0f,0.0f);
+			
+			s.Start();
+			
+			scene.AddChild(player);
 		}
 		
 		public void Dispose()
 		{
-			characterTextureInfo.Dispose();
+			playerTextureInfo.Dispose();
 		}
 		
-		public void Update()
+		public Vector2 getPlayerPos()
 		{
-        	//Get gamepad input.
-			gamePadData = GamePad.GetData(0);
+			return player.Position;
+		}
+		
+		public void Update(Scene scene)
+		{
+        	inputManager.CheckInput ();
+			centerPosition = player.Position + player.Quad.Center;
 			
-			if(isPlayer && isAlive)
+			if(isAlive)
 			{
-				//Left movement.
-	    		if ((gamePadData.Buttons & GamePadButtons.Left) != 0)
-	    		{
-					character.Position = new Vector2(character.Position.X - 4.0f, character.Position.Y);
-	    		}
-			
-				//Right movement.
-	    		if ((gamePadData.Buttons & GamePadButtons.Right) != 0)
-	    		{
-					character.Position = new Vector2(character.Position.X + 4.0f, character.Position.Y);
-	    		}
+				//Movement
+				movingDirection = inputManager.GetTransform ();
+				facingDirection = inputManager.GetFacingDirection();
+				if (!(movingDirection.IsZero()))
+				{
+					Vector2 newDir = movingDirection.Normalize();
+					player.Position = new Vector2(player.Position.X + (newDir.X * speed),player.Position.Y + (newDir.Y * speed));
+				}
+				//Movement^
 				
-				//Up movement.
-	    		if ((gamePadData.Buttons & GamePadButtons.Up) != 0)
-	    		{
-					character.Position = new Vector2(character.Position.X, character.Position.Y + 4.0f);
-	    		}
 				
-				//Down movement.
-	    		if ((gamePadData.Buttons & GamePadButtons.Down) != 0)
-	    		{
-					character.Position = new Vector2(character.Position.X, character.Position.Y - 4.0f);
-	    		}
-			}
-			
-			if(health <= 0.0f && !isPlayer && !isActivated)
-			{
-				isAlive = false;		
-				Death();
-				isActivated = true;
-			}
-			
-			else if(health <= 0.0f && isPlayer)
-			{
-				isAlive = false;
+				wallCollision();
+				
+				
+				
+				if(inputManager.GetCanFire())
+				{
+					if(s.ElapsedMilliseconds > 500)
+					{
+						Weapon weaponOne = new Weapon(scene, 10, 10.0f, 1, centerPosition, facingDirection);
+						weaponList.Add(weaponOne);
+						Console.WriteLine(weaponList.Count);
+						s.Reset();
+						s.Start();
+					}
+				}
+				
+				if(weaponList.Count > 0)
+				{
+					foreach(Weapon w in weaponList)
+					{
+						w.Update();
+					}
+				}
 			}
 		}
 		
-		public void Death()
+		void wallCollision()
 		{
-			Scene scene = Director.Instance.CurrentScene;
-			ring = new Resurrection(scene, character.Position);
+			//Check if player has hit the wall.
+			if (player.Position.X > Director.Instance.GL.Context.GetViewport().Width - player.Quad.S.X)
+			{
+				player.Position = new Vector2(Director.Instance.GL.Context.GetViewport().Width - player.Quad.S.X,player.Position.Y);
+			}
+			if (player.Position.Y > Director.Instance.GL.Context.GetViewport().Height - player.Quad.S.Y)
+			{
+				player.Position = new Vector2(player.Position.X,Director.Instance.GL.Context.GetViewport().Height - (player.Quad.S.X/2));
+			}
+			if (player.Position.X < 0.0f)
+			{					
+				player.Position = new Vector2(0.0f, player.Position.Y);
+			}
+			if (player.Position.Y < 0.0f)
+			{					
+				player.Position = new Vector2(player.Position.X, 0.0f);
+			}
 		}
 	}
 }

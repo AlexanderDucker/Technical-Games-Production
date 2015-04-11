@@ -40,12 +40,22 @@
   <ItemGroup>
     <Compile Include="Classes\AppMain.cs" />
     <Compile Include="Classes\Bullet.cs" />
-    <Compile Include="Classes\Enemy.cs" />
-    <Compile Include="Classes\Player.cs" />
-    <Compile Include="Resurrection.cs" />
-    <Compile Include="TheGame.cs" />
-    <Compile Include="TextureLoading.cs" />
     <Compile Include="Classes\Weapon.cs" />
+    <Compile Include="Classes\Player.cs" />
+    <Compile Include="TheGame.cs" />
+    <Compile Include="Managers\ObjectManager.cs" />
+    <Compile Include="Managers\TextureLoading.cs" />
+    <Compile Include="Managers\InputManager.cs" />
+    <Compile Include="Managers\MechanicManager.cs" />
+    <Compile Include="Classes\TextureSwitching.cs" />
+    <Compile Include="Classes\Tile.cs" />
+    <Compile Include="Classes\Enemies\EnemyChaser.cs" />
+    <Compile Include="Classes\Enemies\EnemyEvasive.cs" />
+    <Compile Include="Classes\Enemies\EnemyTank.cs" />
+    <Compile Include="Classes\Enemies\EnemyBase.cs" />
+    <Compile Include="Managers\CollisionManager.cs" />
+    <Compile Include="Managers\EnemyManager.cs" />
+    <Compile Include="Managers\SpriteSheetManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <PsmMetadata Include="app.xml" />
@@ -54,31 +64,26 @@
   <ItemGroup>
     <Folder Include="fonts\" />
     <Folder Include="Classes\" />
-    <Folder Include="Classes\Textures\" />
+    <Folder Include="Textures\" />
+    <Folder Include="Managers\" />
+    <Folder Include="Classes\Enemies\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Classes\Textures\bullet.png" />
-    <Content Include="Classes\Textures\Character_one.png" />
-    <Content Include="Classes\Textures\Character_one_dead.png" />
-    <Content Include="Classes\Textures\Character_one_shoot.png" />
-    <Content Include="Classes\Textures\Character_one_walk_one.png" />
-    <Content Include="Classes\Textures\Character_one_walk_two.png" />
-    <Content Include="Classes\Textures\Character_three.png" />
-    <Content Include="Classes\Textures\Character_three_dead.png" />
-    <Content Include="Classes\Textures\Character_two.png" />
-    <Content Include="Classes\Textures\Character_two_dead.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Classes\Textures\Character_one_dead.psd" />
-    <None Include="Classes\Textures\Character_three.psd" />
-    <None Include="Classes\Textures\Character_three_dead.psd" />
-    <None Include="Classes\Textures\Character_three_shoot.psd" />
-    <None Include="Classes\Textures\Character_three_walk_one.psd" />
-    <None Include="Classes\Textures\Character_three_walk_two.psd" />
-    <None Include="Classes\Textures\Character_two.psd" />
-    <None Include="Classes\Textures\Character_two_dead.psd" />
-    <None Include="Classes\Textures\Character_two_shoot.psd" />
-    <None Include="Classes\Textures\Character_two_walk_one.psd" />
-    <None Include="Classes\Textures\Character_two_walk_two.psd" />
+    <Content Include="Textures\bullet.png" />
+    <Content Include="Textures\Character_one.png" />
+    <Content Include="Textures\Character_one_dead.png" />
+    <Content Include="Textures\Character_one_shoot.png" />
+    <Content Include="Textures\Character_one_walk_one.png" />
+    <Content Include="Textures\Character_one_walk_two.png" />
+    <Content Include="Textures\Character_three.png" />
+    <Content Include="Textures\Character_three_dead.png" />
+    <Content Include="Textures\Character_two.png" />
+    <Content Include="Textures\Character_two_dead.png" />
+    <Content Include="Sprite_Index.txt" />
+    <Content Include="Textures\spritesheet.png" />
+    <Content Include="Textures\Spritesheet_Minecraft.PNG" />
+    <Content Include="Textures\Graveyard_spritetile.png" />
+    <Content Include="Textures\Necromancer.png" />
+    <Content Include="Textures\Necromancer_one.png" />
   </ItemGroup>
 </Project>
