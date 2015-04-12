@@ -1,10 +1,15 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="MonochromeRainbow\Classes\Player.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="MonochromeRainbow\Managers\EnemyManager.cs">
     <Files>
-      <File FileName="MonochromeRainbow\Classes\Player.cs" Line="49" Column="42" />
-      <File FileName="MonochromeRainbow\Managers\InputManager.cs" Line="51" Column="7" />
-      <File FileName="MonochromeRainbow\Managers\TextureLoading.cs" Line="41" Column="40" />
+      <File FileName="MonochromeRainbow\Managers\TextureLoading.cs" Line="55" Column="14" />
+      <File FileName="MonochromeRainbow\Classes\Enemies\EnemyBase.cs" Line="18" Column="17" />
+      <File FileName="MonochromeRainbow\Managers\EnemyManager.cs" Line="77" Column="5" />
+      <File FileName="MonochromeRainbow\Classes\Enemies\EnemyChaser.cs" Line="1" Column="1" />
+      <File FileName="MonochromeRainbow\Classes\Enemies\EnemyEvasive.cs" Line="68" Column="6" />
+      <File FileName="MonochromeRainbow\Classes\Enemies\EnemyTank.cs" Line="36" Column="22" />
+      <File FileName="MonochromeRainbow\Managers\InputManager.cs" Line="54" Column="20" />
+      <File FileName="MonochromeRainbow\Classes\Player.cs" Line="98" Column="37" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -12,9 +17,10 @@
           <Node name="MonochromeRainbow" expanded="True">
             <Node name="Classes" expanded="True">
               <Node name="Enemies" expanded="True" />
-              <Node name="Player.cs" selected="True" />
             </Node>
-            <Node name="Managers" expanded="True" />
+            <Node name="Managers" expanded="True">
+              <Node name="EnemyManager.cs" selected="True" />
+            </Node>
             <Node name="Textures" expanded="True">
               <Option id="ShowAllFiles" value="True" />
             </Node>

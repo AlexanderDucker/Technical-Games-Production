@@ -10,26 +10,24 @@ namespace MonochromeRainbow
 {
 	public class TextureLoading
 	{
-
 		private TextureInfo[] 	playerTex;
 		private TextureInfo 	deadPlayerTex;
 		private TextureInfo[] 	walkPlayerTex;
-		private TextureInfo 	enemyTex;
+		private TextureInfo[] 	enemyChaserTex;
 		private TextureInfo 	deadEnemyTex;
+		private TextureInfo[] 	enemyTankTex;
+		private TextureInfo[]   enemyEvasiveTex;
+		public int enemyTexSizeHW = 48;
 		//private TextureInfo 	weaponTex;
 		
-
-	
-		public TextureInfo[] 	 PlayerTex			{ get{return playerTex;} }
-		public TextureInfo   DeadPlayerTex		{ get{return deadPlayerTex;} }
-		public TextureInfo[] WalkPlayerTex		{ get{return walkPlayerTex;} }
-		public TextureInfo   EnemyTex	  		{ get{return enemyTex;} }
-		public TextureInfo   DeadEnemyTex 		{ get{return deadEnemyTex;} }
+		public TextureInfo[]   PlayerTex{ get{return playerTex;} }
+		public TextureInfo   DeadPlayerTex{ get{return deadPlayerTex;} }
+		//public TextureInfo[] WalkPlayerTex{ get{return walkPlayerTex;} }
+		public TextureInfo[]   EnemyChaserTex{ get{return enemyChaserTex;} }
+		public TextureInfo   DeadEnemyTex{ get{return deadEnemyTex;} }
+		public TextureInfo[]   EnemyTankTex{ get{return enemyTankTex;} }
+		public TextureInfo[]	 EnemyEvasiveTex { get{return enemyEvasiveTex;}}
 		//public TextureInfo   WeaponTex{ get{return weaponTex;} }
-		
-		//public TextureLoading textures;
-		//textures = textureManager;
-		//enemy.SetTexture (textures.EnemyTex, spawnpoints[spawnpt], scene);
 		
 		public TextureLoading ()
 		{
@@ -39,12 +37,38 @@ namespace MonochromeRainbow
 			playerTex[2] = new TextureInfo("Application/textures/Necromancer_Three.png");
 			playerTex[3] = new TextureInfo("Application/textures/Necromancer_one.png");
 			deadPlayerTex = new TextureInfo("Application/textures/Character_one_dead.png");
-			walkPlayerTex = new TextureInfo[2];
-			walkPlayerTex[0] = new TextureInfo("Application/textures/Character_one_walk_one.png");
-			walkPlayerTex[1] = new TextureInfo("Application/textures/Character_one_walk_two.png");
-			enemyTex = new TextureInfo("Application/Textures/Character_three.png");
+			//walkPlayerTex = new TextureInfo[2];
+			//walkPlayerTex[0] = new TextureInfo("Application/textures/Character_one_walk_one.png");
+			//walkPlayerTex[1] = new TextureInfo("Application/textures/Character_one_walk_two.png");
+			
+			
 			deadEnemyTex = new TextureInfo("Application/Textures/Character_three_dead.png");
+			LoadEnemyTextures ();
+			
 			//weaponTex = new TextureInfo("Application/textures/player/blue.png");
+		}
+		
+		public void LoadEnemyTextures()
+		{
+			
+			enemyChaserTex = new TextureInfo[4];
+			enemyChaserTex[0] = new TextureInfo("Application/Textures/ChaserOne.png");
+			enemyChaserTex[1] = new TextureInfo("Application/Textures/ChaserTwo.png");
+			enemyChaserTex[2] = new TextureInfo("Application/Textures/ChaserThree.png");
+			enemyChaserTex[3] = new TextureInfo("Application/Textures/ChaserFour.png");
+			
+			enemyTankTex = new TextureInfo[4];
+			enemyTankTex[0]= new TextureInfo("Application/Textures/TankOne.png");
+			enemyTankTex[1]= new TextureInfo("Application/Textures/TankTwo.png");
+			enemyTankTex[2]= new TextureInfo("Application/Textures/TankThree.png");
+			enemyTankTex[3]= new TextureInfo("Application/Textures/TankFour.png");
+			
+			enemyEvasiveTex = new TextureInfo[4];
+			enemyEvasiveTex[0] = new TextureInfo("Application/Textures/EvasiveOne.png");
+			enemyEvasiveTex[1] = new TextureInfo("Application/Textures/EvasiveTwo.png");
+			enemyEvasiveTex[2] = new TextureInfo("Application/Textures/EvasiveThree.png");
+			enemyEvasiveTex[3] = new TextureInfo("Application/Textures/EvasiveFour.png");
+			
 		}
 		
 		
