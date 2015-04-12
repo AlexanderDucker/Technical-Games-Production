@@ -141,7 +141,7 @@ namespace MonochromeRainbow
 			eTexture.Dispose ();
 		}
 		
-		public virtual void RunAI(Vector2 playerPos)
+		public virtual void RunAI(Vector2 playerPos, List<Vector2> enemyPositions)
 		{
 			
 		}

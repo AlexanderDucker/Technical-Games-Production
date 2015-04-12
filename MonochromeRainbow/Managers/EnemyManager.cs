@@ -15,6 +15,7 @@ namespace MonochromeRainbow
 	{
 		public List<Weapon> weaponList = new List<Weapon>();
 		public List<EnemyBase> enemies = new List<EnemyBase>();
+		public List<Vector2>  enemyPositions = new List<Vector2>();
 		public Vector2[] spawnpoints;
 		public int enemyCount;
 		public TextureLoading textures;
@@ -48,7 +49,7 @@ namespace MonochromeRainbow
 			for(int i = 0; i < enemies.Count; i++)
 			{
 				enemies[i].Update(playerPos);	
-				enemies[i].RunAI (playerPos);
+				enemies[i].RunAI (playerPos, enemyPositions);
 				enemies[i].Shoot (playerPos, scene, playerMoving, weaponList);
 				Console.WriteLine (weaponList.Count);
 			}
