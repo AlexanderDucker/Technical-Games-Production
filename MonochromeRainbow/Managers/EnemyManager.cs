@@ -39,7 +39,7 @@ namespace MonochromeRainbow
 				//if there are not 20 enemies in the list - works for respawning.
 				//loops through four spawnpoints and creates an enemy at each one
 				CreateNewEnemy (spawnpnt, playerPos);
-				spawnpnt++;
+				spawnpnt++;	          
 			}
 			
 			//resets the spawn counter
@@ -85,19 +85,23 @@ namespace MonochromeRainbow
 			{
 				EnemyBase enemy = new EnemyChaser();
 				enemy.SetTexture (textures.EnemyChaserTex, spawnpoints[spawnpt], scene);
-				enemy.InitData(new Vector2(0,0), speed, fireRate, bulletSpeed);
+				enemy.InitData(new Vector2(0,0), 1.7f, 0.0f, 30.0f);
 				enemies.Add (enemy);
 			}
 			else if( enemytype ==1)
 			{
 				EnemyBase enemy = new EnemyTank();
 				enemy.SetTexture (textures.EnemyTankTex, spawnpoints[spawnpt], scene);
-				enemy.InitData(new Vector2(0,0), speed, fireRate, bulletSpeed);
+				enemy.InitData(new Vector2(0,0), 0.5f, 0.0f, 30.0f);
 				enemies.Add (enemy);
 			}
-			
-			else
-				CreateNewEnemy (spawnpt, playerPos);
+			else if(enemytype == 2)
+			{
+				EnemyBase enemy = new EnemyEvasive();
+				enemy.SetTexture (textures.EnemyEvasiveTex, spawnpoints[spawnpt], scene);
+				enemy.InitData(new Vector2(0,0), 3.0f, 0.0f, 30.0f);
+				enemies.Add (enemy);
+			}
 			
 		}
 		

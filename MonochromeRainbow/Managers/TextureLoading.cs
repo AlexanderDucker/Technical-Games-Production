@@ -16,6 +16,7 @@ namespace MonochromeRainbow
 		private TextureInfo[] 	enemyChaserTex;
 		private TextureInfo 	deadEnemyTex;
 		private TextureInfo[] 	enemyTankTex;
+		private TextureInfo[]   enemyEvasiveTex;
 		public int enemyTexSizeHW = 48;
 		//private TextureInfo 	weaponTex;
 		
@@ -25,6 +26,7 @@ namespace MonochromeRainbow
 		public TextureInfo   EnemyChaserTex{ get{return enemyChaserTex[0];} }
 		public TextureInfo   DeadEnemyTex{ get{return deadEnemyTex;} }
 		public TextureInfo   EnemyTankTex{ get{return enemyTankTex[0];} }
+		public TextureInfo	 EnemyEvasiveTex { get{return enemyEvasiveTex[0];}}
 		//public TextureInfo   WeaponTex{ get{return weaponTex;} }
 		
 		public TextureLoading ()
@@ -47,8 +49,10 @@ namespace MonochromeRainbow
 			
 			enemyChaserTex = new TextureInfo[8];
 			enemyTankTex = new TextureInfo[8];
+			enemyEvasiveTex = new TextureInfo[8];
 			enemyChaserTex[0] = new TextureInfo(new Texture2D("Application/Textures/EnemyChaserWalking.png", false), new Vector2i(1,8), TRS.Quad0_1);
 			enemyTankTex[0]= new TextureInfo("Application/Textures/EnemyTankWalking.png");
+			enemyEvasiveTex[0] = new TextureInfo("Application/Textures/EnemyEvasiveWalking.png");
 		}
 		
 		

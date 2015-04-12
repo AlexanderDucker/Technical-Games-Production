@@ -38,15 +38,12 @@ namespace MonochromeRainbow
 			
 			facingDirection = new Vector2(0,0);
 			facingDirection = facingDirection.Normalize();		
-			speed = 0;
-		    fireRate =0;
-			shootSpeed = 0;
 			bulletTex = 1;
 			runAway = false;
 			
 		}
 		
-		public virtual void InitData(Vector2 playerPos, float speed, int fireRate, float bulletSpeed)
+		public virtual void InitData(Vector2 playerPos, float speed, float fireRate, float bulletSpeed)
 		{
 			radius = enemy.Quad.Point10.X/2;
 			centerPosition = enemy.Position + enemy.Quad.Center;
