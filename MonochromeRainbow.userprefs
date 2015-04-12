@@ -19,9 +19,8 @@
             <Node name="Classes" expanded="True">
               <Node name="Enemies" expanded="True" />
             </Node>
-            <Node name="Managers" expanded="True">
-              <Node name="CollisionManager.cs" selected="True" />
-            </Node>
+            <Node name="Managers" expanded="True" />
+            <Node name="Textures" selected="True" />
           </Node>
         </State>
       </Pad>
