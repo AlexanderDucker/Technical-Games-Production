@@ -43,8 +43,7 @@ namespace MonochromeRainbow
 			textures = new TextureInfo[4];
 				
 		
-			textures[0] = textures[inputManager.GetTexture()];
-			textures[1] = new TextureInfo("/Application/Textures/Character_one_dead.png");
+			textures = textureManager.PlayerTex;
 			
 			playerTextureInfo = new TextureInfo();
 			playerTextureInfo = textures[0];
