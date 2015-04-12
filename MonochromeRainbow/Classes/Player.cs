@@ -80,7 +80,7 @@ namespace MonochromeRainbow
 		{
         	inputManager.CheckInput ();
 			centerPosition = player.Position + player.Quad.Center;
-			Console.WriteLine(player.Position);
+			//Console.WriteLine(player.Position);
 			
 			if(isAlive)
 			{
@@ -127,7 +127,7 @@ namespace MonochromeRainbow
 					{
 						Weapon weaponOne = new Weapon(scene, 10, 10.0f, 1, centerPosition, facingDirection);
 						weaponList.Add(weaponOne);
-						Console.WriteLine(weaponList.Count);
+						//Console.WriteLine(weaponList.Count);
 						s.Reset();
 						s.Start();
 					}

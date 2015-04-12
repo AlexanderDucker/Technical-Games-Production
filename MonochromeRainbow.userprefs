@@ -2,18 +2,28 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="MonochromeRainbow\Managers\CollisionManager.cs">
     <Files>
-      <File FileName="MonochromeRainbow\Managers\EnemyManager.cs" Line="113" Column="36" />
+      <File FileName="MonochromeRainbow\Managers\EnemyManager.cs" Line="57" Column="38" />
       <File FileName="MonochromeRainbow\Classes\Enemies\EnemyChaser.cs" Line="39" Column="37" />
       <File FileName="MonochromeRainbow\Classes\Enemies\EnemyTank.cs" Line="38" Column="5" />
-      <File FileName="MonochromeRainbow\Classes\Enemies\EnemyBase.cs" Line="81" Column="4" />
-      <File FileName="MonochromeRainbow\Managers\CollisionManager.cs" Line="78" Column="52" />
-      <File FileName="MonochromeRainbow\Classes\Player.cs" Line="57" Column="18" />
+      <File FileName="MonochromeRainbow\Classes\Enemies\EnemyBase.cs" Line="131" Column="11" />
+      <File FileName="MonochromeRainbow\Managers\CollisionManager.cs" Line="89" Column="42" />
+      <File FileName="MonochromeRainbow\Classes\Player.cs" Line="123" Column="5" />
       <File FileName="MonochromeRainbow\Managers\TextureLoading.cs" Line="19" Column="34" />
       <File FileName="MonochromeRainbow\Classes\Enemies\EnemyEvasive.cs" Line="96" Column="3" />
+      <File FileName="MonochromeRainbow\Classes\CharacterSwitching.cs" Line="50" Column="6" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
-        <State />
+        <State expanded="True">
+          <Node name="MonochromeRainbow" expanded="True">
+            <Node name="Classes" expanded="True">
+              <Node name="Enemies" expanded="True" />
+            </Node>
+            <Node name="Managers" expanded="True">
+              <Node name="CollisionManager.cs" selected="True" />
+            </Node>
+          </Node>
+        </State>
       </Pad>
       <Pad Id="ClassPad">
         <State expanded="True" selected="True" />

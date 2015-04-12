@@ -48,11 +48,16 @@ namespace MonochromeRainbow
 			
 			for(int i = 0; i < enemies.Count; i++)
 			{
-				enemies[i].Update(playerPos);	
-				enemies[i].RunAI (playerPos, enemyPositions);
-				enemies[i].Shoot (playerPos, scene, playerMoving, weaponList);
-				Console.WriteLine (weaponList.Count);
+				enemies[i].Update(playerPos);
+				if (enemies[i].health > 0)
+				{
+					enemies[i].RunAI (playerPos, enemyPositions);
+					enemies[i].Shoot (playerPos, scene, playerMoving, weaponList);
+				}
+				Console.Write(enemies[i].health + " ");
+				//Console.WriteLine (weaponList.Count);
 			}
+			Console.WriteLine();
 			//TEMPORARY STUFF
 			gamePadData = GamePad.GetData(0);
 			 if (((gamePadData.Buttons & GamePadButtons.Circle) != 0))

@@ -41,7 +41,7 @@ namespace MonochromeRainbow
 						{
 							//Currently reduces player health by fixed amount and prints to console window
 						    p1.health -= 1;
-							Console.WriteLine(p1.health);
+							//Console.WriteLine(p1.health);
 						}
 					else if(p1.health <=0)
 						p1.IsAlive = true;
@@ -92,7 +92,7 @@ namespace MonochromeRainbow
 							manager.enemies[i].enemy.GetContentWorldBounds(ref manager.enemies[i].bounds);
 							if(player.weaponList[i].bounds.Overlaps(manager.enemies[i].bounds))
 							{
-								manager.enemies[i].Health -= 1;
+								manager.enemies[i].health -= 1.0f;
 								scene.RemoveChild(player.weaponList[i].weapon, true);
 								playerTempList.Remove(player.weaponList[i]);
 							}
