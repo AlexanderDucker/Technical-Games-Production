@@ -47,7 +47,6 @@
     <Compile Include="Managers\TextureLoading.cs" />
     <Compile Include="Managers\InputManager.cs" />
     <Compile Include="Managers\MechanicManager.cs" />
-    <Compile Include="Classes\TextureSwitching.cs" />
     <Compile Include="Classes\Tile.cs" />
     <Compile Include="Classes\Enemies\EnemyChaser.cs" />
     <Compile Include="Classes\Enemies\EnemyEvasive.cs" />
@@ -55,6 +54,7 @@
     <Compile Include="Classes\Enemies\EnemyBase.cs" />
     <Compile Include="Managers\CollisionManager.cs" />
     <Compile Include="Managers\EnemyManager.cs" />
+    <Compile Include="Classes\CharacterSwitching.cs" />
   </ItemGroup>
   <ItemGroup>
     <PsmMetadata Include="app.xml" />

@@ -18,9 +18,9 @@ namespace MonochromeRainbow
 		private SpriteUV		player;
 		public Bounds2			bounds;
 		private TextureInfo		playerTextureInfo;
-		private TextureInfo[]	textures;
+		public TextureInfo[]	textures;
 		public Vector2			movingDirection, facingDirection, centerPosition;
-		private bool 			isAlive, abilityStarted;
+		public bool 			isAlive, abilityStarted, hasSwapped, canSwap;
 		public float			speed, radius, shootSpeed, fireRate;
 		public int				bulletTex, health;
 		
