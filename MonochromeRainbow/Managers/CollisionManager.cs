@@ -30,7 +30,7 @@ namespace MonochromeRainbow
 			enemies1 = enemies;
 
 			//Loops through each weapon list of each enemy for collision with player
-			for(int i = 0; i < manager.weaponList.Count-1; i++)
+			for(int i = 0; i < manager.weaponList.Count; i++)
 			{
 					manager.weaponList[i].weapon.GetContentWorldBounds(ref manager.weaponList[i].bounds);
 					p1.PlayerSprite.GetContentWorldBounds(ref player.bounds);
@@ -48,31 +48,35 @@ namespace MonochromeRainbow
 						
 						scene.RemoveChild(manager.weaponList[i].weapon, true);
 						tempWeaponList.Remove(manager.weaponList[i]);
-			
+						break;
 					}
 				//Checks for projectile collisions with side of screen	
 					if(manager.weaponList[i].weapon.Position.X > Director.Instance.GL.Context.GetViewport().Width + manager.weaponList[i].weapon.Quad.S.X)
 					{
 						scene.RemoveChild(manager.weaponList[i].weapon, true);
 						tempWeaponList.Remove(manager.weaponList[i]);
+						break;
 					}
 					
 					if(manager.weaponList[i].weapon.Position.X < -10.0f)
 					{
 						scene.RemoveChild(manager.weaponList[i].weapon, true);
 						tempWeaponList.Remove(manager.weaponList[i]);
+						break;
 					}
 					
 					if(manager.weaponList[i].weapon.Position.Y < -10.0f)
 					{
 						scene.RemoveChild(manager.weaponList[i].weapon, true);
 						tempWeaponList.Remove(manager.weaponList[i]);
+						break;
 					}
 					
-					if(manager.weaponList[i].weapon.Position.Y > Director.Instance.GL.Context.GetViewport().Height + manager.weaponList[i].weapon.Quad.S.X)
+					if(manager.weaponList[i].weapon.Position.Y > Director.Instance.GL.Context.GetViewport().Height + manager.weaponList[i].weapon.Quad.S.Y)
 					{
 						scene.RemoveChild(manager.weaponList[i].weapon, true);
 						tempWeaponList.Remove(manager.weaponList[i]);
+						break;
 					}
 				//End of projectile collision with screen check
 				

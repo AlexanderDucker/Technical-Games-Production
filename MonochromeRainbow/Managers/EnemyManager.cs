@@ -108,9 +108,9 @@ namespace MonochromeRainbow
 		{
 			spawnpoints = new Vector2[4];
 			spawnpoints[0] = new Vector2(0,0);
-			spawnpoints[1] = new Vector2(0,520);
-			spawnpoints[2] = new Vector2(940,520);
-			spawnpoints[3] = new Vector2(940, 0);
+			spawnpoints[1] = new Vector2(0,496);
+			spawnpoints[2] = new Vector2(912,496);
+			spawnpoints[3] = new Vector2(912, 0);
 		}
 	}
 }
