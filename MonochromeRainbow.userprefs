@@ -1,10 +1,13 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="MonochromeRainbow\Classes\Player.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="MonochromeRainbow\Sprite_Index.txt">
     <Files>
-      <File FileName="MonochromeRainbow\Classes\Player.cs" Line="56" Column="37" />
-      <File FileName="MonochromeRainbow\Managers\InputManager.cs" Line="37" Column="42" />
-      <File FileName="MonochromeRainbow\Managers\TextureLoading.cs" Line="36" Column="35" />
+      <File FileName="MonochromeRainbow\Classes\Tile.cs" Line="35" Column="49" />
+      <File FileName="MonochromeRainbow\Sprite_Index.txt" Line="2" Column="82" />
+      <File FileName="k:\Technical-Games-Production-master\MonochromeRainbow\Classes\AppMain.cs" Line="28" Column="1" />
+      <File FileName="MonochromeRainbow\Classes\Enemies\EnemyBase.cs" Line="46" Column="3" />
+      <File FileName="MonochromeRainbow\Managers\EnemyManager.cs" Line="65" Column="22" />
+      <File FileName="MonochromeRainbow\Managers\ObjectManager.cs" Line="45" Column="6" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -12,12 +15,10 @@
           <Node name="MonochromeRainbow" expanded="True">
             <Node name="Classes" expanded="True">
               <Node name="Enemies" expanded="True" />
-              <Node name="Player.cs" selected="True" />
             </Node>
             <Node name="Managers" expanded="True" />
-            <Node name="Textures" expanded="True">
-              <Option id="ShowAllFiles" value="True" />
-            </Node>
+            <Node name="Textures" expanded="True" />
+            <Node name="Sprite_Index.txt" selected="True" />
           </Node>
         </State>
       </Pad>

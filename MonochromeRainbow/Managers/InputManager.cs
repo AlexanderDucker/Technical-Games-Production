@@ -17,27 +17,20 @@ namespace MonochromeRainbow
 		private GamePadData		gamePadData;
 		private  Vector2 		transform, facingDirection;
 		private bool 			canFire = false;
-		public TextureLoading spriteTextures;
-		public TextureInfo		textures;
-	
 		
 		public InputManager ()
 		{
-			transform = new Vector2(0,0);
-			facingDirection = new Vector2(0,0);
+			transform= new Vector2(0,0);
+			facingDirection= new Vector2(0,0);
 		}
 		
-		public void CheckInput(TextureLoading textureManager)
+		public void CheckInput()
 		{
 			gamePadData = GamePad.GetData(0);
-			spriteTextures = textureManager;
-			textures = new TextureInfo();
 			
 			//Left movement
 		    	if ((gamePadData.Buttons & GamePadButtons.Left) != 0)
 		    	{
-					
-					textures = spriteTextures.PlayerTex[0];
 					transform.X = -1.0f;
 					facingDirection.X = -1.0f;
 					if ((gamePadData.Buttons & GamePadButtons.Up) != 0)
@@ -56,8 +49,6 @@ namespace MonochromeRainbow
 				//Right movement
 		    	else if ((gamePadData.Buttons & GamePadButtons.Right) != 0)
 		    	{
-			
-					textures = spriteTextures.PlayerTex[1];
 					transform.X = 1.0f;
 					facingDirection.X = 1.0f;
 					if ((gamePadData.Buttons & GamePadButtons.Up) != 0)
@@ -80,8 +71,6 @@ namespace MonochromeRainbow
 				//Up movement
 		    	if ((gamePadData.Buttons & GamePadButtons.Up) != 0)
 		    	{
-				
-					textures = spriteTextures.PlayerTex[2];
 					transform.Y = 1.0f;
 					facingDirection.Y = 1.0f;
 					if ((gamePadData.Buttons & GamePadButtons.Left) != 0)
@@ -100,8 +89,6 @@ namespace MonochromeRainbow
 				//Down movement
 		    	else if ((gamePadData.Buttons & GamePadButtons.Down) != 0)
 		    	{
-				
-					textures = spriteTextures.PlayerTex[3];
 					transform.Y = -1.0f;
 					facingDirection.Y = -1.0f;
 					if ((gamePadData.Buttons & GamePadButtons.Left) != 0)

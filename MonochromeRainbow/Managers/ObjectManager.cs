@@ -18,7 +18,7 @@ namespace MonochromeRainbow
 		This class is for everything we add.
 		It currently handles the EnemyManager, Player, the in progress Collisions and Mechanics.
 		*/
-		EnemyManager 	enemyManager;
+		//EnemyManager 	enemyManager;
 		TextureLoading 	textureManager;
 		Player player;
 		CollisionManager collisions;
@@ -30,8 +30,8 @@ namespace MonochromeRainbow
 		{
 			level = new Tile (gameScene);
 			textureManager = new TextureLoading();
-			enemyManager = new EnemyManager(gameScene, textureManager);
-			player = new Player(gameScene, new Vector2(100,100), textureManager);
+			//enemyManager = new EnemyManager(gameScene, textureManager);
+			player = new Player(gameScene, new Vector2(100,100));
 			collisions = new CollisionManager();
 			mechanics = new MechanicManager(gameScene);
 			
@@ -40,9 +40,9 @@ namespace MonochromeRainbow
 		
 		public void UpdateObjects()
 		{
-			enemyManager.Update(player.centerPosition, !player.movingDirection.IsZero());	
+			//enemyManager.Update(player.centerPosition, !player.movingDirection.IsZero());	
 			player.Update (scene);
-			collisions.CheckCollisions(player, enemyManager.enemies, scene, enemyManager);
+			//collisions.CheckCollisions(player, enemyManager.enemies, scene, enemyManager);
 		}
 		
 		

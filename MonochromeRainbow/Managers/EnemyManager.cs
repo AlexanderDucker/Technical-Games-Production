@@ -78,9 +78,24 @@ namespace MonochromeRainbow
 			bulletSpeed /= 10;
 			int fireRate = rand.Next(300, 500);
 			
-			EnemyBase enemy = new EnemyChaser();
-			enemy.SetTexture (textures.EnemyTex, spawnpoints[spawnpt], scene);
-			enemies.Add (enemy);
+			Random rnd = new Random();
+			int enemytype = rnd.Next (3);
+			if(enemytype == 0)
+			{
+				EnemyBase enemy = new EnemyChaser();
+				enemy.SetTexture (textures.EnemyChaserTex, spawnpoints[spawnpt], scene);
+				enemies.Add (enemy);
+			}
+			else if( enemytype ==1)
+			{
+				EnemyBase enemy = new EnemyTank();
+				enemy.SetTexture (textures.EnemyTankTex, spawnpoints[spawnpt], scene);
+				enemies.Add (enemy);
+			}
+			
+			else
+				CreateNewEnemy (spawnpt, playerPos);
+			
 		}
 		
 		public void DecideEnemyType()

@@ -12,15 +12,15 @@ namespace MonochromeRainbow
 {
 	public class EnemyBase
 	{
-		protected SpriteUV		enemy;
-		protected TextureInfo	eTexture; 
-		protected Vector2		facingDirection, centerPosition, playerPosition;
-		protected float			speed, health, radius, shootSpeed, fireRate;
-		protected bool			hasSwapped, isAlive;
-		protected Vector2 		position;
-		protected int			bulletTex;
-		protected bool			runAway;
-		protected Stopwatch s = new Stopwatch();
+		public SpriteUV		enemy;
+		public TextureInfo	eTexture; 
+		public Vector2		facingDirection, centerPosition, playerPosition;
+		public float		speed, health, radius, shootSpeed, fireRate;
+		public bool			hasSwapped, isAlive;
+		public Vector2 		position;
+		public int			bulletTex;
+		public bool			runAway;
+		public Stopwatch s = new Stopwatch();
 		
 
 		//Accessors.
@@ -33,8 +33,7 @@ namespace MonochromeRainbow
 		{
 			health = 1.0f;
 			hasSwapped = false;
-			isAlive = true;
-			
+			isAlive = true;		
 			facingDirection = new Vector2(0,0);
 			facingDirection = facingDirection.Normalize();		
 			speed = 0;
@@ -76,9 +75,13 @@ namespace MonochromeRainbow
 		
 		public virtual void SetTexture(TextureInfo texture, Vector2 pos, Scene scene)
 		{
+			
 			eTexture = texture;
 			enemy = new SpriteUV(eTexture);
-			enemy.Quad.S = texture.TextureSizef;
+			enemy.Quad.S = new Vector2(48,48);
+			//enemy.CenterSprite();
+		
+			enemy.Scale = new Vector2(2,2);
 			enemy.Position = pos;
 			scene.AddChild(enemy);
 		}

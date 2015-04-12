@@ -1,303 +1,163 @@
 using System;
-
+using System.Diagnostics;
+using System.Collections.Generic;
 using Sce.PlayStation.Core;
 using Sce.PlayStation.Core.Graphics;
+using Sce.PlayStation.Core.Input;
 
 using Sce.PlayStation.HighLevel.GameEngine2D;
 using Sce.PlayStation.HighLevel.GameEngine2D.Base;
 
-
 namespace MonochromeRainbow
-	
 {
 	public class Enemy
 	{
-		private TextureInfo		textureInfo;
-		private	TextureInfo[]	textures;
+		public SpriteUV			enemy;
+		public TextureInfo		eTexture; 
+		private Vector2			facingDirection, centerPosition;
+		public float			speed, health, radius, shootSpeed, fireRate;
+		private bool			hasSwapped, isAlive;
+		private Vector2 		position;
+		public int				bulletTex;
+		private bool			runAway;
+		public 	List<Weapon>    weaponList = new List<Weapon>();
+
+		//Accessors.
+		public Vector2 CenterPosition{ get{return centerPosition;}}
+		public float Radius { get{return radius;} }
+		public float Health { get{return health;} set{health = value;} }
+		public bool IsAlive{ get{return isAlive;} set{isAlive = value;} }
+		public SpriteUV EnemySprite{get {return enemy;} }
+		Stopwatch s = new Stopwatch();
 		
-		public bool				isAlive = false;
-		public float			yVelocity;
-		public bool 			onGround;
-		public int 				type;
-		public int 				behavior;
-		public int 				health;
-		public int 				damage;
-		public Bounds2			bounds;
-		public Vector2			position;
-		public Vector2[]		spawnPositions;
-		public SpriteUV			sprite;
-		public bool				mayJumpAgain;
-	
-		public Enemy (Scene scene)
+		public Enemy ()
 		{
+			
 		}
 		
-		public void Load(Scene scene)
+		public void InitData(Vector2 playerPos, float speed, int fireRate, float bulletSpeed)
 		{
-			SetEnemyArray();
-			
-			textureInfo = new TextureInfo();
-			textureInfo = textures[0];
-			
-			DecideType ();
-			
-			spawnPositions = new Vector2[9];
-			SetSpawnLocations();
-			sprite			= new SpriteUV(textureInfo);
-			sprite.Quad.S	= textureInfo.TextureSizef;
-			bounds = new Bounds2();
-			DecideSpawnLocation ();
-			yVelocity = 5.0f;
-			onGround = false;
-			scene.AddChild(sprite);
+			health = 1.0f;
+			hasSwapped = false;
+			isAlive = true;
+			radius = enemy.Quad.Point10.X/2;
+			centerPosition = enemy.Position + enemy.Quad.Center;
+			position = enemy.Position;
+			facingDirection = playerPos - enemy.Position;
+			facingDirection = facingDirection.Normalize();		
+			this.speed = speed;
+			health = 2.0f;
+			isAlive = true;
+			this.fireRate = fireRate;
+			shootSpeed = bulletSpeed;
+			bulletTex = 0;
+			runAway = false;
+			s.Start();
 		}
 		
-		public void SetEnemyArray()
+		public void SetTexture(TextureInfo texture, Vector2 pos)
 		{
-			textures = new TextureInfo[3];
-			textures[0]		= new TextureInfo("/Application/textures/enemy/flyingEnemy.png");
-			textures[1]		= new TextureInfo("/Application/textures/enemy/regularEnemy.png");
-			textures[2]		= new TextureInfo("/Application/textures/enemy/heavyEnemy.png");	
+			eTexture = texture;
+			enemy = new SpriteUV(eTexture);
+			enemy.Quad.S = texture.TextureSizef;
+			enemy.Position = pos;
 		}
 		
-		public void DecideType()
+		public void Dispose()
 		{
+			eTexture.Dispose ();
+		}
 		
-			//Decide random type
-			Random rnd = new Random();
-			
-			int random = randomNumber();
-			
-			//Flying Enemy
-			if(random <= 50)
-			{
-				type = 1;
-				behavior = 1;
-				health = 5;
-				damage = 1;
+		public void Update(Vector2 playerpos)
+		{
+			centerPosition = enemy.Position + enemy.Quad.Center;
+			radius = enemy.Quad.Point10.X/2;
 				
-				textureInfo = textures[0];
-			}
-			//Normal enemy
-			else if(random <= 85)
+			if(health <= 0.0f && !hasSwapped)
 			{
-				type = 0;
-				behavior = 0;
-				health = 3;
-				damage = 1;	
-				
-				textureInfo = textures[1];
+				enemy.Position = enemy.Position - enemy.Quad.Center;
+				radius = enemy.Quad.Point10.X / 2;
+				hasSwapped = true;
+				isAlive = false;
 			}
-			//Tanky Enemy
-			else
-			{
-				type = 2;
-				behavior = 2;
-				health = 7;
-				damage = 3;
-				
-				textureInfo = textures[2];
-			}	
+		
+			enemy.Position = position;
 		}
 		
-		public int randomNumber()
+		public void RunAI(Vector2 playerPos)
 		{
-			var randGen = new Random(Guid.NewGuid().GetHashCode());
-			int randInt = randGen.Next (100);
+			facingDirection = playerPos - enemy.Position;
+			facingDirection = facingDirection.Normalize();
 			
-			return randInt;
-		}
-		
-		public void SetSpawnLocations()
-		{
-			//Create array of potential spawn positions (set to the platform XY positions.
-			//Added 20 to each one because of Y0 being at the bottom.
-			spawnPositions[8] = new Vector2(0,158);
-			spawnPositions[0] = new Vector2(0,292);
-			spawnPositions[1] = new Vector2(0,428);
-			spawnPositions[2] = new Vector2(380,220);
-			spawnPositions[3] = new Vector2(380,360);
-			spawnPositions[4] = new Vector2(380,80);
-			spawnPositions[5] = new Vector2(760, 156);
-			spawnPositions[6] = new Vector2(760, 292);
-			spawnPositions[7] = new Vector2(760, 428);
-		}
-		
-		public void DecideSpawnLocation()
-		{
-			if(type == 1)
-			{
-				Random rnd = new Random();
-				int num = rnd.Next(0,961);
-				position = new Vector2(num, 500);
-			}
-			else
-			{
-				//Create random number
-				Vector2 randPos = new Vector2();
-				Random rnd = new Random();
-				int num = rnd.Next (0,9);
-				//choose an item in spawnPositions based on the random number
-				randPos = spawnPositions[num];
-				//set the position to that item in the array
-				sprite.Position = new Vector2();
-				sprite.Position = randPos;
-				position = randPos;
-				num = rnd.Next (0,9);
-			}
-		}
-		
-		public void Update()
-		{
-			sprite.Position = position;
-		}
-		
-		public void RunAI(Vector2 playerLocation)
-		{
-		
-			if(type == 0)
-				RunAIType1 (playerLocation);
-			else if(type == 1)
-				RunAIType2 (playerLocation);
-			else if(type==2)
-				RunAIType3 (playerLocation);
-		}
-		
-		public void RunAIType1(Vector2 playerLocation)
-		{
-			//normalAI
+			Vector2 dir = playerPos - centerPosition;
+			float distanceSqrd = Square(dir.X) + Square(dir.Y);
+			double distance = System.Math.Sqrt(distanceSqrd);
 			
-			if (onGround)
+			if (distance >= 150.0f)
 			{
-				yVelocity = 0;
-				
-				if (mayJumpAgain)
+				position += facingDirection * speed;
+			}
+			else if (distance < 100.0f)
+			{
+				position -= facingDirection * speed;
+				runAway = true;
+			}
+			if (runAway)
+			{
+				if(distance >= 150.0f)
 				{
-                	if(playerLocation.Y > position.Y)
-					{
-						yVelocity = 11.0f;
-						mayJumpAgain = false;
-					}
+					runAway = false;	
 				}
-        		else if (onGround)
+			}
+		}
+		public void Shoot(Vector2 playerPos, Scene scene, bool playerMoving)
+		{
+			if (!runAway)
+			{
+				Vector2 dir = playerPos - centerPosition;
+				float distanceSqrd = Square(dir.X) + Square(dir.Y);
+				double distance = System.Math.Sqrt(distanceSqrd);
+				
+				if(s.ElapsedMilliseconds > 0)
 				{
-					mayJumpAgain = true;
-        		}
-			}
-			
-			//moves towards the player
-			if (position.X < playerLocation.X)
-			{
-				position.X += 0.9f;	
-			}
-			if (position.X > playerLocation.X)
-			{
-				position.X -= 0.9f;	
-			}
-						
-			//Check if enemy is off the ground.
-			if (!onGround)
-			{
-        		//Enemy loses vertical speed tue to gravity.
-				yVelocity -= 0.5f;
-			}
-			
-			//Enemy shouldn't fall too fast. [Terminal Velocity]
-			if (yVelocity < -5.0f)
-			{
-        		yVelocity = -5.0f;
-			}
-			
-			//Check if enemy is on the ground.
-            if (yVelocity != 0.0f)
-			{
-				onGround = false;
-    		}
-			
-			//checks if enemy has hit the ground.
-			if (position.Y < 0.0f)
-			{
-				position.Y = 0.0f;
-				onGround = true;
-			}
-			
-			position.Y += yVelocity;
-		}
-		
-		public void RunAIType2(Vector2 playerLocation)
-		{
-			//flying AI
-		
-			//moves towards the player on the X axis
-			if (position.X < playerLocation.X)
-			{
-				position.X += 0.7f;	
-				sprite.Position = position;
-			}
-			if (position.X > playerLocation.X)
-			{
-				position.X -= 0.7f;	
-				sprite.Position = position;
-			}
-			if (position.Y < playerLocation.Y)
-			{
-				position.Y += 0.7f;	
-				sprite.Position = position;
-			}
-			if (position.Y > playerLocation.Y)
-			{
-				position.Y -= 0.7f;	
-				sprite.Position = position;
+					int missFactor;
+					Random rand = new Random(Guid.NewGuid().GetHashCode());
+					if (playerMoving)
+					{
+						if (distance < 50.0f)
+						{
+							missFactor = rand.Next(-20,20);
+						}
+						else
+						{
+							missFactor = rand.Next(-50,50);
+						}
+					}
+					else
+					{
+						if (distance < 50.0f)
+						{
+							missFactor = rand.Next(-50,50);
+						}
+						else
+						{
+							missFactor = rand.Next(-100,100);
+						}
+					}
+					Vector2 newVec;
+					newVec.X = -facingDirection.Y;
+					newVec.Y = facingDirection.X;
+					newVec *= missFactor;
+					newVec = playerPos + (newVec - centerPosition);
+					newVec = newVec.Normalize();
+					Weapon weaponOne = new Weapon(scene, 10, shootSpeed, bulletTex, centerPosition, newVec);
+					weaponList.Add(weaponOne);
+					s.Reset();
+					s.Start();
+				}
 			}
 		}
-		
-		public void RunAIType3(Vector2 playerLocation)
-		{
-			//normalAI
-			
-			if (onGround)
-			{
-				yVelocity = 0;
-			}
-			
-			//moves towards the player
-			if (position.X < playerLocation.X)
-			{
-				position.X += 0.9f;	
-			}
-			if (position.X > playerLocation.X)
-			{
-				position.X -= 0.9f;	
-			}
-						
-			//Check if enemy is off the ground.
-			if (!onGround)
-			{
-        		//Enemy loses vertical speed tue to gravity.
-				yVelocity -= 0.5f;
-			}
-			
-			//Enemy shouldn't fall too fast. [Terminal Velocity]
-			if (yVelocity < -5.0f)
-			{
-        		yVelocity = -5.0f;
-			}
-			
-			//Check if enemy is on the ground.
-            if (yVelocity != 0.0f)
-			{
-				onGround = false;
-    		}
-			
-			//checks if enemy has hit the ground.
-			if (position.Y < 0.0f)
-			{
-				position.Y = 0.0f;
-				onGround = true;
-			}
-			
-			position.Y += yVelocity;
-		}
+		private float Square(float a){return a*a;}
 	}
 }
 

@@ -23,10 +23,6 @@ namespace MonochromeRainbow
 		public float			speed, radius, shootSpeed, fireRate;
 		public int				bulletTex, health;
 		
-		
-		
-		//enemy.SetTexture (textures.EnemyTex, spawnpoints[spawnpt], scene);
-		public TextureLoading spriteTextures;
 		public InputManager 	inputManager;
 		public Vector2 CenterPosition{ get{return centerPosition;} }
 		public bool IsAlive{ get{return isAlive;} set{isAlive = value;} }
@@ -36,18 +32,16 @@ namespace MonochromeRainbow
 		public List<Weapon> weaponList = new List<Weapon>();
 		Stopwatch s = new Stopwatch();
 
-		public Player (Scene scene, Vector2 playerPos, TextureLoading textureManager)
+		public Player (Scene scene, Vector2 playerPos)
 		{
 			inputManager = new InputManager();
-			spriteTextures = textureManager;
-			textures = new TextureInfo[4];
-				
-		
-			textures[0] = inputManager.textures;
+			textures = new TextureInfo[2];
+			textures[0] = new TextureInfo("/Application/Textures/Character_one.png");
 			textures[1] = new TextureInfo("/Application/Textures/Character_one_dead.png");
 			
 			playerTextureInfo = new TextureInfo();
 			playerTextureInfo = textures[0];
+			
 			player = new SpriteUV(playerTextureInfo);	
 			player.Quad.S = playerTextureInfo.TextureSizef;
 			
@@ -81,7 +75,7 @@ namespace MonochromeRainbow
 		
 		public void Update(Scene scene)
 		{
-        	inputManager.CheckInput (spriteTextures);
+        	inputManager.CheckInput ();
 			centerPosition = player.Position + player.Quad.Center;
 			
 			if(isAlive)
@@ -94,7 +88,6 @@ namespace MonochromeRainbow
 					Vector2 newDir = movingDirection.Normalize();
 					player.Position = new Vector2(player.Position.X + (newDir.X * speed),player.Position.Y + (newDir.Y * speed));
 				}
-		
 				//Movement^
 				
 				

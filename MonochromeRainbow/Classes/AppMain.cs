@@ -23,14 +23,12 @@ namespace MonochromeRainbow
 			//Game loop.
 			while (!quitGame)
 			{
-
 				Update();
 				Director.Instance.Update();
 				Director.Instance.Render();
 				UISystem.Render();
 				Director.Instance.GL.Context.SwapBuffers();
 				Director.Instance.PostSwap();
-
 			}
 			Director.Terminate();
 		}

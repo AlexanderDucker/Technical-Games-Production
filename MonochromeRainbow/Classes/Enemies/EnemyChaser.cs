@@ -14,20 +14,7 @@ namespace MonochromeRainbow
 	{
 		public EnemyChaser() : base()
 		{			
-			runAway = false;
 		}	
-		
-		public override void SetTexture(TextureInfo texture, Vector2 pos, Scene scene)
-		{
-			eTexture = texture;
-			enemy = new SpriteUV(eTexture);
-			enemy.Quad.S = texture.TextureSizef;
-			position = pos;
-			bulletTex = 1;
-			enemy.Position = pos;
-			scene.AddChild(enemy);
-		}
-		
 		public override void RunAI(Vector2 playerPos)
 		{
 			if(playerPos.X > enemy.Position.X)
