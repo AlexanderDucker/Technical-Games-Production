@@ -14,10 +14,10 @@ namespace MonochromeRainbow
 {
 	public class MechanicManager
 	{
-		CharacterSwitching textureSwitching;
+		TextureSwitching textureSwitching;
 		public MechanicManager (Scene gameScene)
 		{
-			textureSwitching = new CharacterSwitching();
+			textureSwitching = new TextureSwitching();
 		}
 		
 		

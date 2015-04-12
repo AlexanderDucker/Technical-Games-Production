@@ -15,7 +15,6 @@ namespace MonochromeRainbow
 	{
 		public List<Weapon> weaponList = new List<Weapon>();
 		public List<EnemyBase> enemies = new List<EnemyBase>();
-		public List<Vector2>  enemyPositions = new List<Vector2>();
 		public Vector2[] spawnpoints;
 		public int enemyCount;
 		public TextureLoading textures;
@@ -39,7 +38,7 @@ namespace MonochromeRainbow
 				//if there are not 20 enemies in the list - works for respawning.
 				//loops through four spawnpoints and creates an enemy at each one
 				CreateNewEnemy (spawnpnt, playerPos);
-				spawnpnt++;	          
+				spawnpnt++;
 			}
 			
 			//resets the spawn counter
@@ -49,8 +48,7 @@ namespace MonochromeRainbow
 			for(int i = 0; i < enemies.Count; i++)
 			{
 				enemies[i].Update(playerPos);	
-				enemies[i].RunAI (playerPos, enemyPositions);
-				
+				enemies[i].RunAI (playerPos);
 				enemies[i].Shoot (playerPos, scene, playerMoving, weaponList);
 				Console.WriteLine (weaponList.Count);
 			}
@@ -73,31 +71,16 @@ namespace MonochromeRainbow
 		
 		public void CreateNewEnemy(int spawnpt, Vector2 playerPos)
 		{
-
-			Random rnd = new Random();
-			int enemytype = rnd.Next (3);
-			if(enemytype == 0)
-			{
-				EnemyBase enemy = new EnemyChaser();
-				enemy.SetTexture (textures.EnemyChaserTex, spawnpoints[spawnpt], scene);
-				enemy.InitData(new Vector2(0,0), 2.0f, 400.0f, 20.0f);
-				enemies.Add (enemy);
-			}
-			else if( enemytype ==1)
-			{
-				EnemyBase enemy = new EnemyTank();
-				enemy.SetTexture (textures.EnemyTankTex, spawnpoints[spawnpt], scene);
-				enemy.InitData(new Vector2(0,0), 0.5f, 2000.0f, 30.0f);
-				enemies.Add (enemy);
-			}
-			else if(enemytype == 2)
-			{
-				EnemyBase enemy = new EnemyEvasive();
-				enemy.SetTexture (textures.EnemyEvasiveTex, spawnpoints[spawnpt], scene);
-				enemy.InitData(new Vector2(0,0), 3.0f, 1500.0f, 40.0f);
-				enemies.Add (enemy);
-			}
+			Random rand = new Random(Guid.NewGuid().GetHashCode());
+			float speed = (float)rand.Next(10, 20);
+			speed /= 10;
+			float bulletSpeed = (float)rand.Next(100, 200);
+			bulletSpeed /= 10;
+			int fireRate = rand.Next(300, 500);
 			
+			EnemyBase enemy = new EnemyChaser();
+			enemy.SetTexture (textures.EnemyTex, spawnpoints[spawnpt], scene);
+			enemies.Add (enemy);
 		}
 		
 		public void DecideEnemyType()
@@ -109,9 +92,9 @@ namespace MonochromeRainbow
 		{
 			spawnpoints = new Vector2[4];
 			spawnpoints[0] = new Vector2(0,0);
-			spawnpoints[1] = new Vector2(0,496);
-			spawnpoints[2] = new Vector2(912,496);
-			spawnpoints[3] = new Vector2(912, 0);
+			spawnpoints[1] = new Vector2(0,520);
+			spawnpoints[2] = new Vector2(940,520);
+			spawnpoints[3] = new Vector2(940, 0);
 		}
 	}
 }

@@ -12,15 +12,13 @@ namespace MonochromeRainbow
 {
 	public class EnemyBase
 	{
-		public SpriteUV		enemy;
-		public Bounds2      bounds;
+		protected SpriteUV		enemy;
 		protected TextureInfo	eTexture; 
-				protected TextureInfo[] eTextures;
 		protected Vector2		facingDirection, centerPosition, playerPosition;
-		public float			speed, health, radius, shootSpeed, fireRate;
+		protected float			speed, health, radius, shootSpeed, fireRate;
 		protected bool			hasSwapped, isAlive;
 		protected Vector2 		position;
-		public int			bulletTex;
+		protected int			bulletTex;
 		protected bool			runAway;
 		protected Stopwatch s = new Stopwatch();
 		
@@ -33,18 +31,21 @@ namespace MonochromeRainbow
 		
 		public  EnemyBase ()
 		{
-			health = 100.0f;
+			health = 1.0f;
 			hasSwapped = false;
 			isAlive = true;
 			
 			facingDirection = new Vector2(0,0);
 			facingDirection = facingDirection.Normalize();		
+			speed = 0;
+		    fireRate =0;
+			shootSpeed = 0;
 			bulletTex = 1;
 			runAway = false;
 			
 		}
 		
-		public virtual void InitData(Vector2 playerPos, float speed, float fireRate, float bulletSpeed)
+		public virtual void InitData(Vector2 playerPos, float speed, int fireRate, float bulletSpeed)
 		{
 			radius = enemy.Quad.Point10.X/2;
 			centerPosition = enemy.Position + enemy.Quad.Center;
@@ -75,28 +76,11 @@ namespace MonochromeRainbow
 		
 		public virtual void SetTexture(TextureInfo texture, Vector2 pos, Scene scene)
 		{
-			
 			eTexture = texture;
 			enemy = new SpriteUV(eTexture);
-			enemy.Quad.S = new Vector2(48,48);
+			enemy.Quad.S = texture.TextureSizef;
 			enemy.Position = pos;
 			scene.AddChild(enemy);
-		}
-		
-				public virtual void ChangeTexture(TextureInfo aliveTex, TextureInfo deadTex, Vector2 pos)
-		{
-			eTextures = new TextureInfo[2];
-			eTextures[0] = aliveTex;
-			eTextures[1] = deadTex;
-			eTexture = eTextures[0];
-			enemy = new SpriteUV(eTexture);
-			enemy.Quad.S = eTexture.TextureSizef;
-			enemy.Position = pos;
-		}
-		
-		public virtual TextureInfo GetTexture(int tex)
-		{
-			return eTextures[tex];
 		}
 		
 		public virtual void Shoot(Vector2 playerPos, Scene scene, bool playerMoving, List<Weapon> weaponList)
@@ -152,9 +136,9 @@ namespace MonochromeRainbow
 			eTexture.Dispose ();
 		}
 		
-		public virtual void RunAI(Vector2 playerPos, List<Vector2> enemyPositions)
+		public virtual void RunAI(Vector2 playerPos)
 		{
-		
+			
 		}
 		
 		public static float Square(float a){return a*a;}

@@ -14,16 +14,19 @@ namespace MonochromeRainbow
 {
 	public class Player
 	{
-		private GamePadData		gamePadData;
 		private SpriteUV		player;
 		public Bounds2			bounds;
 		private TextureInfo		playerTextureInfo;
-		public TextureInfo[]	textures;
+		private TextureInfo[]	textures;
 		public Vector2			movingDirection, facingDirection, centerPosition;
-		public bool 			isAlive, abilityStarted, hasSwapped, canSwap;
+		private bool 			isAlive;
 		public float			speed, radius, shootSpeed, fireRate;
 		public int				bulletTex, health;
 		
+		
+		
+		//enemy.SetTexture (textures.EnemyTex, spawnpoints[spawnpt], scene);
+		public TextureLoading spriteTextures;
 		public InputManager 	inputManager;
 		public Vector2 CenterPosition{ get{return centerPosition;} }
 		public bool IsAlive{ get{return isAlive;} set{isAlive = value;} }
@@ -32,18 +35,19 @@ namespace MonochromeRainbow
 		public SpriteUV PlayerSprite{get {return player;} }
 		public List<Weapon> weaponList = new List<Weapon>();
 		Stopwatch s = new Stopwatch();
-		Stopwatch abilityTimer = new Stopwatch();
 
-		public Player (Scene scene, Vector2 playerPos)
+		public Player (Scene scene, Vector2 playerPos, TextureLoading textureManager)
 		{
 			inputManager = new InputManager();
-			textures = new TextureInfo[2];
-			textures[0] = new TextureInfo("/Application/Textures/Character_one.png");
+			spriteTextures = textureManager;
+			textures = new TextureInfo[4];
+				
+		
+			textures[0] = textures[inputManager.GetTexture()];
 			textures[1] = new TextureInfo("/Application/Textures/Character_one_dead.png");
 			
 			playerTextureInfo = new TextureInfo();
 			playerTextureInfo = textures[0];
-			
 			player = new SpriteUV(playerTextureInfo);	
 			player.Quad.S = playerTextureInfo.TextureSizef;
 			
@@ -61,7 +65,6 @@ namespace MonochromeRainbow
 			facingDirection = new Vector2(1.0f,0.0f);
 			
 			s.Start();
-			abilityStarted = false;
 			
 			scene.AddChild(player);
 		}
@@ -78,14 +81,12 @@ namespace MonochromeRainbow
 		
 		public void Update(Scene scene)
 		{
-        	inputManager.CheckInput ();
+        	inputManager.CheckInput (spriteTextures);
 			centerPosition = player.Position + player.Quad.Center;
-			Console.WriteLine(player.Position);
 			
 			if(isAlive)
 			{
 				//Movement
-				gamePadData = GamePad.GetData(0);
 				movingDirection = inputManager.GetTransform ();
 				facingDirection = inputManager.GetFacingDirection();
 				if (!(movingDirection.IsZero()))
@@ -93,28 +94,8 @@ namespace MonochromeRainbow
 					Vector2 newDir = movingDirection.Normalize();
 					player.Position = new Vector2(player.Position.X + (newDir.X * speed),player.Position.Y + (newDir.Y * speed));
 				}
+		
 				//Movement^
-				if((gamePadData.Buttons & GamePadButtons.Select) != 0)
-				{
-					if(!abilityStarted)
-					{
-						abilityStarted = true;
-						abilityTimer.Start();
-						if(facingDirection.Y == 1.0f)
-							player.Position = new Vector2(player.Position.X,player.Position.Y + 1000.0f);
-						else if(facingDirection.Y == -1.0f)
-							player.Position = new Vector2(player.Position.X,player.Position.Y - 100.0f);
-						else if(facingDirection.X == 1.0f)
-							player.Position = new Vector2(player.Position.X + 100.0f,player.Position.Y);
-						else if(facingDirection.X == -1.0f)
-							player.Position = new Vector2(player.Position.X + -100.0f,player.Position.Y);
-					}
-					if(abilityTimer.ElapsedMilliseconds > 3000)
-					{
-						abilityStarted = false;
-						abilityTimer.Reset();
-					}
-				}
 				
 				
 				wallCollision();
