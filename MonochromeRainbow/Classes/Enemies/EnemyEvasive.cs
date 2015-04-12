@@ -45,6 +45,14 @@ namespace MonochromeRainbow
 				}
 			}
 			
+			for(int i = 0; i < enemyPosWithoutOwn.Count; i++)
+			{
+				if(position.X - enemyPosWithoutOwn[i].X < 20 && position.Y - enemyPosWithoutOwn[i].Y <20)
+				{
+					position.X +=speed;
+					position.Y +=speed;
+				}
+			
 			if(position.X < 0)
 			{
 				position.X = 0;	
@@ -94,7 +102,7 @@ namespace MonochromeRainbow
 		
 		}
 		
-	
+		}
 	}
 }
 

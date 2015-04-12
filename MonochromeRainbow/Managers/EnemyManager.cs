@@ -50,6 +50,7 @@ namespace MonochromeRainbow
 			{
 				enemies[i].Update(playerPos);	
 				enemies[i].RunAI (playerPos, enemyPositions);
+				
 				enemies[i].Shoot (playerPos, scene, playerMoving, weaponList);
 				Console.WriteLine (weaponList.Count);
 			}
@@ -86,7 +87,7 @@ namespace MonochromeRainbow
 			{
 				EnemyBase enemy = new EnemyTank();
 				enemy.SetTexture (textures.EnemyTankTex, spawnpoints[spawnpt], scene);
-				enemy.InitData(new Vector2(0,0), 0.1f, 2000.0f, 30.0f);
+				enemy.InitData(new Vector2(0,0), 0.5f, 2000.0f, 30.0f);
 				enemies.Add (enemy);
 			}
 			else if(enemytype == 2)

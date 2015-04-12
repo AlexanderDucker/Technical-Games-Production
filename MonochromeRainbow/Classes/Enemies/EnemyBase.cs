@@ -154,7 +154,7 @@ namespace MonochromeRainbow
 		
 		public virtual void RunAI(Vector2 playerPos, List<Vector2> enemyPositions)
 		{
-			
+		
 		}
 		
 		public static float Square(float a){return a*a;}
