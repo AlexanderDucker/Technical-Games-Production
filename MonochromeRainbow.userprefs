@@ -2,9 +2,9 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="MonochromeRainbow\Classes\Player.cs">
     <Files>
-      <File FileName="MonochromeRainbow\Classes\Player.cs" Line="56" Column="37" />
-      <File FileName="MonochromeRainbow\Managers\InputManager.cs" Line="37" Column="42" />
-      <File FileName="MonochromeRainbow\Managers\TextureLoading.cs" Line="36" Column="35" />
+      <File FileName="MonochromeRainbow\Classes\Player.cs" Line="45" Column="3" />
+      <File FileName="MonochromeRainbow\Managers\InputManager.cs" Line="22" Column="26" />
+      <File FileName="MonochromeRainbow\Managers\TextureLoading.cs" Line="25" Column="27" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
