@@ -87,6 +87,7 @@
     <Content Include="Textures\EnemyTankWalking.png" />
     <Content Include="Textures\graveyard spritesheet.png" />
     <Content Include="Textures\grass.png" />
+    <Content Include="Textures\bullet2.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Textures\Necromancer_Two.psd" />

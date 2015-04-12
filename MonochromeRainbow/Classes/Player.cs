@@ -56,7 +56,7 @@ namespace MonochromeRainbow
 			isAlive = true;
 			fireRate = 200;
 			shootSpeed = 10.0f;
-			bulletTex = 1;
+			bulletTex = 2;
 			
 			facingDirection = new Vector2(1.0f,0.0f);
 			
@@ -125,7 +125,7 @@ namespace MonochromeRainbow
 				{
 					if(s.ElapsedMilliseconds > 500)
 					{
-						Weapon weaponOne = new Weapon(scene, 10, 10.0f, 1, centerPosition, facingDirection);
+						Weapon weaponOne = new Weapon(scene, 10, 10.0f, bulletTex, centerPosition, facingDirection);
 						weaponList.Add(weaponOne);
 						//Console.WriteLine(weaponList.Count);
 						s.Reset();
