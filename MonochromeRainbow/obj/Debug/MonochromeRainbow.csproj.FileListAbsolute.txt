@@ -302,3 +302,7 @@ C:\Users\Alex\Documents\GitHub\Technical-Games-Production\MonochromeRainbow\bin\
 C:\Users\Alex\Documents\GitHub\Technical-Games-Production\MonochromeRainbow\bin\Debug\MonochromeRainbow-unsigned\Application\Textures\grass.png
 C:\Users\Alex\Documents\GitHub\Technical-Games-Production\MonochromeRainbow\bin\Debug\MonochromeRainbow-signed\Application\Textures\graveyard spritesheet.png
 C:\Users\Alex\Documents\GitHub\Technical-Games-Production\MonochromeRainbow\bin\Debug\MonochromeRainbow-signed\Application\Textures\grass.png
+C:\Users\Zac\Desktop\TGP Current\Technical-Games-Production\MonochromeRainbow\bin\Debug\MonochromeRainbow-unsigned\Application\Textures\graveyard spritesheet.png
+C:\Users\Zac\Desktop\TGP Current\Technical-Games-Production\MonochromeRainbow\bin\Debug\MonochromeRainbow-unsigned\Application\Textures\grass.png
+C:\Users\Zac\Desktop\TGP Current\Technical-Games-Production\MonochromeRainbow\bin\Debug\MonochromeRainbow-signed\Application\Textures\graveyard spritesheet.png
+C:\Users\Zac\Desktop\TGP Current\Technical-Games-Production\MonochromeRainbow\bin\Debug\MonochromeRainbow-signed\Application\Textures\grass.png

@@ -49,12 +49,12 @@ namespace MonochromeRainbow
 			for(int i = 0; i < enemies.Count; i++)
 			{
 				enemies[i].Update(playerPos);
-				if (enemies[i].health > 0)
+				if (enemies[i].IsAlive)
 				{
 					enemies[i].RunAI (playerPos, enemyPositions);
 					enemies[i].Shoot (playerPos, scene, playerMoving, weaponList);
 				}
-				Console.Write(i + " " + enemies[i].health + ", ");
+				Console.Write(i + " " + enemies[i].health + " " + enemies[i].IsAlive + ", ");
 				//Console.WriteLine (weaponList.Count);
 			}
 			Console.WriteLine();
