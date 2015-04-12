@@ -54,7 +54,7 @@ namespace MonochromeRainbow
 					enemies[i].RunAI (playerPos, enemyPositions);
 					enemies[i].Shoot (playerPos, scene, playerMoving, weaponList);
 				}
-				Console.Write(enemies[i].health + " ");
+				Console.Write(i + " " + enemies[i].health + ", ");
 				//Console.WriteLine (weaponList.Count);
 			}
 			Console.WriteLine();

@@ -83,44 +83,52 @@ namespace MonochromeRainbow
 				manager.weaponList = tempWeaponList;
 			}
 			
-					for(int i = 0; i < player.weaponList.Count - 1; i++)
-					{
-						player.weaponList[i].weapon.GetContentWorldBounds(ref player.weaponList[i].bounds);
-						playerTempList = player.weaponList;
-						for(int y = 0; y < manager.enemies.Count - 1; y++)
+			for(int i = 0; i < player.weaponList.Count - 1; i++)
+     		{
+      			player.weaponList[i].weapon.GetContentWorldBounds(ref player.weaponList[i].bounds);
+      			playerTempList = player.weaponList;
+      			for(int y = 0; y < manager.enemies.Count - 1; y++)
+				{
+       				manager.enemies[y].enemy.GetContentWorldBounds(ref manager.enemies[y].bounds);
+       				if(player.weaponList[i].bounds.Overlaps(manager.enemies[y].bounds))
+       				{
+						if (manager.enemies[y].health > 0)
 						{
-							manager.enemies[i].enemy.GetContentWorldBounds(ref manager.enemies[i].bounds);
-							if(player.weaponList[i].bounds.Overlaps(manager.enemies[i].bounds))
-							{
-								manager.enemies[i].health -= 1.0f;
-								scene.RemoveChild(player.weaponList[i].weapon, true);
-								playerTempList.Remove(player.weaponList[i]);
-							}
+        					manager.enemies[y].health -= 1.0f;
+        					scene.RemoveChild(player.weaponList[i].weapon, true);
+        					playerTempList.Remove(player.weaponList[i]);
+							break;
 						}
+       				}
+      			}
 				
 				//Checks for projectile collisions with side of screen	
 				if(player.weaponList[i].weapon.Position.X > Director.Instance.GL.Context.GetViewport().Width + player.weaponList[i].weapon.Quad.S.X)
 				{
 					scene.RemoveChild(player.weaponList[i].weapon, true);
 					playerTempList.Remove(player.weaponList[i]);
+					break;
 				}
 				
 				if(player.weaponList[i].weapon.Position.X < -10.0f)
 				{
 					scene.RemoveChild(player.weaponList[i].weapon, true);
 					playerTempList.Remove(player.weaponList[i]);
+					break;
 				}
 				
 				if(player.weaponList[i].weapon.Position.Y < -10.0f)
 				{
 					scene.RemoveChild(player.weaponList[i].weapon, true);
 					playerTempList.Remove(player.weaponList[i]);
+					break;
 				}
 				
 				if(player.weaponList[i].weapon.Position.Y > Director.Instance.GL.Context.GetViewport().Height + player.weaponList[i].weapon.Quad.S.X)
 				{
 					scene.RemoveChild(player.weaponList[i].weapon, true);
 					playerTempList.Remove(player.weaponList[i]);
+					break;
 				}
 				//End of projectile collision with screen check
 				
