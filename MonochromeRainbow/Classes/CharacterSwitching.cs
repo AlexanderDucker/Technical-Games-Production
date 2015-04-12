@@ -24,7 +24,7 @@ namespace MonochromeRainbow
 
 		public void CheckDistance(EnemyBase e, Player p)
 		{
-						gamePadData = GamePad.GetData(0);
+			gamePadData = GamePad.GetData(0);
 			Vector2 dir = (p.CenterPosition) - (e.CenterPosition);
 			float distanceSqrd = Square(dir.X) + Square(dir.Y);
 

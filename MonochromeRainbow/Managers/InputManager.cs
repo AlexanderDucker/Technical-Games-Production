@@ -27,8 +27,6 @@ namespace MonochromeRainbow
 		public void CheckInput()
 		{
 			gamePadData = GamePad.GetData(0);
-
-			
 			//Left movement
 		    	if ((gamePadData.Buttons & GamePadButtons.Left) != 0)
 		    	{

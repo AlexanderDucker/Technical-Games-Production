@@ -73,10 +73,12 @@ namespace MonochromeRainbow
 			enemy.Position = position;
 		}
 		
-		public virtual void SetTexture(TextureInfo texture, Vector2 pos, Scene scene)
+		public void SetTexture(TextureInfo aliveTex, TextureInfo deadTex, Vector2 pos, Scene scene)
 		{
-			
-			eTexture = texture;
+			eTextures = new TextureInfo[2];
+			eTextures[0] = aliveTex;
+			eTextures[1] = deadTex;
+			eTexture = eTextures[0];
 			enemy = new SpriteUV(eTexture);
 			enemy.Quad.S = new Vector2(48,48);
 			enemy.Position = pos;

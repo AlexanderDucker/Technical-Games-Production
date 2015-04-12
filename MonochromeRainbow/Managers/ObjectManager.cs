@@ -40,7 +40,7 @@ namespace MonochromeRainbow
 		
 		public void UpdateObjects()
 		{
-			enemyManager.Update(player.centerPosition, !player.movingDirection.IsZero());	
+			enemyManager.Update(player);	
 			player.Update (scene);
 			collisions.CheckCollisions(player, enemyManager.enemies, scene, enemyManager);
 		}

@@ -19,6 +19,7 @@ namespace MonochromeRainbow
 		public Vector2[] spawnpoints;
 		public int enemyCount;
 		public TextureLoading textures;
+		public CharacterSwitching cSwitch;
 		public Scene scene;
 		int spawnpnt = 0;
 		private static GamePadData		gamePadData;
@@ -30,15 +31,16 @@ namespace MonochromeRainbow
 			scene = gameScene;
 			textures = textureManager;
 			enemyCount = 20;
+			cSwitch = new CharacterSwitching();
 		}
 		
-		public void Update(Vector2 playerPos, bool playerMoving)
+		public void Update(Player player)
 		{
 			if(enemies.Count < enemyCount)
 			{	
 				//if there are not 20 enemies in the list - works for respawning.
 				//loops through four spawnpoints and creates an enemy at each one
-				CreateNewEnemy (spawnpnt, playerPos);
+				CreateNewEnemy (spawnpnt, player.CenterPosition);
 				spawnpnt++;	          
 			}
 			
@@ -48,11 +50,15 @@ namespace MonochromeRainbow
 			
 			for(int i = 0; i < enemies.Count; i++)
 			{
-				enemies[i].Update(playerPos);
+				enemies[i].Update(player.CenterPosition);
 				if (enemies[i].IsAlive)
 				{
-					enemies[i].RunAI (playerPos, enemyPositions);
-					enemies[i].Shoot (playerPos, scene, playerMoving, weaponList);
+					enemies[i].RunAI (player.CenterPosition, enemyPositions);
+					enemies[i].Shoot (player.CenterPosition, scene, !player.movingDirection.IsZero(), weaponList);
+				}
+				else
+				{
+					cSwitch.CheckDistance(enemies[i], player);
 				}
 				Console.Write(i + " " + enemies[i].health + " " + enemies[i].IsAlive + ", ");
 				//Console.WriteLine (weaponList.Count);
@@ -83,21 +89,21 @@ namespace MonochromeRainbow
 			if(enemytype == 0)
 			{
 				EnemyBase enemy = new EnemyChaser();
-				enemy.SetTexture (textures.EnemyChaserTex, spawnpoints[spawnpt], scene);
+				enemy.SetTexture (textures.EnemyChaserTex, textures.DeadEnemyTex, spawnpoints[spawnpt], scene);
 				enemy.InitData(new Vector2(0,0), 2.0f, 400.0f, 20.0f);
 				enemies.Add (enemy);
 			}
 			else if( enemytype ==1)
 			{
 				EnemyBase enemy = new EnemyTank();
-				enemy.SetTexture (textures.EnemyTankTex, spawnpoints[spawnpt], scene);
+				enemy.SetTexture (textures.EnemyTankTex, textures.DeadEnemyTex, spawnpoints[spawnpt], scene);
 				enemy.InitData(new Vector2(0,0), 0.1f, 2000.0f, 30.0f);
 				enemies.Add (enemy);
 			}
 			else if(enemytype == 2)
 			{
 				EnemyBase enemy = new EnemyEvasive();
-				enemy.SetTexture (textures.EnemyEvasiveTex, spawnpoints[spawnpt], scene);
+				enemy.SetTexture (textures.EnemyEvasiveTex, textures.DeadEnemyTex, spawnpoints[spawnpt], scene);
 				enemy.InitData(new Vector2(0,0), 3.0f, 1500.0f, 40.0f);
 				enemies.Add (enemy);
 			}
