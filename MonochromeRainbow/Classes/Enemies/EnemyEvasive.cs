@@ -12,10 +12,9 @@ namespace MonochromeRainbow
 {
 	public class EnemyEvasive : EnemyBase
 	{
-		
 		public EnemyEvasive() : base()
 		{
-			
+		
 		}
 		
 		public override void RunAI(Vector2 playerPos, List<Vector2> enemyPositions)
@@ -46,23 +45,53 @@ namespace MonochromeRainbow
 				}
 			}
 			
-			for(int i = 0; i < enemyPosWithoutOwn.Count; i++)
+			if(position.X < 0)
 			{
-				if(position.X - enemyPosWithoutOwn[i].X < 20 && position.Y - enemyPosWithoutOwn[i].Y <20)
+				position.X = 0;	
+			}
+			if(position.X > 960)
+			{
+				position.X = 960;	
+			}
+			if(position.Y < 0)
+			{
+				position.Y = 0;	
+			}
+			if(position.Y > 544)
+			{
+				position.Y = 544;	
+			}
+			
+			if(position.X > playerPos.X)
+			{
+				if(position.X - playerPos.X <300.0f)
 				{
-					position.X +=speed;
-					position.Y +=speed;
+					position.X +=speed;	
+				}
+			}
+			else
+			{
+				if(position.X + playerPos.X >300f)
+				{
+					position.X -=speed;	
 				}
 			}
 			
-			if(playerPos.X > 480)
-				position.X -= speed;
-			if(playerPos.Y > 272)
-				position.Y -=speed;
-			if(playerPos.X < 480)
-				position.X += speed;
-			if(playerPos.Y < 272)
-				position.Y += speed;
+			if(position.Y < playerPos.X)
+			{
+				if(position.Y - playerPos.Y > 250f)
+				{
+					position.Y += speed;	
+				}
+			}
+			else
+			{
+				if(position.Y - playerPos.Y < 250f)
+				{
+					position.Y -= speed;	
+				}
+			}
+		
 		}
 		
 	
