@@ -17,8 +17,9 @@ namespace MonochromeRainbow
 			
 		}
 		
-		public override void RunAI(Vector2 playerPos)
+		public override void RunAI(Vector2 playerPos, List<Vector2> enemyPositions)
 		{
+			
 			facingDirection = playerPos - enemy.Position;
 			facingDirection = facingDirection.Normalize();
 			
@@ -35,13 +36,29 @@ namespace MonochromeRainbow
 				position -= facingDirection * speed;
 				runAway = true;
 			}
-			if (runAway)
+			List<Vector2>enemyPosWithoutOwn = new List<Vector2>();
+			for(int i = 0; i < enemyPositions.Count; i++)
 			{
-				if(distance >= 150.0f)
+				if(enemyPositions[i] != position)
 				{
-					runAway = false;	
+					enemyPosWithoutOwn.Add (enemyPositions[i]);
 				}
 			}
+			
+			for(int i = 0; i < enemyPosWithoutOwn.Count; i++)
+			{
+				if(position.X - enemyPosWithoutOwn[i].X < 20 && position.Y - enemyPosWithoutOwn[i].Y <20)
+				{
+					position.X +=speed;
+					position.Y +=speed;
+				}
+				
+			
+				
+			}
+			
+			
+			
 		}
 	}
 }

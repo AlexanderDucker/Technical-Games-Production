@@ -47,7 +47,6 @@
     <Compile Include="Managers\TextureLoading.cs" />
     <Compile Include="Managers\InputManager.cs" />
     <Compile Include="Managers\MechanicManager.cs" />
-    <Compile Include="Classes\TextureSwitching.cs" />
     <Compile Include="Classes\Tile.cs" />
     <Compile Include="Classes\Enemies\EnemyChaser.cs" />
     <Compile Include="Classes\Enemies\EnemyEvasive.cs" />
@@ -55,7 +54,7 @@
     <Compile Include="Classes\Enemies\EnemyBase.cs" />
     <Compile Include="Managers\CollisionManager.cs" />
     <Compile Include="Managers\EnemyManager.cs" />
-    <Compile Include="Managers\SpriteSheetManager.cs" />
+    <Compile Include="Classes\CharacterSwitching.cs" />
   </ItemGroup>
   <ItemGroup>
     <PsmMetadata Include="app.xml" />
@@ -82,11 +81,9 @@
     <Content Include="Sprite_Index.txt" />
     <Content Include="Textures\spritesheet.png" />
     <Content Include="Textures\Spritesheet_Minecraft.PNG" />
-    <Content Include="Textures\Graveyard_spritetile.png" />
-    <Content Include="Textures\Necromancer.png" />
-    <Content Include="Textures\Necromancer_one.png" />
-    <Content Include="Textures\Necromancer_Four.png" />
-    <Content Include="Textures\Necromancer_Three.png" />
-    <Content Include="Textures\Necromancer_Two.png" />
+    <Content Include="Textures\jugger.png" />
+    <Content Include="Textures\EnemyChaserWalking.png" />
+    <Content Include="Textures\enemyEvasiveWalking.png" />
+    <Content Include="Textures\EnemyTankWalking.png" />
   </ItemGroup>
 </Project>

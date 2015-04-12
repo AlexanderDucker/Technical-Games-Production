@@ -17,28 +17,21 @@ namespace MonochromeRainbow
 		private GamePadData		gamePadData;
 		private  Vector2 		transform, facingDirection;
 		private bool 			canFire = false;
-		//public TextureLoading spriteTextures;
-		//public TextureInfo		textures;
-		public int textures = 0;
-	
 		
 		public InputManager ()
 		{
-			transform = new Vector2(0,0);
-			facingDirection = new Vector2(0,0);
+			transform= new Vector2(0,0);
+			facingDirection= new Vector2(0,0);
 		}
 		
-		public void CheckInput(TextureLoading textureManager)
+		public void CheckInput()
 		{
 			gamePadData = GamePad.GetData(0);
-			//spriteTextures = spriteTextures;
-			textures = 0;//
+
 			
 			//Left movement
 		    	if ((gamePadData.Buttons & GamePadButtons.Left) != 0)
 		    	{
-					
-					textures = 0;
 					transform.X = -1.0f;
 					facingDirection.X = -1.0f;
 					if ((gamePadData.Buttons & GamePadButtons.Up) != 0)
@@ -57,8 +50,6 @@ namespace MonochromeRainbow
 				//Right movement
 		    	else if ((gamePadData.Buttons & GamePadButtons.Right) != 0)
 		    	{
-			
-					textures = 1;
 					transform.X = 1.0f;
 					facingDirection.X = 1.0f;
 					if ((gamePadData.Buttons & GamePadButtons.Up) != 0)
@@ -81,8 +72,6 @@ namespace MonochromeRainbow
 				//Up movement
 		    	if ((gamePadData.Buttons & GamePadButtons.Up) != 0)
 		    	{
-				
-					textures = 2;
 					transform.Y = 1.0f;
 					facingDirection.Y = 1.0f;
 					if ((gamePadData.Buttons & GamePadButtons.Left) != 0)
@@ -101,8 +90,6 @@ namespace MonochromeRainbow
 				//Down movement
 		    	else if ((gamePadData.Buttons & GamePadButtons.Down) != 0)
 		    	{
-				
-					textures = 3;
 					transform.Y = -1.0f;
 					facingDirection.Y = -1.0f;
 					if ((gamePadData.Buttons & GamePadButtons.Left) != 0)
@@ -132,28 +119,6 @@ namespace MonochromeRainbow
 			{
 				canFire = false;	
 			}
-		}
-		
-		//public int SwapTexture()
-		//{
-			//int temptex = 0;
-			
-			//if (textures == spriteTextures.PlayerTex[0])
-			//	temptex = 0;
-		//	if (textures == spriteTextures.PlayerTex[1])
-		//		temptex = 1;
-		//	if (textures == spriteTextures.PlayerTex[2])
-		//		temptex = 2;
-		//	if (textures == spriteTextures.PlayerTex[3])
-		//		temptex = 3;
-			
-		//	return temptex;
-		//}
-		
-		
-		public int GetTexture()
-		{
-			return textures;	
 		}
 		
 		public Vector2 GetTransform()
