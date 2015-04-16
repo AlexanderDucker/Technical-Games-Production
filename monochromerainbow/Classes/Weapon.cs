@@ -31,9 +31,16 @@ namespace MonochromeRainbow
 			this.shotSpeed = shotSpeeds;
 
 			hasCollided = false;
-			weaponOne = new TextureInfo("/Application/textures/bullet.png");
+			if (texture == 1)
+			{
+				weaponOne = new TextureInfo("/Application/textures/bullet.png");
+			}
+			else
+			{
+				weaponOne = new TextureInfo("/Application/textures/bullet2.png");
+			}	
 			weapon = new SpriteUV(weaponOne);
-			weaponRec = new Vector2(32, 16);
+			weaponRec = new Vector2(16, 16);
 			weapon.Quad.S = weaponRec;
 			weapon.Position = position;
 			this.facingDirection = facingDirection;

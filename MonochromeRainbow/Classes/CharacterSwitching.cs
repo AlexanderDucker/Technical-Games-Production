@@ -27,12 +27,9 @@ namespace MonochromeRainbow
 						gamePadData = GamePad.GetData(0);
 			Vector2 dir = (p.CenterPosition) - (e.CenterPosition);
 			float distanceSqrd = Square(dir.X) + Square(dir.Y);
-
-			Console.WriteLine(distanceSqrd);
 			
 			if(distanceSqrd <= Square(e.Radius) + Square(p.Radius))
 			{
-				Console.WriteLine("collision");
 				//Swap sprites & positions. press a.
 				if (((gamePadData.Buttons & GamePadButtons.Square) != 0))
 				{
@@ -40,7 +37,7 @@ namespace MonochromeRainbow
 					{
 						p.hasSwapped = true;
 						p.canSwap = false;
-						Console.WriteLine("erjngtlkejrngt");
+						
 					}
 				}
 				if (((gamePadData.Buttons & GamePadButtons.Square) == 0))

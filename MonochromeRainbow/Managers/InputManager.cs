@@ -28,19 +28,18 @@ namespace MonochromeRainbow
 		public void CheckInput()
 		{
 			gamePadData = GamePad.GetData(0);
-			textures = 3;
 			
 			//Left movement
 		    	if ((gamePadData.Buttons & GamePadButtons.Left) != 0)
 		    	{
 					textures = 1;
-				Console.WriteLine ("tex" + textures);
 
 					transform.X = -1.0f;
 					facingDirection.X = -1.0f;
 					if ((gamePadData.Buttons & GamePadButtons.Up) != 0)
 		    		{
 						facingDirection.Y = 1.0f;
+						textures = 1;
 					}
 					else if ((gamePadData.Buttons & GamePadButtons.Down) != 0)
 		    		{
@@ -54,14 +53,14 @@ namespace MonochromeRainbow
 				//Right movement
 		    	else if ((gamePadData.Buttons & GamePadButtons.Right) != 0)
 		    	{
-				textures = 2;
-				Console.WriteLine ("tex" + textures);
+				textures = 0;
 			
 					transform.X = 1.0f;
 					facingDirection.X = 1.0f;
 					if ((gamePadData.Buttons & GamePadButtons.Up) != 0)
 		    		{
 						facingDirection.Y = 1.0f;
+						textures = 1;
 					}
 					else if ((gamePadData.Buttons & GamePadButtons.Down) != 0)
 		    		{
@@ -77,10 +76,10 @@ namespace MonochromeRainbow
 					transform.X = 0.0f;
 				}
 				//Up movement
+			
 		    	if ((gamePadData.Buttons & GamePadButtons.Up) != 0)
 		    	{
-								textures = 0;
-				Console.WriteLine ("tex" + textures);
+				textures = 2;
 					transform.Y = 1.0f;
 					facingDirection.Y = 1.0f;
 					if ((gamePadData.Buttons & GamePadButtons.Left) != 0)
@@ -100,7 +99,6 @@ namespace MonochromeRainbow
 		    	else if ((gamePadData.Buttons & GamePadButtons.Down) != 0)
 		    	{
 				textures = 3;
-				Console.WriteLine ("tex" + textures);
 					transform.Y = -1.0f;
 					facingDirection.Y = -1.0f;
 					if ((gamePadData.Buttons & GamePadButtons.Left) != 0)
@@ -133,9 +131,7 @@ namespace MonochromeRainbow
 		}
 		public int GetTexture()
 		{
-			Console.WriteLine("Texture" + textures);
-			return textures;	
-			
+			return textures;				
 		}
 		
 		public Vector2 GetTransform()

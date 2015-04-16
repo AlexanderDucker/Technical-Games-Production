@@ -39,7 +39,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\AppMain.cs" />
-    <Compile Include="Classes\Bullet.cs" />
     <Compile Include="Classes\Weapon.cs" />
     <Compile Include="Classes\Player.cs" />
     <Compile Include="TheGame.cs" />
@@ -103,5 +102,6 @@
     <Content Include="Textures\Necromancer_one.png" />
     <Content Include="Textures\graveyard spritesheet.png" />
     <Content Include="Textures\grass.png" />
+    <Content Include="Textures\bullet2.png" />
   </ItemGroup>
 </Project>

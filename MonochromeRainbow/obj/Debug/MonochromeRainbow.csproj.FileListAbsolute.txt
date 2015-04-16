@@ -426,3 +426,5 @@ C:\Users\Alex\Downloads\Technical-Games-Production-master\Technical-Games-Produc
 C:\Users\Alex\Downloads\Technical-Games-Production-master\Technical-Games-Production-master\MonochromeRainbow\bin\Debug\MonochromeRainbow-unsigned\Application\Textures\grass.png
 C:\Users\Alex\Downloads\Technical-Games-Production-master\Technical-Games-Production-master\MonochromeRainbow\bin\Debug\MonochromeRainbow-signed\Application\Textures\graveyard spritesheet.png
 C:\Users\Alex\Downloads\Technical-Games-Production-master\Technical-Games-Production-master\MonochromeRainbow\bin\Debug\MonochromeRainbow-signed\Application\Textures\grass.png
+C:\Users\Alex\Downloads\Technical-Games-Production-master\Technical-Games-Production-master\MonochromeRainbow\bin\Debug\MonochromeRainbow-unsigned\Application\Textures\bullet2.png
+C:\Users\Alex\Downloads\Technical-Games-Production-master\Technical-Games-Production-master\MonochromeRainbow\bin\Debug\MonochromeRainbow-signed\Application\Textures\bullet2.png

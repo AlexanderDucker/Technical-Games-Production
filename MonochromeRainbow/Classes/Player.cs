@@ -54,12 +54,12 @@ namespace MonochromeRainbow
 			centerPosition = player.Position + player.Quad.Center;
 			radius = player.Quad.Point10.X/2;
 			
-			speed = 4.0f;
+			speed = 2.0f;
 			health = 100;
 			isAlive = true;
 			fireRate = 200;
 			shootSpeed = 10.0f;
-			bulletTex = 1;
+			bulletTex = 2;
 			
 			facingDirection = new Vector2(1.0f,0.0f);
 			
@@ -82,10 +82,8 @@ namespace MonochromeRainbow
 		public void Update(Scene scene)
 		{
         	inputManager.CheckInput ();
-			centerPosition = player.Position + player.Quad.Center;
-			Console.WriteLine(player.Position);
+			centerPosition = player.Position + player.Quad.Center;	
 			tempTexCounter = inputManager.GetTexture();
-			
 			if(isAlive)
 			{
 				//Movement
@@ -118,8 +116,7 @@ namespace MonochromeRainbow
 						abilityStarted = false;
 						abilityTimer.Reset();
 					}
-				}
-				
+				}	
 				
 				wallCollision();
 
@@ -127,9 +124,8 @@ namespace MonochromeRainbow
 				{
 					if(s.ElapsedMilliseconds > 500)
 					{
-						Weapon weaponOne = new Weapon(scene, 10, 10.0f, 1, centerPosition, facingDirection);
+						Weapon weaponOne = new Weapon(scene, 10, 10.0f, bulletTex, centerPosition, facingDirection);
 						weaponList.Add(weaponOne);
-						Console.WriteLine(weaponList.Count);
 						s.Reset();
 						s.Start();
 					}
@@ -154,9 +150,9 @@ namespace MonochromeRainbow
 				player.Position = new Vector2(Director.Instance.GL.Context.GetViewport().Width - player.Quad.S.X,player.Position.Y);
 			}
 			if (player.Position.Y > Director.Instance.GL.Context.GetViewport().Height - player.Quad.S.Y)
-  			{
-    			player.Position = new Vector2(player.Position.X,Director.Instance.GL.Context.GetViewport().Height - (player.Quad.S.Y));
-   			}
+			{
+				player.Position = new Vector2(player.Position.X,Director.Instance.GL.Context.GetViewport().Height - (player.Quad.S.X/2));
+			}
 			if (player.Position.X < 0.0f)
 			{					
 				player.Position = new Vector2(0.0f, player.Position.Y);
@@ -165,7 +161,6 @@ namespace MonochromeRainbow
 			{					
 				player.Position = new Vector2(player.Position.X, 0.0f);
 			}
-			
 		}
 	}
 }

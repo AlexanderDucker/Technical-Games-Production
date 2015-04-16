@@ -56,7 +56,6 @@ namespace MonochromeRainbow
 				enemies[i].Update(playerPos);	
 				enemies[i].RunAI (playerPos, enemyPositions);
 				enemies[i].Shoot (playerPos, scene, playerMoving, weaponList);
-				Console.WriteLine (weaponList.Count);
 			
 				if(enemies[i].position.X < playerPos.X)
 				{
@@ -90,9 +89,6 @@ namespace MonochromeRainbow
 					w.Update();
 				}
 			}
-			
-			for(int i = 0; i < enemies.Count - 1; i++)
-    		Console.WriteLine(enemies[i].CenterPosition);
 		}
 		
 		public void CreateNewEnemy(int spawnpt, Vector2 playerPos)
