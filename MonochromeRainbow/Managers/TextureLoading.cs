@@ -32,11 +32,11 @@ namespace MonochromeRainbow
 		public TextureLoading ()
 		{
 			playerTex = new TextureInfo[4];
-			playerTex[0] = new TextureInfo("Application/textures/Necromancer_Four.png");
+			playerTex[0] = new TextureInfo("Application/textures/Necromancer_Three.png");
 			playerTex[1] = new TextureInfo("Application/textures/Necromancer_Two.png");
-			playerTex[2] = new TextureInfo("Application/textures/Necromancer_Three.png");
-			playerTex[3] = new TextureInfo("Application/textures/Necromancer_one.png");
-			deadPlayerTex = new TextureInfo("Application/textures/Character_one_dead.png");
+			playerTex[2] = new TextureInfo("Application/textures/Necromancer_Four.png");
+			playerTex[3] = new TextureInfo("Application/textures/Necromancer_One.png");
+			deadPlayerTex = new TextureInfo("Application/textures/Character_One_dead.png");
 			//walkPlayerTex = new TextureInfo[2];
 			//walkPlayerTex[0] = new TextureInfo("Application/textures/Character_one_walk_one.png");
 			//walkPlayerTex[1] = new TextureInfo("Application/textures/Character_one_walk_two.png");

@@ -42,9 +42,6 @@ namespace MonochromeRainbow
 			spriteTextures = textureManager;
 			
 			textures = new TextureInfo[4];
-			//textures[0] = new TextureInfo("/Application/Textures/Character_one.png");
-			//textures[1] = new TextureInfo("/Application/Textures/Character_one_dead.png");
-			
 			textures[0] = textureManager.PlayerTex[tempTexCounter];
 			
 			playerTextureInfo = new TextureInfo();
@@ -57,7 +54,7 @@ namespace MonochromeRainbow
 			centerPosition = player.Position + player.Quad.Center;
 			radius = player.Quad.Point10.X/2;
 			
-			speed = 2.0f;
+			speed = 4.0f;
 			health = 100;
 			isAlive = true;
 			fireRate = 200;
@@ -125,9 +122,7 @@ namespace MonochromeRainbow
 				
 				
 				wallCollision();
-				
-				
-				
+
 				if(inputManager.GetCanFire())
 				{
 					if(s.ElapsedMilliseconds > 500)

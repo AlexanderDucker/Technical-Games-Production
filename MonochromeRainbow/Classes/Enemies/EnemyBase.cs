@@ -14,14 +14,14 @@ namespace MonochromeRainbow
 	{
 		public SpriteUV		enemy;
 		public Bounds2      bounds;
-		protected TextureInfo	eTexture; 
-		protected Vector2		facingDirection, centerPosition, playerPosition;
-		protected float			speed, health, radius, shootSpeed, fireRate;
-		protected bool			hasSwapped, isAlive;
+		public TextureInfo	eTexture; 
+		public Vector2		facingDirection, centerPosition, playerPosition;
+		public float			speed, health, radius, shootSpeed, fireRate;
+		public bool			hasSwapped, isAlive;
 		public Vector2 		position;
-		protected int			bulletTex;
-		protected bool			runAway;
-		protected Stopwatch s = new Stopwatch();
+		public int			bulletTex;
+		public bool			runAway;
+		public Stopwatch s = new Stopwatch();
 		
 
 		//Accessors.
@@ -32,7 +32,7 @@ namespace MonochromeRainbow
 		
 		public  EnemyBase ()
 		{
-			health = 100.0f;
+			health = 1.0f;
 			hasSwapped = false;
 			isAlive = true;
 			
@@ -84,7 +84,7 @@ namespace MonochromeRainbow
 		
 		public virtual void Shoot(Vector2 playerPos, Scene scene, bool playerMoving, List<Weapon> weaponList)
 		{
-			if (!runAway)
+			if (!runAway && health > 0.0f)
 			{
 				Vector2 dir = playerPos - centerPosition;
 				float distanceSqrd = Square(dir.X) + Square(dir.Y);

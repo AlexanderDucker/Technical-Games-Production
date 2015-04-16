@@ -101,5 +101,7 @@
     <Content Include="Textures\TankThree.png" />
     <Content Include="Textures\TankTwo.png" />
     <Content Include="Textures\Necromancer_one.png" />
+    <Content Include="Textures\graveyard spritesheet.png" />
+    <Content Include="Textures\grass.png" />
   </ItemGroup>
 </Project>

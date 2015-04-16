@@ -57,23 +57,23 @@ namespace MonochromeRainbow
 				enemies[i].RunAI (playerPos, enemyPositions);
 				enemies[i].Shoot (playerPos, scene, playerMoving, weaponList);
 				Console.WriteLine (weaponList.Count);
-				
-			if(enemies[i].position.X < playerPos.X)
-			{
-				TempTexCounter = 1;
-			}
-			if(enemies[i].position.X > playerPos.X)
-			{
-				TempTexCounter = 2;
-			}
-			if(enemies[i].position.Y < playerPos.Y)
-			{
-				TempTexCounter = 0;
-			}
-			if(enemies[i].position.Y > playerPos.Y)
-			{
-				TempTexCounter = 3;
-			}
+			
+				if(enemies[i].position.X < playerPos.X)
+				{
+					TempTexCounter = 1;
+				}
+				if(enemies[i].position.X > playerPos.X)
+				{
+					TempTexCounter = 2;
+				}
+				if(enemies[i].position.Y < playerPos.Y)
+				{
+					TempTexCounter = 0;
+				}
+				if(enemies[i].position.Y > playerPos.Y)
+				{
+					TempTexCounter = 3;
+				}
 			}
 			//TEMPORARY STUFF
 			gamePadData = GamePad.GetData(0);
