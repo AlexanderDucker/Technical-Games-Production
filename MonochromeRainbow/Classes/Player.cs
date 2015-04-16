@@ -24,7 +24,8 @@ namespace MonochromeRainbow
 		public float			speed, radius, shootSpeed, fireRate;
 		public int				bulletTex, health;
 		public int				tempTexCounter;
-		
+		public Tile 			worldTiles;
+		public Vector2 			pos;
 		public TextureLoading spriteTextures;
 		public InputManager 	inputManager;
 		public Vector2 CenterPosition{ get{return centerPosition;} }
@@ -36,11 +37,12 @@ namespace MonochromeRainbow
 		Stopwatch s = new Stopwatch();
 		Stopwatch abilityTimer = new Stopwatch();
 
-		public Player (Scene scene, Vector2 playerPos, TextureLoading textureManager)
+		public Player (Scene scene, Vector2 playerPos, TextureLoading textureManager, Tile tiles)
 		{
+			pos = playerPos;
 			inputManager = new InputManager();
 			spriteTextures = textureManager;
-			
+			worldTiles = tiles;
 			textures = new TextureInfo[4];
 			textures[0] = textureManager.PlayerTex[tempTexCounter];
 			
@@ -139,27 +141,34 @@ namespace MonochromeRainbow
 					}
 				}
 				player.TextureInfo = spriteTextures.PlayerTex[tempTexCounter];
+				pos = player.Position;
 			}
 		}
 		
 		void wallCollision()
 		{
+			
 			//Check if player has hit the wall.
-			if (player.Position.X > Director.Instance.GL.Context.GetViewport().Width - player.Quad.S.X)
+			
+			if (player.Position.X > Director.Instance.GL.Context.GetViewport().Width - player.Quad.X.X -50)
 			{
-				player.Position = new Vector2(Director.Instance.GL.Context.GetViewport().Width - player.Quad.S.X,player.Position.Y);
+				pos.X = (Director.Instance.GL.Context.GetViewport().Width - PlayerSprite.TextureInfo.TextureSizei.X - 50) ;
+				player.Position= pos;
 			}
-			if (player.Position.Y > Director.Instance.GL.Context.GetViewport().Height - player.Quad.S.Y)
+			if (player.Position.Y > Director.Instance.GL.Context.GetViewport().Height - player.Quad.Y.Y - 50)
 			{
-				player.Position = new Vector2(player.Position.X,Director.Instance.GL.Context.GetViewport().Height - (player.Quad.S.X/2));
+				pos.Y = (Director.Instance.GL.Context.GetViewport().Height - PlayerSprite.TextureInfo.TextureSizei.Y - 50);
+				player.Position=pos;
 			}
-			if (player.Position.X < 0.0f)
+			if (player.Position.X < 50.0f)
 			{					
-				player.Position = new Vector2(0.0f, player.Position.Y);
+				pos.X = 50.0f;
+				player.Position = pos;
 			}
-			if (player.Position.Y < 0.0f)
+			if (player.Position.Y < 50.0f)
 			{					
-				player.Position = new Vector2(player.Position.X, 0.0f);
+				pos.Y = 50.0f;
+				player.Position = pos;
 			}
 		}
 	}

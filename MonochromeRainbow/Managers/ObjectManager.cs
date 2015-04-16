@@ -31,7 +31,7 @@ namespace MonochromeRainbow
 			level = new Tile (gameScene);
 			textureManager = new TextureLoading();
 			enemyManager = new EnemyManager(gameScene, textureManager);
-			player = new Player(gameScene, new Vector2(100,100), textureManager);
+			player = new Player(gameScene, new Vector2(100,100), textureManager, level);
 			collisions = new CollisionManager();
 			mechanics = new MechanicManager(gameScene);
 			
