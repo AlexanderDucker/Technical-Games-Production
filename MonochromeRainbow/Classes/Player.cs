@@ -23,7 +23,9 @@ namespace MonochromeRainbow
 		public bool 			isAlive, abilityStarted, hasSwapped, canSwap;
 		public float			speed, radius, shootSpeed, fireRate;
 		public int				bulletTex, health;
+		public int				tempTexCounter;
 		
+		public TextureLoading spriteTextures;
 		public InputManager 	inputManager;
 		public Vector2 CenterPosition{ get{return centerPosition;} }
 		public bool IsAlive{ get{return isAlive;} set{isAlive = value;} }
@@ -34,12 +36,13 @@ namespace MonochromeRainbow
 		Stopwatch s = new Stopwatch();
 		Stopwatch abilityTimer = new Stopwatch();
 
-		public Player (Scene scene, Vector2 playerPos)
+		public Player (Scene scene, Vector2 playerPos, TextureLoading textureManager)
 		{
 			inputManager = new InputManager();
-			textures = new TextureInfo[2];
-			textures[0] = new TextureInfo("/Application/Textures/Character_one.png");
-			textures[1] = new TextureInfo("/Application/Textures/Character_one_dead.png");
+			spriteTextures = textureManager;
+			
+			textures = new TextureInfo[4];
+			textures[0] = textureManager.PlayerTex[tempTexCounter];
 			
 			playerTextureInfo = new TextureInfo();
 			playerTextureInfo = textures[0];
@@ -79,9 +82,8 @@ namespace MonochromeRainbow
 		public void Update(Scene scene)
 		{
         	inputManager.CheckInput ();
-			centerPosition = player.Position + player.Quad.Center;
-			//Console.WriteLine(player.Position);
-			
+			centerPosition = player.Position + player.Quad.Center;	
+			tempTexCounter = inputManager.GetTexture();
 			if(isAlive)
 			{
 				//Movement
@@ -114,20 +116,16 @@ namespace MonochromeRainbow
 						abilityStarted = false;
 						abilityTimer.Reset();
 					}
-				}
-				
+				}	
 				
 				wallCollision();
-				
-				
-				
+
 				if(inputManager.GetCanFire())
 				{
 					if(s.ElapsedMilliseconds > 500)
 					{
 						Weapon weaponOne = new Weapon(scene, 10, 10.0f, bulletTex, centerPosition, facingDirection);
 						weaponList.Add(weaponOne);
-						//Console.WriteLine(weaponList.Count);
 						s.Reset();
 						s.Start();
 					}
@@ -140,6 +138,7 @@ namespace MonochromeRainbow
 						w.Update();
 					}
 				}
+				player.TextureInfo = spriteTextures.PlayerTex[tempTexCounter];
 			}
 		}
 		

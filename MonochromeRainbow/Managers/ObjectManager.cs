@@ -31,7 +31,7 @@ namespace MonochromeRainbow
 			level = new Tile (gameScene);
 			textureManager = new TextureLoading();
 			enemyManager = new EnemyManager(gameScene, textureManager);
-			player = new Player(gameScene, new Vector2(100,100));
+			player = new Player(gameScene, new Vector2(100,100), textureManager);
 			collisions = new CollisionManager();
 			mechanics = new MechanicManager(gameScene);
 			
@@ -40,7 +40,7 @@ namespace MonochromeRainbow
 		
 		public void UpdateObjects()
 		{
-			enemyManager.Update(player);	
+			enemyManager.Update(player.centerPosition, !player.movingDirection.IsZero());	
 			player.Update (scene);
 			collisions.CheckCollisions(player, enemyManager.enemies, scene, enemyManager);
 		}

@@ -19,10 +19,12 @@ namespace MonochromeRainbow
 		public Vector2[] spawnpoints;
 		public int enemyCount;
 		public TextureLoading textures;
-		public CharacterSwitching cSwitch;
 		public Scene scene;
 		int spawnpnt = 0;
 		private static GamePadData		gamePadData;
+		public int TexCounter;
+		public int TempTexCounter;
+		
 
 		
 		public EnemyManager (Scene gameScene, TextureLoading textureManager)
@@ -31,16 +33,17 @@ namespace MonochromeRainbow
 			scene = gameScene;
 			textures = textureManager;
 			enemyCount = 20;
-			cSwitch = new CharacterSwitching();
 		}
 		
-		public void Update(Player player)
+		public void Update(Vector2 playerPos, bool playerMoving)
 		{
+			TexCounter = GetTexCounter();
+			
 			if(enemies.Count < enemyCount)
 			{	
 				//if there are not 20 enemies in the list - works for respawning.
 				//loops through four spawnpoints and creates an enemy at each one
-				CreateNewEnemy (spawnpnt, player.CenterPosition);
+				CreateNewEnemy (spawnpnt, playerPos);
 				spawnpnt++;	          
 			}
 			
@@ -50,20 +53,27 @@ namespace MonochromeRainbow
 			
 			for(int i = 0; i < enemies.Count; i++)
 			{
-				enemies[i].Update(player.CenterPosition);
-				if (enemies[i].IsAlive)
+				enemies[i].Update(playerPos);	
+				enemies[i].RunAI (playerPos, enemyPositions);
+				enemies[i].Shoot (playerPos, scene, playerMoving, weaponList);
+			
+				if(enemies[i].position.X < playerPos.X)
 				{
-					enemies[i].RunAI (player.CenterPosition, enemyPositions);
-					enemies[i].Shoot (player.CenterPosition, scene, !player.movingDirection.IsZero(), weaponList);
+					TempTexCounter = 1;
 				}
-				else
+				if(enemies[i].position.X > playerPos.X)
 				{
-					cSwitch.CheckDistance(enemies[i], player);
+					TempTexCounter = 2;
 				}
-				Console.Write(i + " " + enemies[i].health + " " + enemies[i].IsAlive + ", ");
-				//Console.WriteLine (weaponList.Count);
+				if(enemies[i].position.Y < playerPos.Y)
+				{
+					TempTexCounter = 0;
+				}
+				if(enemies[i].position.Y > playerPos.Y)
+				{
+					TempTexCounter = 3;
+				}
 			}
-			Console.WriteLine();
 			//TEMPORARY STUFF
 			gamePadData = GamePad.GetData(0);
 			 if (((gamePadData.Buttons & GamePadButtons.Circle) != 0))
@@ -89,21 +99,21 @@ namespace MonochromeRainbow
 			if(enemytype == 0)
 			{
 				EnemyBase enemy = new EnemyChaser();
-				enemy.SetTexture (textures.EnemyChaserTex, textures.DeadEnemyTex, spawnpoints[spawnpt], scene);
+				enemy.SetTexture (textures.EnemyChaserTex[TexCounter], spawnpoints[spawnpt], scene);
 				enemy.InitData(new Vector2(0,0), 2.0f, 400.0f, 20.0f);
 				enemies.Add (enemy);
 			}
 			else if( enemytype ==1)
 			{
 				EnemyBase enemy = new EnemyTank();
-				enemy.SetTexture (textures.EnemyTankTex, textures.DeadEnemyTex, spawnpoints[spawnpt], scene);
+				enemy.SetTexture (textures.EnemyTankTex[TexCounter], spawnpoints[spawnpt], scene);
 				enemy.InitData(new Vector2(0,0), 0.1f, 2000.0f, 30.0f);
 				enemies.Add (enemy);
 			}
 			else if(enemytype == 2)
 			{
 				EnemyBase enemy = new EnemyEvasive();
-				enemy.SetTexture (textures.EnemyEvasiveTex, textures.DeadEnemyTex, spawnpoints[spawnpt], scene);
+				enemy.SetTexture (textures.EnemyEvasiveTex[TexCounter], spawnpoints[spawnpt], scene);
 				enemy.InitData(new Vector2(0,0), 3.0f, 1500.0f, 40.0f);
 				enemies.Add (enemy);
 			}
@@ -122,6 +132,10 @@ namespace MonochromeRainbow
 			spawnpoints[1] = new Vector2(0,496);
 			spawnpoints[2] = new Vector2(912,496);
 			spawnpoints[3] = new Vector2(912, 0);
+		}
+		public int GetTexCounter()
+		{
+			return TempTexCounter;	
 		}
 	}
 }

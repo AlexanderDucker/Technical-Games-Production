@@ -33,11 +33,11 @@ namespace MonochromeRainbow
 			hasCollided = false;
 			if (texture == 1)
 			{
-			weaponOne = new TextureInfo("/Application/textures/bullet.png");
+				weaponOne = new TextureInfo("/Application/textures/bullet.png");
 			}
 			else
 			{
-							weaponOne = new TextureInfo("/Application/textures/bullet2.png");
+				weaponOne = new TextureInfo("/Application/textures/bullet2.png");
 			}	
 			weapon = new SpriteUV(weaponOne);
 			weaponRec = new Vector2(16, 16);

@@ -24,15 +24,12 @@ namespace MonochromeRainbow
 
 		public void CheckDistance(EnemyBase e, Player p)
 		{
-			gamePadData = GamePad.GetData(0);
+						gamePadData = GamePad.GetData(0);
 			Vector2 dir = (p.CenterPosition) - (e.CenterPosition);
 			float distanceSqrd = Square(dir.X) + Square(dir.Y);
-
-			Console.WriteLine(distanceSqrd);
 			
 			if(distanceSqrd <= Square(e.Radius) + Square(p.Radius))
 			{
-				Console.WriteLine("collision");
 				//Swap sprites & positions. press a.
 				if (((gamePadData.Buttons & GamePadButtons.Square) != 0))
 				{
@@ -40,7 +37,7 @@ namespace MonochromeRainbow
 					{
 						p.hasSwapped = true;
 						p.canSwap = false;
-						Console.WriteLine("erjngtlkejrngt");
+						
 					}
 				}
 				if (((gamePadData.Buttons & GamePadButtons.Square) == 0))
@@ -55,28 +52,28 @@ namespace MonochromeRainbow
 				EnemyEvasive tempEnemy = new EnemyEvasive();
 				//tempEnemy.changeTexture(0, player.textures[0]);
 				//tempEnemy.changeTexture(1, player.textures[1]);
-				tempEnemy.ChangeTexture(p.textures[0], p.textures[1], p.centerPosition);
-				tempEnemy.speed = p.speed;
-				tempEnemy.fireRate = p.fireRate;
-				tempEnemy.shootSpeed = p.shootSpeed;
-				tempEnemy.bulletTex = p.bulletTex;
+		//		tempEnemy.ChangeTexture(p.textures[0], p.textures[1], p.centerPosition);
+		//		tempEnemy.speed = p.speed;
+		//		tempEnemy.fireRate = p.fireRate;
+		//		tempEnemy.shootSpeed = p.shootSpeed;
+		//		tempEnemy.bulletTex = p.bulletTex;
 				
-				p.textures[0] = e.GetTexture(0);
-				p.textures[1] = e.GetTexture(1);
-				p.PlayerSprite.TextureInfo = p.textures[0];
-				p.speed = e.speed;
-				p.fireRate = e.fireRate;
-				p.shootSpeed = e.shootSpeed;
-				p.bulletTex = e.bulletTex;
+		//		p.textures[0] = e.GetTexture(0);
+		//		p.textures[1] = e.GetTexture(1);
+		//		p.PlayerSprite.TextureInfo = p.textures[0];
+		//		p.speed = e.speed;
+		//		p.fireRate = e.fireRate;
+		//		p.shootSpeed = e.shootSpeed;
+		//		p.bulletTex = e.bulletTex;
 				
 				//e.changeTexture(0, tempEnemy.GetTexture(0));
 				//e.changeTexture(1, tempEnemy.GetTexture(1));
 				//e.EnemySprite.TextureInfo = e.GetTexture(1);
-				e.ChangeTexture(tempEnemy.GetTexture(0), tempEnemy.GetTexture(1), tempEnemy.CenterPosition);
-				e.speed = tempEnemy.speed;
-				e.fireRate = tempEnemy.fireRate;
-				e.shootSpeed = tempEnemy.shootSpeed;
-				e.bulletTex = tempEnemy.bulletTex;
+		//		e.ChangeTexture(tempEnemy.GetTexture(0), tempEnemy.GetTexture(1), tempEnemy.CenterPosition);
+		//		e.speed = tempEnemy.speed;
+		//		e.fireRate = tempEnemy.fireRate;
+		//		e.shootSpeed = tempEnemy.shootSpeed;
+		//		e.bulletTex = tempEnemy.bulletTex;
 				
 				p.hasSwapped = false;
 			}

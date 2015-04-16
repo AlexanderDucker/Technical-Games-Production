@@ -39,9 +39,8 @@ namespace MonochromeRainbow
 					{
 						if(p1.health > 0)
 						{
-							//Currently reduces player health by fixed amount and prints to console window
+							//Currently reduces player health by fixed amount
 						    p1.health -= 1;
-							//Console.WriteLine(p1.health);
 						}
 					else if(p1.health <=0)
 						p1.IsAlive = true;

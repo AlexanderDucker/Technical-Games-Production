@@ -39,7 +39,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\AppMain.cs" />
-    <Compile Include="Classes\Bullet.cs" />
     <Compile Include="Classes\Weapon.cs" />
     <Compile Include="Classes\Player.cs" />
     <Compile Include="TheGame.cs" />
@@ -85,11 +84,24 @@
     <Content Include="Textures\EnemyChaserWalking.png" />
     <Content Include="Textures\enemyEvasiveWalking.png" />
     <Content Include="Textures\EnemyTankWalking.png" />
+    <Content Include="Textures\Necromancer_Four.png" />
+    <Content Include="Textures\Necromancer_Three.png" />
+    <Content Include="Textures\Necromancer_Two.png" />
+    <Content Include="Textures\ChaserFour.png" />
+    <Content Include="Textures\ChaserOne.png" />
+    <Content Include="Textures\ChaserThree.png" />
+    <Content Include="Textures\ChaserTwo.png" />
+    <Content Include="Textures\EvasiveFour.png" />
+    <Content Include="Textures\EvasiveOne.png" />
+    <Content Include="Textures\EvasiveThree.png" />
+    <Content Include="Textures\EvasiveTwo.png" />
+    <Content Include="Textures\TankFour.png" />
+    <Content Include="Textures\TankOne.png" />
+    <Content Include="Textures\TankThree.png" />
+    <Content Include="Textures\TankTwo.png" />
+    <Content Include="Textures\Necromancer_one.png" />
     <Content Include="Textures\graveyard spritesheet.png" />
     <Content Include="Textures\grass.png" />
     <Content Include="Textures\bullet2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Textures\Necromancer_Two.psd" />
   </ItemGroup>
 </Project>

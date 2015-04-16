@@ -32,7 +32,7 @@ namespace MonochromeRainbow
 			tiles = new SpriteTile[24,14];
 			//0-4 width, 0-4 height.
 			spriteInfo = new TextureInfo(new Texture2D("/Application/Textures/graveyard spritesheet.png", false),
-			                             new Vector2i(6,6), TRS.Quad0_1);
+			                             new Vector2i(8,6), TRS.Quad0_1);
 			Vector2 size = new Vector2(40, 39);
 			for(int i = 0; i < 24; i++)
 			{
