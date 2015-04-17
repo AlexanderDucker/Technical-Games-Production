@@ -24,6 +24,7 @@ namespace MonochromeRainbow
 		private static GamePadData		gamePadData;
 		public int TexCounter;
 		public int TempTexCounter;
+				public CharacterSwitching cSwitch;
 		
 
 		
@@ -33,9 +34,10 @@ namespace MonochromeRainbow
 			scene = gameScene;
 			textures = textureManager;
 			enemyCount = 20;
+			cSwitch = new CharacterSwitching();
 		}
 		
-		public void Update(Vector2 playerPos, bool playerMoving)
+		public void Update(Player player)
 		{
 			TexCounter = GetTexCounter();
 			
@@ -43,7 +45,7 @@ namespace MonochromeRainbow
 			{	
 				//if there are not 20 enemies in the list - works for respawning.
 				//loops through four spawnpoints and creates an enemy at each one
-				CreateNewEnemy (spawnpnt, playerPos);
+				CreateNewEnemy (spawnpnt, player.centerPosition);
 				spawnpnt++;	          
 			}
 			
@@ -53,23 +55,30 @@ namespace MonochromeRainbow
 			
 			for(int i = 0; i < enemies.Count; i++)
 			{
-				enemies[i].Update(playerPos);	
-				enemies[i].RunAI (playerPos, enemyPositions);
-				enemies[i].Shoot (playerPos, scene, playerMoving, weaponList);
-			
-				if(enemies[i].position.X < playerPos.X)
+				if (enemies[i].health > 0)
+				{
+					
+				enemies[i].RunAI (player.centerPosition, enemyPositions);
+				enemies[i].Shoot (player.centerPosition, scene, !player.movingDirection.IsZero(), weaponList);
+				}
+								else
+				{
+					cSwitch.CheckDistance(enemies[i], player);
+				}
+			enemies[i].Update(player.centerPosition);
+				if(enemies[i].position.X < player.centerPosition.X)
 				{
 					TempTexCounter = 1;
 				}
-				if(enemies[i].position.X > playerPos.X)
+				if(enemies[i].position.X > player.centerPosition.X)
 				{
 					TempTexCounter = 2;
 				}
-				if(enemies[i].position.Y < playerPos.Y)
+				if(enemies[i].position.Y < player.centerPosition.Y)
 				{
 					TempTexCounter = 0;
 				}
-				if(enemies[i].position.Y > playerPos.Y)
+				if(enemies[i].position.Y > player.centerPosition.Y)
 				{
 					TempTexCounter = 3;
 				}

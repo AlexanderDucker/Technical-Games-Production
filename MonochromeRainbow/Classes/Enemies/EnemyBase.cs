@@ -15,6 +15,7 @@ namespace MonochromeRainbow
 		public SpriteUV		enemy;
 		public Bounds2      bounds;
 		public TextureInfo	eTexture; 
+		public TextureInfo[] eTextures;
 		public Vector2		facingDirection, centerPosition, playerPosition;
 		public float			speed, health, radius, shootSpeed, fireRate;
 		public bool			hasSwapped, isAlive;
@@ -83,6 +84,19 @@ namespace MonochromeRainbow
 			enemy.Position = pos;
 			scene.AddChild(enemy);
 		}
+		
+						public virtual void ChangeTexture(TextureInfo aliveTex, TextureInfo deadTex, Vector2 pos)
+		{
+			eTextures = new TextureInfo[2];
+			eTextures[0] = aliveTex;
+			eTextures[1] = deadTex;
+			eTexture = eTextures[0];
+			enemy = new SpriteUV(eTexture);
+			enemy.Quad.S = eTexture.TextureSizef;
+			enemy.Position = pos;
+		}
+		
+		
 		
 		public virtual void Shoot(Vector2 playerPos, Scene scene, bool playerMoving, List<Weapon> weaponList)
 		{
