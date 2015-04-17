@@ -123,7 +123,7 @@ namespace MonochromeRainbow
 
 				if(inputManager.GetCanFire())
 				{
-					if(s.ElapsedMilliseconds > 500)
+					if(s.ElapsedMilliseconds > 250)
 					{
 						Weapon weaponOne = new Weapon(scene, 10, 10.0f, bulletTex, centerPosition, facingDirection);
 						weaponList.Add(weaponOne);

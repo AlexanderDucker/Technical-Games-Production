@@ -43,7 +43,7 @@ namespace MonochromeRainbow
 						    p1.health -= 1;
 						}
 					else if(p1.health <=0)
-						p1.IsAlive = true;
+						p1.IsAlive = false;
 						
 						scene.RemoveChild(manager.weaponList[i].weapon, true);
 						tempWeaponList.Remove(manager.weaponList[i]);
@@ -86,14 +86,14 @@ namespace MonochromeRainbow
      		{
       			player.weaponList[i].weapon.GetContentWorldBounds(ref player.weaponList[i].bounds);
       			playerTempList = player.weaponList;
-      			for(int y = 0; y < manager.enemies.Count - 1; y++)
+      			for(int y = 0; y < manager.enemies.Count; y++)
 				{
-       				manager.enemies[y].enemy.GetContentWorldBounds(ref manager.enemies[y].bounds);
-       				if(player.weaponList[i].bounds.Overlaps(manager.enemies[y].bounds))
+       				manager.enemies[y].enemy.GetContentWorldBounds(ref enemies1[y].bounds);
+       				if(player.weaponList[i].bounds.Overlaps(enemies1[y].bounds))
        				{
-						if (manager.enemies[y].health > 0)
+						if (enemies1[y].health > 0)
 						{
-        					manager.enemies[y].health -= 1.0f;
+        					enemies1[y].health -= 1.0f;
         					scene.RemoveChild(player.weaponList[i].weapon, true);
         					playerTempList.Remove(player.weaponList[i]);
 							break;

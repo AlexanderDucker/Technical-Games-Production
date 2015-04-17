@@ -1,12 +1,15 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="MonochromeRainbow\Managers\InputManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="MonochromeRainbow\Managers\EnemyManager.cs">
     <Files>
       <File FileName="MonochromeRainbow\Managers\TextureLoading.cs" Line="15" Column="26" />
-      <File FileName="MonochromeRainbow\Managers\ObjectManager.cs" Line="43" Column="41" />
+      <File FileName="MonochromeRainbow\Managers\ObjectManager.cs" Line="54" Column="67" />
       <File FileName="MonochromeRainbow\Classes\Menu.cs" Line="34" Column="24" />
       <File FileName="MonochromeRainbow\Managers\InputManager.cs" Line="31" Column="37" />
-      <File FileName="..\..\..\Program Files (x86)\MSBuild\Sce\Sce.Psm.Common.targets" Line="193" Column="3" />
+      <File FileName="MonochromeRainbow\Classes\Player.cs" Line="126" Column="36" />
+      <File FileName="MonochromeRainbow\Managers\EnemyManager.cs" Line="36" Column="19" />
+      <File FileName="MonochromeRainbow\Managers\CollisionManager.cs" Line="46" Column="25" />
+      <File FileName="MonochromeRainbow\Classes\CharacterSwitching.cs" Line="56" Column="5" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -16,7 +19,7 @@
               <Node name="Enemies" expanded="True" />
             </Node>
             <Node name="Managers" expanded="True">
-              <Node name="InputManager.cs" selected="True" />
+              <Node name="EnemyManager.cs" selected="True" />
             </Node>
             <Node name="Textures" expanded="True" />
           </Node>

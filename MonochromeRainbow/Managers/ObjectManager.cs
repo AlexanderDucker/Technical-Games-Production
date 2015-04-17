@@ -51,7 +51,7 @@ namespace MonochromeRainbow
 		{
 			if(gameRunning)
 			{
-				if(player.inputManager.GetPaused () == false)
+				if(player.inputManager.GetPaused () == false && player.isAlive)
 				{
 					enemyManager.Update(player);	
 					player.Update (scene);

@@ -53,7 +53,7 @@ namespace MonochromeRainbow
 			if(p.hasSwapped)
 			{
 				EnemyEvasive tempEnemy = new EnemyEvasive();
-				//tempEnemy.ChangeTexture(p.textures[0], p.textures[1], p.centerPosition);
+				tempEnemy.ChangeTexture(p.textures[0], p.textures[1], p.centerPosition);
 				tempEnemy.eTexture = p.PlayerSprite.TextureInfo;
 				tempEnemy.speed = p.speed;
 				tempEnemy.fireRate = p.fireRate;
