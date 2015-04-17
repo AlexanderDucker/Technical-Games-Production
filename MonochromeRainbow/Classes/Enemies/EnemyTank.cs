@@ -58,6 +58,28 @@ namespace MonochromeRainbow
 			}
 			
 			
+			if (enemy.Position.X > Director.Instance.GL.Context.GetViewport().Width - enemy.Quad.X.X -50)
+			{
+				position.X = (Director.Instance.GL.Context.GetViewport().Width - enemy.TextureInfo.TextureSizei.X - 50) ;
+				enemy.Position= position;
+			}
+			if (enemy.Position.Y > Director.Instance.GL.Context.GetViewport().Height - enemy.Quad.Y.Y - 50)
+			{
+				position.Y = (Director.Instance.GL.Context.GetViewport().Height - enemy.TextureInfo.TextureSizei.Y - 50);
+				enemy.Position=position;
+			}
+			if (enemy.Position.X < 50.0f)
+			{					
+				position.X = 50.0f;
+				enemy.Position = position;
+			}
+			if (enemy.Position.Y < 50.0f)
+			{					
+				position.Y = 50.0f;
+				enemy.Position = position;
+			}
+			
+			
 			
 		}
 	}

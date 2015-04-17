@@ -67,8 +67,10 @@ namespace MonochromeRainbow
 				radius = enemy.Quad.Point10.X / 2;
 				hasSwapped = true;
 				isAlive = false;
+				
+				position = enemy.Position;
 			}
-		
+			
 			enemy.Position = position;
 		}
 		

@@ -24,7 +24,6 @@ namespace MonochromeRainbow
 		public float			speed, radius, shootSpeed, fireRate;
 		public int				bulletTex, health;
 		public int				tempTexCounter;
-		public Tile 			worldTiles;
 		public Vector2 			pos;
 		public TextureLoading spriteTextures;
 		public InputManager 	inputManager;
@@ -37,12 +36,12 @@ namespace MonochromeRainbow
 		Stopwatch s = new Stopwatch();
 		Stopwatch abilityTimer = new Stopwatch();
 
-		public Player (Scene scene, Vector2 playerPos, TextureLoading textureManager, Tile tiles)
+		public Player (Scene scene, Vector2 playerPos, TextureLoading textureManager)
 		{
 			pos = playerPos;
 			inputManager = new InputManager();
 			spriteTextures = textureManager;
-			worldTiles = tiles;
+			
 			textures = new TextureInfo[4];
 			textures[0] = textureManager.PlayerTex[tempTexCounter];
 			
