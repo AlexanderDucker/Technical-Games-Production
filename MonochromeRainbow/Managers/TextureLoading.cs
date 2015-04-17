@@ -12,11 +12,12 @@ namespace MonochromeRainbow
 	{
 		private TextureInfo[] 	playerTex;
 		private TextureInfo 	deadPlayerTex;
-		private TextureInfo[] 	walkPlayerTex;
+		//private TextureInfo[] 	walkPlayerTex;
 		private TextureInfo[] 	enemyChaserTex;
 		private TextureInfo 	deadEnemyTex;
 		private TextureInfo[] 	enemyTankTex;
 		private TextureInfo[]   enemyEvasiveTex;
+		private TextureInfo[]   backgrounds;
 		public int enemyTexSizeHW = 48;
 		//private TextureInfo 	weaponTex;
 		
@@ -27,6 +28,7 @@ namespace MonochromeRainbow
 		public TextureInfo   DeadEnemyTex{ get{return deadEnemyTex;} }
 		public TextureInfo[]   EnemyTankTex{ get{return enemyTankTex;} }
 		public TextureInfo[]	 EnemyEvasiveTex { get{return enemyEvasiveTex;}}
+		public TextureInfo[] MenuBGs {get{return backgrounds;}}
 		//public TextureInfo   WeaponTex{ get{return weaponTex;} }
 		
 		public TextureLoading ()
@@ -40,7 +42,9 @@ namespace MonochromeRainbow
 			//walkPlayerTex = new TextureInfo[2];
 			//walkPlayerTex[0] = new TextureInfo("Application/textures/Character_one_walk_one.png");
 			//walkPlayerTex[1] = new TextureInfo("Application/textures/Character_one_walk_two.png");
-			
+			backgrounds = new TextureInfo [3];
+			backgrounds[0] = new TextureInfo("Application/textures/TitleScreen.png"); 
+			backgrounds[1] = new TextureInfo ("Application/textures/Instructions.png");
 			
 			deadEnemyTex = new TextureInfo("Application/Textures/Character_three_dead.png");
 			LoadEnemyTextures ();

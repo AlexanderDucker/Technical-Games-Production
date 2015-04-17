@@ -24,9 +24,20 @@ namespace MonochromeRainbow
 		CollisionManager collisions;
 		MechanicManager mechanics;
 		Tile level;
-		Scene scene;
+		Menu menu;
+		public Scene scene;
+		bool gameRunning = false;
 		
 		public ObjectManager (Scene gameScene)
+		{
+			textureManager = new TextureLoading();
+			menu = new Menu(textureManager, gameScene);
+			scene = gameScene;
+		}
+		
+	
+		
+		public void StartGame(Scene gameScene)
 		{
 			level = new Tile(gameScene);
 			textureManager = new TextureLoading();
@@ -34,15 +45,31 @@ namespace MonochromeRainbow
 			player = new Player(gameScene, new Vector2(100,100), textureManager);
 			collisions = new CollisionManager();
 			mechanics = new MechanicManager(gameScene);
-			
-			scene = gameScene;
 		}
 		
 		public void UpdateObjects()
 		{
-			enemyManager.Update(player.centerPosition, !player.movingDirection.IsZero());	
-			player.Update (scene);
-			collisions.CheckCollisions(player, enemyManager.enemies, scene, enemyManager);
+			if(gameRunning)
+			{
+				if(player.inputManager.GetPaused () == false)
+				{
+					enemyManager.Update(player.centerPosition, !player.movingDirection.IsZero());	
+					player.Update (scene);
+					collisions.CheckCollisions(player, enemyManager.enemies, scene, enemyManager);
+				}
+				else
+					player.inputManager.CheckPaused ();
+				
+			}
+			else
+			{
+				menu.UpdateMenus ();
+				if(menu.GetStart() == true)
+				{
+					gameRunning = true;	
+					StartGame(scene);
+				}
+			}
 		}
 		
 		

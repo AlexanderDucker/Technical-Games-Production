@@ -18,6 +18,7 @@ namespace MonochromeRainbow
 		private  Vector2 		transform, facingDirection;
 		private bool 			canFire = false;
 		public int textures;
+		public bool 			isPaused = false;
 		
 		public InputManager ()
 		{
@@ -25,9 +26,33 @@ namespace MonochromeRainbow
 			facingDirection= new Vector2(0,0);
 		}
 		
-		public void CheckInput()
+		public void CheckPaused()
 		{
 			gamePadData = GamePad.GetData(0);
+			
+			if(!isPaused)
+			{
+				if((gamePadData.Buttons & GamePadButtons.Start) !=0)
+				{
+					isPaused= true;
+				}
+			}
+			else
+			{
+				if((gamePadData.Buttons & GamePadButtons.Start) !=0)
+				{
+					isPaused= false;
+				}
+			}
+		}
+		
+		public void CheckInput()
+		{
+			CheckPaused();
+			gamePadData = GamePad.GetData(0);
+			
+			
+			
 			
 			//Left movement
 		    	if ((gamePadData.Buttons & GamePadButtons.Left) != 0)
@@ -76,7 +101,7 @@ namespace MonochromeRainbow
 					transform.X = 0.0f;
 				}
 				//Up movement
-			
+				
 		    	if ((gamePadData.Buttons & GamePadButtons.Up) != 0)
 		    	{
 				textures = 2;
@@ -132,6 +157,11 @@ namespace MonochromeRainbow
 		public int GetTexture()
 		{
 			return textures;				
+		}
+		
+		public bool GetPaused()
+		{
+			return isPaused;	
 		}
 		
 		public Vector2 GetTransform()

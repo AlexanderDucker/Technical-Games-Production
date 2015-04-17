@@ -1,18 +1,12 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="MonochromeRainbow\Classes\Player.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="MonochromeRainbow\Managers\InputManager.cs">
     <Files>
-      <File FileName="MonochromeRainbow\Managers\EnemyManager.cs" Line="55" Column="5" />
-      <File FileName="MonochromeRainbow\Classes\Enemies\EnemyChaser.cs" Line="39" Column="37" />
-      <File FileName="MonochromeRainbow\Classes\Enemies\EnemyTank.cs" Line="38" Column="5" />
-      <File FileName="MonochromeRainbow\Classes\Enemies\EnemyBase.cs" Line="135" Column="23" />
-      <File FileName="MonochromeRainbow\Managers\CollisionManager.cs" Line="90" Column="4" />
-      <File FileName="MonochromeRainbow\Classes\Player.cs" Line="151" Column="95" />
-      <File FileName="MonochromeRainbow\Managers\TextureLoading.cs" Line="19" Column="14" />
-      <File FileName="MonochromeRainbow\Classes\Enemies\EnemyEvasive.cs" Line="96" Column="3" />
-      <File FileName="MonochromeRainbow\Classes\CharacterSwitching.cs" Line="53" Column="20" />
-      <File FileName="MonochromeRainbow\Managers\ObjectManager.cs" Line="26" Column="14" />
-      <File FileName="MonochromeRainbow\Classes\Tile.cs" Line="34" Column="41" />
+      <File FileName="MonochromeRainbow\Managers\TextureLoading.cs" Line="15" Column="26" />
+      <File FileName="MonochromeRainbow\Managers\ObjectManager.cs" Line="43" Column="41" />
+      <File FileName="MonochromeRainbow\Classes\Menu.cs" Line="34" Column="24" />
+      <File FileName="MonochromeRainbow\Managers\InputManager.cs" Line="31" Column="37" />
+      <File FileName="..\..\..\Program Files (x86)\MSBuild\Sce\Sce.Psm.Common.targets" Line="193" Column="3" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -20,9 +14,11 @@
           <Node name="MonochromeRainbow" expanded="True">
             <Node name="Classes" expanded="True">
               <Node name="Enemies" expanded="True" />
-              <Node name="Player.cs" selected="True" />
             </Node>
-            <Node name="Managers" expanded="True" />
+            <Node name="Managers" expanded="True">
+              <Node name="InputManager.cs" selected="True" />
+            </Node>
+            <Node name="Textures" expanded="True" />
           </Node>
         </State>
       </Pad>
